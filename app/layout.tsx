@@ -9,9 +9,9 @@ const font = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "Asso.info",
+  title: "Drivite",
   description:
-    "Asso.info est une application de gestion d'adhésions pour les associations.",
+    "Nous offrons des services sur-mesure pour l'achat et la vente de véhicules. Notre accompagnement personnalisé rend le processus simple et sécurisé.",
 };
 
 export default async function RootLayout({
@@ -20,7 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" suppressHydrationWarning>
+    <html lang="fr">
       <body className={`${font.className}`}>
         <Providers>{children}</Providers>
       </body>

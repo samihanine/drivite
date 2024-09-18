@@ -1,4 +1,3 @@
-import { type UploadFile } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 import { useAction } from "next-safe-action/hooks";
 import { showError } from "../../lib/utils";
