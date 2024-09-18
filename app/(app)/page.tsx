@@ -8,9 +8,5 @@ export default async function Page() {
     return redirect("/login");
   }
 
-  if (!user.organizationUsers.length) {
-    return redirect("/onboarding");
-  }
-
-  return redirect(`/organizations/${user.organizationUsers[0].organizationId}`);
+  return <div>{user.name}</div>;
 }
