@@ -12,7 +12,7 @@ export const getCurrentUser = async () => {
     return null;
   }
 
-  const result: string | undefined = await new Promise((resolve, reject) => {
+  const result: string | undefined = await new Promise((resolve) => {
     jsonwebtoken.verify(
       accessToken,
       process.env.SECRET_KEY as string,
@@ -27,13 +27,6 @@ export const getCurrentUser = async () => {
 
   const user = await prisma.user.findUnique({
     where: { id: result },
-    include: {
-      organizationUsers: {
-        include: {
-          organization: true,
-        },
-      },
-    },
   });
 
   return user || null;
