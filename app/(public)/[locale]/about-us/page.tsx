@@ -1,7 +1,9 @@
+import { Cta } from "@/features/landing/components/cta";
+
 export default function Page() {
   return (
-    <div>
-      <h1>Page</h1>
-    </div>
+    <>
+      <Cta />
+    </>
   );
 }

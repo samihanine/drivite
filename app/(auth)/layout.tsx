@@ -1,4 +1,4 @@
-import AuthCarousel from "@/components/auth/auth-carousel";
+import { AuthCarousel } from "@/features/auth/components/auth-carousel";
 import { LogoText } from "@/components/logo-text";
 
 export default async function RootLayout({

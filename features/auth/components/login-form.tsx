@@ -8,7 +8,7 @@ import { loginWithPassword } from "@/server/auth";
 import { showError } from "@/lib/utils";
 import { useAction } from "next-safe-action/hooks";
 
-const LoginForm = () => {
+export const LoginForm = () => {
   const { executeAsync, status } = useAction(loginWithPassword);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -67,5 +67,3 @@ const LoginForm = () => {
     </div>
   );
 };
-
-export default LoginForm;

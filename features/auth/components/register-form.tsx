@@ -23,7 +23,7 @@ import GoogleButton from "./google-button";
 
 const formSchema = registerSchema;
 
-const RegisterForm = () => {
+export const RegisterForm = () => {
   const { executeAsync, status } = useAction(signUpWithPassword);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -152,5 +152,3 @@ const RegisterForm = () => {
     </div>
   );
 };
-
-export default RegisterForm;

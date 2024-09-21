@@ -4,7 +4,7 @@ import Image, { StaticImageData } from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { cn } from "@/lib/utils";
 
-export default function AuthCarousel({
+export function AuthCarousel({
   testimonials,
 }: {
   testimonials: {

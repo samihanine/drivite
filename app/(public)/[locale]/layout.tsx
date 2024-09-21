@@ -1,5 +1,4 @@
 import { Header } from "@/features/landing/components/header";
-import { GeistSans } from "geist/font/sans";
 import { Footer } from "@/features/landing/components/footer";
 import Providers from "@/components/providers";
 import { getI18n } from "@/locale/server";
@@ -33,7 +32,7 @@ export default async function RootLayout({
   const pageLinks = await getPageLinks();
   return (
     <html lang={params.locale || "en"}>
-      <body className={GeistSans.className}>
+      <body>
         <Providers locale={params.locale}>
           <>
             <NextTopLoader color="#000000" />

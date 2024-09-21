@@ -1,14 +1,13 @@
 "use client";
 
-import SelectOrganization from "@/components/organization/select-organization";
 import { Organization, User } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 import { CogIcon, HomeIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { XIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogoText } from "../ui/logo-text";
-import UserDropdown from "../user/user-dropdown";
+import { LogoText } from "@/components/logo-text";
+import UserDropdown from "@/features/user/components/user-dropdown";
 import ThemeToggle from "./theme-toggle";
 
 const MenuItem: React.FC<{
@@ -75,13 +74,6 @@ export default function Sidebar({
             </div>
           </div>
           <div className="flex flex-col gap-2 px-5 py-3">
-            <SelectOrganization
-              organizations={organizations}
-              organizationId={organizationId}
-            />
-
-            <div className="h-2" />
-
             <MenuItem
               exact
               href={`/organizations/${organizationId}`}

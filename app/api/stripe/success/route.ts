@@ -1,4 +1,3 @@
-import { handlePaymentSuccess } from "@/server/billing";
 import { redirect } from "next/navigation";
 import { NextResponse, NextRequest } from "next/server";
 
@@ -12,13 +11,10 @@ export async function GET(request: NextRequest) {
   }
 
   let error: string | undefined = undefined;
-  const path = await handlePaymentSuccess(sessionId).catch((e) => {
-    error = e;
-  });
 
   if (error) {
     return NextResponse.redirect(process.env.NEXT_PUBLIC_BASE_URL + "/");
   }
 
-  redirect(path as string);
+  redirect("/");
 }
