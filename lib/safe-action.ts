@@ -10,14 +10,5 @@ export const authActionClient = actionClient.use(async ({ next, ...props }) => {
     throw new Error("Session is not valid!");
   }
 
-  const organizationId = (props.clientInput as any)?.organizationId;
-  if (organizationId) {
-    if (
-      !user.organizationUsers.find((cu) => cu.organizationId === organizationId)
-    ) {
-      throw new Error("User is not part of the organization");
-    }
-  }
-
   return next({ ctx: { user } });
 });

@@ -1,7 +1,7 @@
 "use client";
 
 import { logOut } from "@/server/auth";
-import { Button } from "../ui/button";
+import { Button } from "@/components/button";
 import { useState } from "react";
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
 export default function LogOutButton() {
