@@ -1,8 +1,6 @@
-"use client";
-
 import { Container } from "@/components/container";
 import { Typography } from "@/components/typography";
-import { useI18n } from "@/locale/client";
+import { getI18n } from "@/locale/server";
 
 const MarketStatisticCard = ({
   percentage,
@@ -26,8 +24,8 @@ const MarketStatisticCard = ({
   );
 };
 
-export const MarketStatistics = () => {
-  const t = useI18n();
+export const MarketStatistics = async () => {
+  const t = await getI18n();
   return (
     <div className="py-20 bg-[#E7F1FB]">
       <Container className="relative h-full flex flex-col gap-12 items-center">

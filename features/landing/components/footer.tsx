@@ -1,11 +1,16 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { Button } from "./button";
-import { Container } from "./container";
-import { EmailIcon, InstagramIcon, LinkedInIcon } from "./icons";
+import { Button } from "../../../components/button";
+import { Container } from "../../../components/container";
+import {
+  EmailIcon,
+  InstagramIcon,
+  LinkedInIcon,
+} from "../../../components/icons";
 import { getI18n } from "@/locale/server";
-import { LocaleSwitcher } from "./locale-switcher";
+import { LocaleSwitcher } from "../../../components/locale-switcher";
 import { PhoneButton } from "./phone-button";
+import { PageLink } from "../queries/get-page-links";
 
 const socialLinks = [
   {
@@ -47,19 +52,10 @@ function SocialLink({
   );
 }
 
-export async function Footer({ newsletter = false }: { newsletter?: boolean }) {
+export async function Footer({ pageLinks }: { pageLinks: PageLink[] }) {
   const t = await getI18n();
-
-  const links = [
-    { label: t("header.home"), href: "/" },
-    { label: t("header.services"), href: "/services" },
-    { label: t("header.about"), href: "/about" },
-    { label: t("header.blog"), href: "/blog" },
-    { label: t("header.contact"), href: "/contact" },
-  ];
-
   return (
-    <section className={clsx(newsletter && "pt-12 sm:pt-16")}>
+    <section>
       <footer className="overflow-hidden border-t border-t-border bg-background py-8 sm:py-16">
         <Container>
           <div className="mx-auto grid max-w-xl items-center gap-5 lg:mx-0 lg:max-w-none lg:grid-cols-12 lg:gap-12 xl:gap-20">
@@ -91,10 +87,10 @@ export async function Footer({ newsletter = false }: { newsletter?: boolean }) {
               <div className="bg-white rounded-full p-1">
                 <LocaleSwitcher />
               </div>
-              {links.map((link, index) => (
+              {pageLinks.map((link, index) => (
                 <Link
                   key={`footer-link-${index}`}
-                  href={link.href}
+                  href={link.href || "/"}
                   className="text-base font-medium text-muted-foreground duration-200 ease-in-out hover:text-foreground"
                 >
                   {link.label}

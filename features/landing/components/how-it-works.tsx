@@ -1,9 +1,7 @@
-"use client";
-
 import { Container } from "@/components/container";
 import { Image } from "@/components/image";
 import { Typography } from "@/components/typography";
-import { useI18n } from "@/locale/client";
+import { getI18n } from "@/locale/server";
 import { CreditCardIcon } from "@heroicons/react/24/solid";
 
 const HowItWorksCard = ({
@@ -36,8 +34,9 @@ const HowItWorksCard = ({
     </div>
   );
 };
-export const HowItWorks = () => {
-  const t = useI18n();
+export const HowItWorks = async () => {
+  const t = await getI18n();
+
   return (
     <div className="py-20">
       <Container className="relative h-full flex flex-col gap-8 items-center">

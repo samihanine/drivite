@@ -1,11 +1,12 @@
-import { Header } from "@/components/header";
+import { Header } from "@/features/landing/components/header";
 import { GeistSans } from "geist/font/sans";
-import { Footer } from "@/components/footer";
+import { Footer } from "@/features/landing/components/footer";
 import Providers from "@/components/providers";
 import { getI18n } from "@/locale/server";
 import NextTopLoader from "nextjs-toploader";
 import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
+import { getPageLinks } from "@/features/landing/queries/get-page-links";
 
 export async function generateMetadata(_: { params: { lang: string } }) {
   const t = await getI18n();
@@ -29,16 +30,17 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const pageLinks = await getPageLinks();
   return (
     <html lang={params.locale || "en"}>
       <body className={GeistSans.className}>
         <Providers locale={params.locale}>
           <>
             <NextTopLoader color="#000000" />
-            <Header />
+            <Header pageLinks={pageLinks} />
             <Analytics />
             <main>{children}</main>
-            <Footer />
+            <Footer pageLinks={pageLinks} />
           </>
         </Providers>
       </body>

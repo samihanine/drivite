@@ -4,6 +4,11 @@ export default {
     description:
       "Nous offrons des services sur-mesure pour l'achat et la vente de véhicules. Notre accompagnement personnalisé rend le processus simple et sécurisé.",
     title: "Drivite - Services pour l'achat et la vente de véhicules",
+    cta: {
+      title: "Faites les meilleurs choix dès maintenant grâce à Drivite",
+      description:
+        "Prêt à prendre la route avec la voiture parfaite ? Contactez Drivite aujourd'hui et découvrez comment nous pouvons vous aider !",
+    },
   },
   header: {
     cta: "07 21 43 65 87",

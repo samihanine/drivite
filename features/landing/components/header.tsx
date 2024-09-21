@@ -1,47 +1,20 @@
 "use client";
 
-import { Fragment } from "react";
-import Link from "next/link";
-import { Image } from "@/components/image";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import { Popover, Transition } from "@headlessui/react";
-import { Button } from "@/components/button";
 import { Container } from "@/components/container";
-import { useI18n } from "@/locale/client";
-import { LocaleSwitcher } from "./locale-switcher";
-import { PhoneIcon } from "@heroicons/react/24/solid";
+import { Image } from "@/components/image";
+import { Popover, Transition } from "@headlessui/react";
+import clsx from "clsx";
 import { ChevronDown } from "lucide-react";
-import { MenuIcon } from "./menu-icon";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Fragment } from "react";
+import { LocaleSwitcher } from "../../../components/locale-switcher";
+import { MenuIcon } from "../../../components/menu-icon";
 import { PhoneButton } from "./phone-button";
+import { PageLink } from "../queries/get-page-links";
 
-export function Header() {
+export function Header({ pageLinks }: { pageLinks: PageLink[] }) {
   const pathname = usePathname();
-  const t = useI18n();
-
-  const links = [
-    { label: t("header.home"), href: "/" },
-    {
-      label: t("header.services"),
-      children: [
-        { label: t("header.buy"), href: "/buy" },
-        { label: t("header.sell"), href: "/sell" },
-        { label: t("header.cars"), href: "/cars" },
-      ],
-    },
-    {
-      label: t("header.about"),
-      children: [
-        { label: t("header.who"), href: "/about-us" },
-        { label: t("header.faq"), href: "/faq" },
-        { label: t("header.join"), href: "/join-us" },
-        { label: t("header.testimonials"), href: "/testimonials" },
-        { label: t("header.partners"), href: "/partners" },
-      ],
-    },
-    { label: t("header.blog"), href: "/blog" },
-    { label: t("header.contact"), href: "/contact" },
-  ];
 
   function MobileNav() {
     return (
@@ -79,7 +52,7 @@ export function Header() {
             >
               <div>
                 <div className="flex flex-col space-y-4">
-                  {links.map((link) =>
+                  {pageLinks.map((link) =>
                     link.children ? (
                       <div className="flex flex-col gap-3" key={link.label}>
                         <span className="font-semibold text-slate-700">
@@ -98,7 +71,7 @@ export function Header() {
                     ) : (
                       <Link
                         key={`${link.label}-mobile`}
-                        href={link.href}
+                        href={link.href || "#"}
                         className="block text-base font-semibold text-slate-700 duration-200 hover:text-slate-900"
                       >
                         {link.label}
@@ -139,7 +112,7 @@ export function Header() {
             </Link>
           </div>
           <div className="hidden items-center md:flex md:space-x-6 lg:space-x-8">
-            {links.map((link) =>
+            {pageLinks.map((link) =>
               link.children ? (
                 <div key={link.label} className="group relative">
                   <button className="relative z-10 font-medium text-slate-700 duration-200 hover:text-slate-900">
@@ -169,7 +142,7 @@ export function Header() {
               ) : (
                 <Link
                   key={`${link.label}-desktop`}
-                  href={link.href}
+                  href={link.href || "#"}
                   className={clsx(
                     'relative duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[""]',
                     pathname == link.href
@@ -185,9 +158,8 @@ export function Header() {
           <div className="flex items-center">
             <LocaleSwitcher />
 
-            <Link href="/contact">
-              <PhoneButton className="hidden md:block" />
-            </Link>
+            <PhoneButton className="hidden md:block" />
+
             <div className="ml-4 md:hidden">
               <MobileNav />
             </div>

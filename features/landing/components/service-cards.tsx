@@ -38,7 +38,7 @@ const ServiceCard = ({
   );
 };
 
-export const ServiceCards: React.FC = () => {
+export const ServiceCards: React.FC = async () => {
   return (
     <div className="px-8 py-20 bg-[#F8F9FF]">
       <Container>

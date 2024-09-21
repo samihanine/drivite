@@ -1,7 +1,7 @@
 "use client";
 
 import { PhoneIcon } from "@heroicons/react/24/solid";
-import { Button } from "./button";
+import { Button } from "../../../components/button";
 import { useI18n } from "@/locale/client";
 import React from "react";
 

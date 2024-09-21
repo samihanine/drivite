@@ -1,14 +1,12 @@
-"use client";
-
-import { Button } from "@/components/button";
+import { ContactButton } from "@/features/landing/components/contact-button";
 import { Container } from "@/components/container";
 import { Image } from "@/components/image";
 import { Typography } from "@/components/typography";
-import { useI18n } from "@/locale/client";
-import Link from "next/link";
+import { getI18n } from "@/locale/server";
 
-export const HomeHero = () => {
-  const t = useI18n();
+export const HomeHero = async () => {
+  const t = await getI18n();
+
   return (
     <div className="relative h-[calc(100vh-80px)]">
       <div className="absolute flex w-full h-full">
@@ -32,11 +30,7 @@ export const HomeHero = () => {
           <Typography variant="lead" className="text-white">
             {t("home.hero.description")}
           </Typography>
-          <Link href="/contact">
-            <Button size={"lg"} variant={"secondary"}>
-              {t("home.hero.cta")} →
-            </Button>
-          </Link>
+          <ContactButton />
         </div>
       </Container>
     </div>
