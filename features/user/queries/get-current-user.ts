@@ -1,7 +1,7 @@
 "use server";
 import jsonwebtoken from "jsonwebtoken";
 import { cookies } from "next/headers";
-import prisma from "../lib/prisma";
+import prisma from "@/lib/prisma";
 
 export const getCurrentUser = async () => {
   const cookieStore = cookies();

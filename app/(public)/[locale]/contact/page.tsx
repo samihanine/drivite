@@ -1,9 +1,16 @@
-import { Cta } from "@/features/landing/components/cta";
+import { ContactHero } from "@/features/landing/components/contact-hero";
+import { Faq } from "@/features/landing/components/faq";
+import { Map } from "@/features/landing/components/map";
+import { getQuestions } from "@/features/landing/queries/get-questions";
 
-export default function Page() {
+export default async function Page() {
+  const questions = await getQuestions();
+
   return (
     <>
-      <Cta />
+      <ContactHero />
+      <Map />
+      <Faq questions={questions} />
     </>
   );
 }

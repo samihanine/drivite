@@ -1,4 +1,4 @@
-import { getCurrentUser } from "@/server/user";
+import { getCurrentUser } from "@/features/user/queries/get-current-user";
 import { createSafeActionClient } from "next-safe-action";
 
 export const actionClient = createSafeActionClient();

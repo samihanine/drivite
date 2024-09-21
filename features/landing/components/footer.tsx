@@ -1,14 +1,8 @@
-import clsx from "clsx";
 import Link from "next/link";
-import { Button } from "../../../components/button";
-import { Container } from "../../../components/container";
-import {
-  EmailIcon,
-  InstagramIcon,
-  LinkedInIcon,
-} from "../../../components/icons";
+import { Container } from "@/components/container";
+import { EmailIcon, InstagramIcon, LinkedInIcon } from "@/components/icons";
 import { getI18n } from "@/locale/server";
-import { LocaleSwitcher } from "../../../components/locale-switcher";
+import { LocaleSwitcher } from "@/components/locale-switcher";
 import { PhoneButton } from "./phone-button";
 import { PageLink } from "../queries/get-page-links";
 
@@ -41,12 +35,12 @@ function SocialLink({
 }) {
   return (
     <a
-      className="flex items-center justify-center gap-2.5 rounded-full border border-primary py-2.5 text-sm text-muted-foreground duration-200 ease-in-out hover:bg-slate-800 hover:text-white lg:gap-2 xl:gap-2.5"
+      className="flex items-center justify-center gap-2.5 rounded-full border border-primary py-2.5 text-sm text-muted-foreground duration-200 ease-in-out hover:bg-primary hover:text-white lg:gap-2 xl:gap-2.5"
       rel="noopener noreferrer"
       target="_blank"
       {...props}
     >
-      <Icon className="h-4 w-4 shrink-0 text-muted-foreground duration-200 ease-in-out group-hover:fill-foreground" />
+      <Icon className="h-4 w-4 shrink-0" />
       {label}
     </a>
   );
@@ -81,7 +75,7 @@ export async function Footer({ pageLinks }: { pageLinks: PageLink[] }) {
               </div>
             </div>
           </div>
-          <hr className="mb-6 mt-12 h-px w-full border-foreground sm:mb-10 sm:mt-16" />
+          <hr className="mb-6 mt-12 h-px w-full border-border sm:mb-10 sm:mt-16" />
           <div className="flex flex-col items-center justify-between md:flex-row">
             <div className="flex items-center gap-6 flex-wrap">
               <div className="bg-white rounded-full p-1">

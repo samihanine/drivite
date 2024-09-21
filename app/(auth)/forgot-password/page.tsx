@@ -1,4 +1,4 @@
-import { getCurrentUser } from "@/server/user";
+import { getCurrentUser } from "@/features/user/queries/get-current-user";
 
 export default async function Page() {
   const user = await getCurrentUser();

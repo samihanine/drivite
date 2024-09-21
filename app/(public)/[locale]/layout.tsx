@@ -35,7 +35,7 @@ export default async function RootLayout({
       <body>
         <Providers locale={params.locale}>
           <>
-            <NextTopLoader color="#000000" />
+            <NextTopLoader color="#01296B" />
             <Header pageLinks={pageLinks} />
             <Analytics />
             <main>{children}</main>

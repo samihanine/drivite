@@ -2,7 +2,14 @@
 
 import { uploadFileToS3 } from "@/lib/s3";
 import { authActionClient } from "@/lib/safe-action";
-import { uploadFileSchema } from "@/lib/schemas";
+import { z } from "zod";
+import { zfd } from "zod-form-data";
+
+export const uploadFileSchema = zfd.formData({
+  file: z.any(),
+});
+
+export type UploadFile = z.infer<typeof uploadFileSchema>;
 
 export const uploadFile = authActionClient
   .schema(uploadFileSchema)

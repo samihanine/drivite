@@ -1,6 +1,5 @@
-"use server";
-import config from "@/lib/config";
 import { Resend } from "resend";
+import config from "./config";
 
 const resend = new Resend(config.RESEND_API_KEY);
 
@@ -46,12 +45,6 @@ export const buildHtmlTemplate = (props: {
                   </table>
               </td>
           </tr>
-          <tr>
-              <td align="center" style="font-size: 12px; color: #707070; padding-top: 20px;">
-                  Printags | 123 Rue Fictive, Ville, 10000<br>
-                  Email: contact@printags.fr | Tel: +33 1 23 45 67 89
-              </td>
-          </tr>
       </table>
   </body>
   </html>`;
@@ -73,13 +66,11 @@ export const sendEmail = async (props: {
   });
 
   const result = await resend.emails.send({
-    from: `Asso.info <${process.env.RESEND_FROM_EMAIL}>`,
+    from: `Drivite <${process.env.RESEND_FROM_EMAIL}>`,
     to: props.to,
     subject: props.subject,
     html,
   });
 
-  if (result.error) {
-    throw new Error(result.error.message);
-  }
+  return result;
 };

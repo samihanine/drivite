@@ -90,7 +90,7 @@ export function Header({ pageLinks }: { pageLinks: PageLink[] }) {
   }
 
   return (
-    <header className="h-20 border-b border-slate-200/80 bg-white">
+    <header className="h-20 border-b border-border bg-white">
       <Container className="flex h-full w-full items-center">
         <nav className="relative z-50 flex w-full items-center justify-between">
           <div className="flex shrink-0 items-center">
@@ -156,7 +156,7 @@ export function Header({ pageLinks }: { pageLinks: PageLink[] }) {
             )}
           </div>
           <div className="flex items-center">
-            <LocaleSwitcher />
+            {/* <LocaleSwitcher />*/}
 
             <PhoneButton className="hidden md:block" />
 
