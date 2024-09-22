@@ -2,8 +2,6 @@ import { Header } from "@/features/landing/components/header";
 import { Footer } from "@/features/landing/components/footer";
 import Providers from "@/components/providers";
 import { getI18n } from "@/locale/server";
-import NextTopLoader from "nextjs-toploader";
-import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
 import { getPageLinks } from "@/features/landing/queries/get-page-links";
 
@@ -35,9 +33,7 @@ export default async function RootLayout({
       <body>
         <Providers locale={params.locale}>
           <>
-            <NextTopLoader color="#01296B" />
             <Header pageLinks={pageLinks} />
-            <Analytics />
             <main>{children}</main>
             <Footer pageLinks={pageLinks} />
           </>

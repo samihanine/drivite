@@ -5,6 +5,7 @@ import ThemeProvider from "./theme-provider";
 import { Toaster } from "@/components/sonner";
 import NextTopLoader from "nextjs-toploader";
 import { I18nProviderClient } from "@/locale/client";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function Providers({
   children,
@@ -15,9 +16,10 @@ export default function Providers({
 }) {
   return (
     <>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <Analytics />
         <Toaster />
-        <NextTopLoader zIndex={99999} color="#f97415" />
+        <NextTopLoader color="#01296B" zIndex={999} />
         <I18nProviderClient locale={locale}>{children}</I18nProviderClient>
       </ThemeProvider>
     </>
