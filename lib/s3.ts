@@ -35,7 +35,6 @@ export const uploadFileToS3 = async (file: File) => {
 
     return key;
   } catch (error) {
-    console.error("Error uploading file:", error);
     throw new Error("An error occurred while uploading the file");
   }
 };
