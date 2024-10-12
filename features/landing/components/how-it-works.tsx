@@ -1,4 +1,5 @@
 import { Container } from "@/components/container";
+import { CarIcon, ChatIcon, ClickIcon, DocumentIcon } from "@/components/icons";
 import { Image } from "@/components/image";
 import { Typography } from "@/components/typography";
 import { getI18n } from "@/locale/server";
@@ -11,12 +12,7 @@ const HowItWorksCard = ({
 }: {
   title: string;
   description: string;
-  Icon: React.ForwardRefExoticComponent<
-    Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
-      title?: string | undefined;
-      titleId?: string | undefined;
-    } & React.RefAttributes<SVGSVGElement>
-  >;
+  Icon: any;
 }) => {
   return (
     <div className="bg-background rounded-lg p-6 max-w-lg w-full">
@@ -24,10 +20,10 @@ const HowItWorksCard = ({
         <div className="w-20 h-20 shadow-inner shadow-[#E7F1FB] rounded-bl-none flex items-center justify-center rounded-xl ">
           <Icon className="h-12 w-12 text-primary" />
         </div>
-        <Typography variant="h4" className="text-primary">
+        <Typography variant="h4" className="text-primary text-base text-center">
           {title}
         </Typography>
-        <Typography variant="small" className="text-center">
+        <Typography variant="small" className="text-center text-sm">
           {description}
         </Typography>
       </div>
@@ -53,9 +49,9 @@ export const HowItWorks = async () => {
               className="absolute left-1/2 w-full px-12 ml-2 pt-10 z-50 hidden md:block"
             />
             <HowItWorksCard
-              title="Acheter ma voiture"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
-              Icon={CreditCardIcon}
+              title="1 - Consultation personnalisée"
+              description="Bénéficiez d’un 1er rendez-vous afin d'établir vos besoins, votre budget et le choix de la formule adaptée."
+              Icon={ClickIcon}
             />
           </div>
 
@@ -66,9 +62,9 @@ export const HowItWorks = async () => {
               className="absolute left-1/2 top-[40px] w-full px-12 ml-2 pt-10 z-50 hidden md:block"
             />
             <HowItWorksCard
-              title="Acheter ma voiture"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
-              Icon={CreditCardIcon}
+              title="2 - Réalisation de nos services"
+              description="Nous vous accompagnons de A à Z  tout au long de votre processus d'achat ou de vente."
+              Icon={DocumentIcon}
             />
           </div>
 
@@ -79,17 +75,17 @@ export const HowItWorks = async () => {
               className="absolute left-1/2 w-full px-12 ml-2 pt-10 z-50 hidden md:block"
             />
             <HowItWorksCard
-              title="Acheter ma voiture"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
-              Icon={CreditCardIcon}
+              title="3 - Suivi et échanges réguliers"
+              description="Restez au courant de chaque avancée de votre projet via votre espace client."
+              Icon={ChatIcon}
             />
           </div>
 
           <div className="relative">
             <HowItWorksCard
-              title="Acheter ma voiture"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
-              Icon={CreditCardIcon}
+              title="4 - Départ en toute sérénité"
+              description="Vous pouvez repartir avec l'esprit tranquille."
+              Icon={CarIcon}
             />
           </div>
         </div>

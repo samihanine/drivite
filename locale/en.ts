@@ -53,7 +53,7 @@ export default {
     },
   },
   footer: {
-    title: "Créons ensemble votre prochain projet",
+    title: "Drivite, l'expert qui éclaire vos choix automobiles",
     rights: "Tous droits réservés",
   },
 } as const;

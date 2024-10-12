@@ -32,10 +32,16 @@ export const MarketStatistics = async () => {
         <Typography variant="h2">{t("home.market.title")}</Typography>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
-          <MarketStatisticCard title="Taux de satisfaction" percentage={95} />
-          <MarketStatisticCard title="Taux de satisfaction" percentage={95} />
-          <MarketStatisticCard title="Taux de satisfaction" percentage={95} />
-          <MarketStatisticCard title="Taux de satisfaction" percentage={95} />
+          <MarketStatisticCard title="de compteurs trafiqués" percentage={10} />
+          <MarketStatisticCard title="d’accidents dissimulés" percentage={20} />
+          <MarketStatisticCard
+            title="de frais de réparations cachés"
+            percentage={30}
+          />
+          <MarketStatisticCard
+            title="d’annonces frauduleuses"
+            percentage={15}
+          />
         </div>
       </Container>
     </div>

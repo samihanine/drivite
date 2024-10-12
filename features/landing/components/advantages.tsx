@@ -1,12 +1,15 @@
 "use client";
 
-import { Button } from "@/components/button";
 import { Container } from "@/components/container";
 import { Image } from "@/components/image";
 import { Typography } from "@/components/typography";
 import { useI18n } from "@/locale/client";
-import { ClipboardDocumentCheckIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
+import {
+  AdjustmentsVerticalIcon,
+  ClipboardDocumentCheckIcon,
+  ClockIcon,
+  ShieldExclamationIcon,
+} from "@heroicons/react/24/solid";
 
 const AdvantageCard = ({
   title,
@@ -59,23 +62,23 @@ export const Advantages = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <AdvantageCard
               Icon={ClipboardDocumentCheckIcon}
-              title="Sécurité"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
+              title="Expertise avancée"
+              description="Bénéficiez de notre savoir-faire et nos connaissances dans le secteur automobile, garantissant des transactions réussies."
             />
             <AdvantageCard
-              Icon={ClipboardDocumentCheckIcon}
-              title="Sécurité"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
+              Icon={AdjustmentsVerticalIcon}
+              title="Accompagnement personnalisé"
+              description="Nous nous adaptons à vos besoins uniques pour vous offrir un service sur-mesure."
             />
             <AdvantageCard
-              Icon={ClipboardDocumentCheckIcon}
-              title="Sécurité"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
+              Icon={ShieldExclamationIcon}
+              title="Sélection exigeante"
+              description="Profitez d'une gamme de véhicules d'occasion soigneusement sélectionnés pour leur qualité."
             />
             <AdvantageCard
-              Icon={ClipboardDocumentCheckIcon}
-              title="Sécurité"
-              description="Drivite simplifie et sécurise l'achat de votre voiture. Comptez sur notre accompagnement et notre expertise pour une expérience réussie."
+              Icon={ClockIcon}
+              title="Gain de temps"
+              description="Évitez les pertes de temps grâce à notre gestion complète, pour une expérience sans stress."
             />
           </div>
         </div>

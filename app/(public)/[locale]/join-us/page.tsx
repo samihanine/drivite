@@ -1,7 +1,11 @@
+import { UnderConstruction } from "@/components/under-construction";
+import { Cta } from "@/features/landing/components/cta";
+
 export default function Page() {
   return (
-    <div>
-      <h1>Page</h1>
-    </div>
+    <>
+      <UnderConstruction />
+      <Cta />
+    </>
   );
 }

@@ -102,7 +102,7 @@ export function Header({ pageLinks }: { pageLinks: PageLink[] }) {
               <Image
                 src={"/images/logos/logo-text.svg"}
                 alt=""
-                className="h-8 w-auto sm:h-9 md:hidden lg:block lg:h-10"
+                className="h-8 w-auto sm:h-9 md:hidden lg:block lg:h-12"
               />
               <Image
                 src={"/images/logos/logo-text.svg"}

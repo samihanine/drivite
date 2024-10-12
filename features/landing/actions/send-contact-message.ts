@@ -9,18 +9,19 @@ const sendContactMessageSchema = z.object({
   email: z.string().email(),
   phone: z.string().optional(),
   message: z.string(),
+  motivation: z.string().optional(),
 });
 
 export type SendContactMessage = z.infer<typeof sendContactMessageSchema>;
 export const sendContactMessage = actionClient
   .schema(sendContactMessageSchema)
   .action(async ({ parsedInput }) => {
-    const { name, email, phone, message } = parsedInput;
+    const { name, email, phone, message, motivation } = parsedInput;
 
     try {
       const text = `Nom: ${name}<br><br>Email: ${email}<br><br>Téléphone: ${
         phone || "Non renseigné"
-      }<br><br>Message: ${message}`;
+      }<br><br>Motivation: ${motivation || "Non renseignée"}<br><br>Message: ${message}`;
 
       console.log("Sending email:", text);
 

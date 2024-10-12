@@ -3,6 +3,7 @@ import { CreditCardIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React from "react";
 import { Typography } from "@/components/typography";
+import { CarIcon } from "@/components/icons";
 
 const ServiceCard = ({
   title,
@@ -13,12 +14,7 @@ const ServiceCard = ({
   title: string;
   description: string;
   href: string;
-  Icon: React.ForwardRefExoticComponent<
-    Omit<React.SVGProps<SVGSVGElement>, "ref"> & {
-      title?: string | undefined;
-      titleId?: string | undefined;
-    } & React.RefAttributes<SVGSVGElement>
-  >;
+  Icon: any;
 }) => {
   return (
     <div className="bg-background rounded-lg p-6 max-w-lg shadow-md shadow-[#E7F1FB]">
@@ -55,7 +51,7 @@ export const ServiceCards: React.FC = async () => {
           <ServiceCard
             title="Vendre ma voiture"
             description="Nos experts sécurisent et simplifient aussi la vente de votre voiture. Comptez sur notre équipe pour une expérience réussie."
-            Icon={CreditCardIcon}
+            Icon={CarIcon}
             href="/sell"
           />
         </div>

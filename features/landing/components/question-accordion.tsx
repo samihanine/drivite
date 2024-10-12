@@ -16,7 +16,7 @@ export const QuestionAccordion = ({ question }: { question: Question }) => {
       className={`accordion border border-solid border-border p-4 rounded-xl mb-8 lg:p-4 bg-background`}
     >
       <button
-        className={`accordion-toggle group inline-flex questions-center justify-between text-left text-lg font-normal leading-8 w-full ${
+        className={`accordion-toggle flex group items-center questions-center justify-between text-left text-lg font-normal leading-8 w-full ${
           isOpen ? "text-primary" : "hover:text-primary"
         }`}
         aria-controls={`basic-collapse-${question.id}`}

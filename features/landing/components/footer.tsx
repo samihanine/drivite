@@ -10,12 +10,12 @@ const socialLinks = [
   {
     label: "Email",
     icon: EmailIcon,
-    href: "mailto:contact@drivite.net",
+    href: "mailto:contact@drivite.fr",
   },
   {
     label: "Instagram",
     icon: InstagramIcon,
-    href: "https://www.instagram.com/drivitenet/",
+    href: "https://www.instagram.com/drivite_fr/",
   },
   {
     label: "LinkedIn",
