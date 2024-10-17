@@ -26,7 +26,7 @@ export const ContactHero = async () => {
               <PhoneIcon className="h-6 w-6 text-primary" />
               <Typography variant="paragraph">
                 <a href="tel:" className="text-primary font-medium">
-                  +33 1 23 45 67 89
+                  06 33 82 71 73
                 </a>
               </Typography>
             </div>

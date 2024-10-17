@@ -62,7 +62,7 @@ export const ContactForm = () => {
       <div className="space-y-2">
         <Label htmlFor="phone">Téléphone</Label>
         <Input
-          placeholder="ex: 06 12 34 56 78"
+          placeholder="ex: 06 33 82 71 73"
           type="text"
           name="phone"
           id="phone"
