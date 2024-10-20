@@ -6,6 +6,7 @@ import { Image } from "@/components/image";
 import { ContactForm } from "./contact-form";
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import Script from "next/script";
+import { CalendlyEmbed } from "./calendly";
 
 export const ContactHero = async () => {
   const t = await getI18n();
@@ -57,16 +58,8 @@ export const ContactHero = async () => {
               Prennez rendez-vous pour une consultation gratuite
             </Typography>
           </div>
-          <div
-            className="calendly-inline-widget"
-            data-url="https://calendly.com/drivite/30min"
-            style={{ minWidth: "320px", height: "630px" }}
-          ></div>
-          <Script
-            type="text/javascript"
-            src="https://assets.calendly.com/assets/external/widget.js"
-            async
-          ></Script>
+
+          <CalendlyEmbed url="https://calendly.com/drivite/30min" />
         </div>
       </Container>
     </div>
