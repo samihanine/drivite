@@ -1,6 +1,13 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
-import { EmailIcon, InstagramIcon, LinkedInIcon } from "@/components/icons";
+import {
+  EmailIcon,
+  InstagramIcon,
+  LinkedInIcon,
+  TwitterIcon,
+  FacebookIcon,
+  YouTubeIcon,
+} from "@/components/icons";
 import { getI18n } from "@/locale/server";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { PhoneButton } from "./phone-button";
@@ -21,6 +28,21 @@ const socialLinks = [
     label: "LinkedIn",
     icon: LinkedInIcon,
     href: "https://www.linkedin.com/company/drivite/",
+  },
+  {
+    label: "Facebook",
+    icon: FacebookIcon,
+    href: "https://www.facebook.com/profile.php?id=61563391888273&locale=fr_FR",
+  },
+  {
+    label: "Twitter",
+    icon: TwitterIcon,
+    href: "https://x.com/drivite_fr",
+  },
+  {
+    label: "YouTube",
+    icon: YouTubeIcon,
+    href: "https://www.youtube.com/@drivite",
   },
 ];
 

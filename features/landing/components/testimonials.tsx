@@ -55,18 +55,18 @@ export const Testimonials = async (props: { testimonials: Testimonial[] }) => {
 
   return (
     <div className="py-20 bg-[#003F88]">
-      <Container className="relative h-full flex flex-col gap-8 items-center">
+      <Container className="relative h-full flex flex-col gap-4 items-center">
         <Typography variant="h2" className="text-white">
-          {t("home.how.title")}
+          Témoignages de nos clients
         </Typography>
         <Typography
           variant="paragraph"
           className="max-w-xl text-center text-white"
         >
-          {t("home.how.description")}
+          Nos clients sont notre priorité, découvrez ce qu'ils pensent de nous.
         </Typography>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full mt-8">
           {props.testimonials.slice(0, 2).map((testimonial) => (
             <TestimonialCard
               key={testimonial.id}

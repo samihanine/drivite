@@ -5,6 +5,7 @@ import { ContactButton } from "@/features/landing/components/contact-button";
 import { Image } from "@/components/image";
 import { ContactForm } from "./contact-form";
 import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/solid";
+import Script from "next/script";
 
 export const ContactHero = async () => {
   const t = await getI18n();
@@ -31,6 +32,11 @@ export const ContactHero = async () => {
               </Typography>
             </div>
 
+            <p>
+              Pour toute informations complémentaires, n'hésitez pas à nous
+              contacter par mail :
+            </p>
+
             <div className="flex gap-4 items-center">
               <EnvelopeIcon className="h-6 w-6 text-primary" />
               <Typography variant="paragraph">
@@ -45,13 +51,22 @@ export const ContactHero = async () => {
         <div className="bg-background p-8 w-full md:w-2/5 rounded-2xl shadow-md flex flex-col gap-8">
           <div>
             <Typography variant="h2" className="mb-2">
-              Entrez en contact
+              Entrons en contact
             </Typography>
             <Typography variant="paragraph">
-              Vous avez une question ?
+              Prennez rendez-vous pour une consultation gratuite
             </Typography>
           </div>
-          <ContactForm />
+          <div
+            className="calendly-inline-widget"
+            data-url="https://calendly.com/drivite/30min"
+            style={{ minWidth: "320px", height: "630px" }}
+          ></div>
+          <Script
+            type="text/javascript"
+            src="https://assets.calendly.com/assets/external/widget.js"
+            async
+          ></Script>
         </div>
       </Container>
     </div>
