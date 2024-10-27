@@ -8,6 +8,10 @@ export async function getAllPosts({
   locale: string;
 }): Promise<Post[]> {
   const query = '*[_type == "post"]';
-  const posts = await client.fetch<SanityPost[]>(query);
+  const posts = await client.fetch<SanityPost[]>(
+    query,
+    {},
+    { next: { revalidate: 0 } },
+  );
   return posts.map((post) => serializePost({ post, locale }));
 }

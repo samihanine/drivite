@@ -10,6 +10,10 @@ export async function getPostBySlug({
   slug: string;
 }): Promise<Post | null> {
   const query = `*[_type == "post" && slug.current == $slug][0]`;
-  const post = await client.fetch<SanityPost>(query, { slug });
+  const post = await client.fetch<SanityPost>(
+    query,
+    { slug },
+    { next: { revalidate: 0 } },
+  );
   return post ? serializePost({ post, locale }) : null;
 }

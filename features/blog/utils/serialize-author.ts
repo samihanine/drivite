@@ -1,6 +1,7 @@
 import { urlFor } from "@/sanity/lib/image";
 import { toHTML } from "@portabletext/to-html";
 import { Author } from "../schemas/author";
+import { htmlToTailwind } from "@/lib/utils";
 
 export type SanityAuthor = {
   _id: string;
@@ -26,5 +27,5 @@ export const serializeAuthor = ({
   name: author.name,
   slug: author.slug.current,
   imageUrl: urlFor(author.image).url(),
-  bio: toHTML(locale === "fr" ? author.biofr : author.bio),
+  bio: htmlToTailwind(toHTML(locale === "fr" ? author.biofr : author.bio)),
 });

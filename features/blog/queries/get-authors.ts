@@ -11,6 +11,10 @@ export async function getAllAuthors({
   locale: string;
 }): Promise<Author[]> {
   const query = '*[_type == "author"]';
-  const authors = await client.fetch<SanityAuthor[]>(query);
+  const authors = await client.fetch<SanityAuthor[]>(
+    query,
+    {},
+    { next: { revalidate: 0 } },
+  );
   return authors.map((author) => serializeAuthor({ author, locale }));
 }

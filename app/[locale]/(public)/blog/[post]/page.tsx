@@ -5,8 +5,6 @@ import { getAuthorByPostSlug } from "@/features/blog/queries/get-author-by-post-
 import { getPostBySlug } from "@/features/blog/queries/get-post-by-slug";
 import { getAllPosts } from "@/features/blog/queries/get-posts";
 import { Post } from "@/features/blog/components/post";
-import { Container } from "@/components/container";
-import { Hero } from "@/features/landing/components/hero";
 
 export async function generateMetadata({
   params,
@@ -92,14 +90,7 @@ export default async function PostPage({
 
   return (
     <>
-      <Hero
-        title={post.title}
-        description={post.description}
-        backgroundImagePath={post.imageUrl}
-      />
-      <Container className="relative py-28">
-        <Post post={post} author={author || undefined} />
-      </Container>
+      <Post post={post} author={author || undefined} />
     </>
   );
 }

@@ -33,7 +33,7 @@ export async function PostsGrid({
                   alt={post.title}
                   width={1200}
                   height={600}
-                  className="w-full h-80 object-cover rounded-xl"
+                  className="w-full h-64 object-cover rounded-xl"
                 />
               )}
               <h3 className="text-2xl font-medium mt-1">{post.title}</h3>

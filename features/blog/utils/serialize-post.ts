@@ -1,3 +1,4 @@
+import { htmlToTailwind } from "@/lib/utils";
 import { Post } from "../schemas/post";
 import { urlFor } from "@/sanity/lib/image";
 import { toHTML } from "@portabletext/to-html";
@@ -38,7 +39,7 @@ export const serializePost = ({
   slug: post.slug.current,
   imageUrl: urlFor(post.mainImage).url(),
   publishedAt: post.publishedAt,
-  body: toHTML(locale === "fr" ? post.bodyfr : post.body),
+  body: htmlToTailwind(toHTML(locale === "fr" ? post.bodyfr : post.body)),
   description: locale === "fr" ? post.descriptionfr : post.description,
   altText: locale === "fr" ? post.mainImage.altfr : post.mainImage.alt,
   authorId: post.author._ref,
