@@ -18,7 +18,7 @@ export const Hero = async ({
   return (
     <div className="relative">
       <div className="absolute flex w-full h-full">
-        <div className="absolute w-full h-full bg-black/70"></div>
+        <div className="absolute w-full h-full bg-black/20"></div>
         <Image
           src={backgroundImagePath}
           className="w-full h-full object-cover"

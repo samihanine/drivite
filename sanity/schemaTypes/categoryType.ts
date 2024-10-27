@@ -26,6 +26,14 @@ export const categoryType = defineType({
       },
     }),
     defineField({
+      title: "Slug (FR)",
+      name: "slugfr",
+      type: "slug",
+      options: {
+        source: "titlefr",
+      },
+    }),
+    defineField({
       title: "Description (EN)",
       name: "description",
       type: "text",
