@@ -1,11 +1,7 @@
 import { Container } from "@/components/container";
 import { Typography } from "@/components/typography";
 import { getI18n } from "@/locale/server";
-import { ContactButton } from "@/features/landing/components/contact-button";
-import { Image } from "@/components/image";
-import { ContactForm } from "./contact-form";
-import { EnvelopeIcon, MapPinIcon, PhoneIcon } from "@heroicons/react/24/solid";
-import Script from "next/script";
+import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import { CalendlyEmbed } from "./calendly";
 
 export const ContactHero = async () => {

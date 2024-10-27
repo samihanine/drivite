@@ -113,7 +113,16 @@ export async function Footer({ pageLinks }: { pageLinks: PageLink[] }) {
               <div className="bg-white rounded-full p-1">
                 <LocaleSwitcher />
               </div>
-              {pageLinks.map((link, index) => (
+              {[
+                {
+                  label: "Mentions légales",
+                  href: "/mentions",
+                },
+                {
+                  label: "Conditions générales de vente",
+                  href: "/cgv",
+                },
+              ].map((link, index) => (
                 <Link
                   key={`footer-link-${index}`}
                   href={link.href || "/"}
