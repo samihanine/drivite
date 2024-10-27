@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Image } from "@/components/image";
 import { type Post } from "../schemas/post";
 import { type Author } from "../schemas/author";
 import { Container } from "@/components/container";

@@ -1,4 +1,4 @@
-import { handleGoogleCallback } from "@/server/auth";
+import { handleGoogleCallback } from "@/features/auth/actions/handle-google-callback";
 import { NextResponse, NextRequest } from "next/server";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";

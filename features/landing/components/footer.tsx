@@ -1,23 +1,25 @@
 import Link from "next/link";
 import { Container } from "@/components/container";
 import {
-  EmailIcon,
+  TiktokIcon,
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
   FacebookIcon,
   YouTubeIcon,
+  EmailIcon,
 } from "@/components/icons";
 import { getI18n } from "@/locale/server";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { PhoneButton } from "./phone-button";
 import { PageLink } from "../queries/get-page-links";
+import { Button } from "@/components/button";
 
 const socialLinks = [
   {
-    label: "Email",
-    icon: EmailIcon,
-    href: "mailto:contact@drivite.fr",
+    label: "Facebook",
+    icon: FacebookIcon,
+    href: "https://www.facebook.com/profile.php?id=61563391888273&locale=fr_FR",
   },
   {
     label: "Instagram",
@@ -30,9 +32,9 @@ const socialLinks = [
     href: "https://www.linkedin.com/company/drivite/",
   },
   {
-    label: "Facebook",
-    icon: FacebookIcon,
-    href: "https://www.facebook.com/profile.php?id=61563391888273&locale=fr_FR",
+    label: "YouTube",
+    icon: YouTubeIcon,
+    href: "https://www.youtube.com/@drivite",
   },
   {
     label: "Twitter",
@@ -40,9 +42,9 @@ const socialLinks = [
     href: "https://x.com/drivite_fr",
   },
   {
-    label: "YouTube",
-    icon: YouTubeIcon,
-    href: "https://www.youtube.com/@drivite",
+    label: "Tiktok",
+    icon: TiktokIcon,
+    href: "https://www.tiktok.com/@drivite_fr",
   },
 ];
 
@@ -79,7 +81,15 @@ export async function Footer({ pageLinks }: { pageLinks: PageLink[] }) {
               <h3 className="text-center font-display text-4xl font-semibold text-foreground sm:text-5xl lg:max-w-xl lg:text-left">
                 {t("footer.title")}
               </h3>
-              <PhoneButton className="mt-8" />
+              <div className="mt-8 flex items-center gap-4 flex-wrap">
+                <PhoneButton />
+                <a href="mailto:contact@drivite.fr">
+                  <Button variant={"outline"}>
+                    <EmailIcon className="h-4 w-4 shrink-0 mr-2" />
+                    contact@drivite.fr
+                  </Button>
+                </a>
+              </div>
             </div>
             <div className="flex flex-col items-center lg:col-span-5 lg:items-start">
               <p className="text-center text-base text-muted-foreground lg:text-left">

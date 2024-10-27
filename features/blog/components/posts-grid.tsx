@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import { Image } from "@/components/image";
 import { Post } from "../schemas/post";
 import { Author } from "../schemas/author";
 

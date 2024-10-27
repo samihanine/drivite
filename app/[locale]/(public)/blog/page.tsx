@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { locale: string } }) {
       <Hero
         title="Blog"
         description="Sur cette page, vous trouverez des articles sur les dernières tendances du marché de l'automobile, des conseils pour l'achat et la vente de véhicules, ainsi que des informations sur les services de Drivite."
-        backgroundImagePath="/images/landing/question.jpg"
+        backgroundImagePath="/images/landing/question.jpeg"
       />
       <Container className="relative py-28">
         <PostsGrid posts={posts} authors={authors} />

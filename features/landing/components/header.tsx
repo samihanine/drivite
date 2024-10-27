@@ -8,7 +8,6 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react";
-import { LocaleSwitcher } from "../../../components/locale-switcher";
 import { MenuIcon } from "../../../components/menu-icon";
 import { PhoneButton } from "./phone-button";
 import { PageLink } from "../queries/get-page-links";

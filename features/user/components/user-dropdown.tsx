@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback } from "@/components/avatar";
 import { Button } from "@/components/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/popover";
 import { User } from "@/lib/schemas";
-import { logOut } from "@/server/auth";
+import { logOut } from "@/features/auth/actions/log-out";
 import { LogOut } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";

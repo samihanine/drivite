@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/input";
 import { User, userSchema } from "@/lib/schemas";
 import { showError } from "@/lib/utils";
-import { updateUser } from "@/server/auth";
+import { updateUser } from "@/features/user/actions/update-user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";

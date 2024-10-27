@@ -11,7 +11,7 @@ export default async function Page() {
       <Hero
         title="Une question, une réponse !"
         description="Sur cette page, vous trouverez des réponses complètes à toutes les questions courantes que vous pourriez avoir concernant Drivite, ainsi que des informations détaillées sur le processus d'achat et de vente de véhicules liés à nos services"
-        backgroundImagePath="/images/landing/question.jpg"
+        backgroundImagePath="/images/landing/question.jpeg"
       />
       <Faq questions={questions} />
       <Cta />

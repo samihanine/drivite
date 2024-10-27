@@ -18,9 +18,9 @@ export const getPageLinks = async (): Promise<PageLink[]> => {
     {
       label: t("header.services"),
       children: [
+        { label: t("header.cars"), href: "/cars" },
         { label: t("header.buy"), href: "/buy" },
         { label: t("header.sell"), href: "/sell" },
-        { label: t("header.cars"), href: "/cars" },
       ],
     },
     {

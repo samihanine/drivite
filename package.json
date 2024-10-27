@@ -67,6 +67,7 @@
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
     "drizzle-orm": "^0.29.5",
+    "embla-carousel-react": "^8.3.0",
     "eslint": "8.48.0",
     "eslint-config-next": "^14.2.16",
     "formdata-node": "^6.0.3",

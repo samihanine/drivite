@@ -7,7 +7,7 @@ export default {
     cta: {
       title: "Faites les meilleurs choix dès maintenant grâce à Drivite",
       description:
-        "Prêt à prendre la route avec la voiture parfaite ? Contactez Drivite aujourd'hui et découvrez comment nous pouvons vous aider !",
+        "Contactez Drivite aujourd'hui et découvrez comment nous pouvons vous aider ! Nos services d'accompagnement sont disponibles partout en France.",
     },
   },
   header: {
@@ -17,7 +17,7 @@ export default {
     blog: "Blog",
     about: "À propos",
     contact: "Contact",
-    cars: "Voir les voitures",
+    cars: "Véhicules en vente",
     sell: "Vendre ma voiture",
     buy: "Acheter une voiture",
     who: "Qui sommes-nous ?",

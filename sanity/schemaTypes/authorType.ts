@@ -36,7 +36,7 @@ export const authorType = defineType({
           lists: [],
         }),
       ],
-    }),
+    } as any),
     defineField({
       title: "Bio (FR)",
       name: "biofr",
@@ -48,7 +48,7 @@ export const authorType = defineType({
           lists: [],
         }),
       ],
-    }),
+    } as any),
   ],
   preview: {
     select: {

@@ -24,7 +24,7 @@ const TestimonialCard = ({
     <div className="bg-background rounded-lg px-6 py-12 w-full flex gap-6">
       <div className="flex flex-col items-center justify-center w-1/3 gap-1">
         <Image
-          src={picture}
+          src={"/images/landing/user.png"}
           alt="Testimonial"
           className="w-24 h-24 rounded-full mb-3"
         />

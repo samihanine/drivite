@@ -4,7 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { Typography } from "@/components/typography";
 import { CarIcon } from "@/components/icons";
-import Image from "next/image";
+import { Image } from "@/components/image";
 
 const ServiceCard = ({
   title,
@@ -20,16 +20,18 @@ const ServiceCard = ({
   return (
     <div className="bg-background rounded-lg p-6 max-w-lg shadow-md shadow-[#E7F1FB]">
       <div className="flex flex-col items-center justify-between h-full gap-6">
-        <div className="w-20 h-20 flex items-center justify-center">
-          <Image
-            src={image}
-            alt={title}
-            width={80}
-            height={80}
-            className="h-20 w-20 text-primary"
-          />
+        <div className="flex flex-col gap-2 items-center justify-center">
+          <div className="w-20 h-20 flex items-center justify-center">
+            <Image
+              src={image}
+              alt={title}
+              width={80}
+              height={80}
+              className="h-20 w-20 text-primary"
+            />
+          </div>
+          <Typography variant="h3">{title}</Typography>
         </div>
-        <Typography variant="h3">{title}</Typography>
         <Typography variant="paragraph" className="text-center">
           {description}
         </Typography>
@@ -58,7 +60,7 @@ export const ServiceCards: React.FC = async () => {
           <ServiceCard
             title="Vendre ma voiture"
             description="Nous vous accompagnons tout au long du processus de vente, vous permettant ainsi de prendre des décisions éclairées et d’éviter les pièges courants. Assurez-vous d'une vente rapide et en toute sécurité."
-            image={"/images/landing/key.png"}
+            image={"/images/landing/car-key.png"}
             href="/sell"
           />
         </div>
