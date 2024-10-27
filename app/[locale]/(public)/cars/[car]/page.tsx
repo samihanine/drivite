@@ -80,3 +80,5 @@ export default async function CarPage({
     </>
   );
 }
+
+export const dynamic = "force-dynamic";
