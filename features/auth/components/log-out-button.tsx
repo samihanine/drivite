@@ -1,9 +1,10 @@
 "use client";
 
-import { logOut } from "@/server/auth";
+import { logOut } from "@/features/auth/actions/log-out";
 import { Button } from "@/components/button";
 import { useState } from "react";
 import { ArrowRightEndOnRectangleIcon } from "@heroicons/react/24/outline";
+
 export default function LogOutButton() {
   const [loading, setLoading] = useState(false);
 

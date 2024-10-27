@@ -13,7 +13,7 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import { showError } from "@/lib/utils";
 import { registerSchema } from "@/lib/schemas";
-import { signUpWithPassword } from "@/server/auth";
+import { signUpWithPassword } from "@/features/auth/actions/sign-up-with-password";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "next-safe-action/hooks";
 import Link from "next/link";

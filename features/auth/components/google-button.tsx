@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/button";
-import { loginWithGoogle } from "@/server/auth";
+import { loginWithGoogle } from "@/features/auth/actions/login-with-google";
 
 const GoogleButton = ({ children }: { children: React.ReactNode }) => {
   const handleLoginWithGoogle = async () => {

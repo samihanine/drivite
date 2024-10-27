@@ -4,7 +4,7 @@ import { Button } from "@/components/button";
 import { Input } from "@/components/input";
 import Link from "next/link";
 import GoogleButton from "./google-button";
-import { loginWithPassword } from "@/server/auth";
+import { loginWithPassword } from "@/features/auth/actions/login-with-password";
 import { showError } from "@/lib/utils";
 import { useAction } from "next-safe-action/hooks";
 
