@@ -3,7 +3,7 @@ import { type Post } from "../schemas/post";
 import { type Author } from "../schemas/author";
 import { Container } from "@/components/container";
 
-export function Post({ post }: { post: Post; author?: Author }) {
+export function Post({ post, author }: { post: Post; author?: Author }) {
   return (
     <>
       <Container className="py-24">
@@ -27,6 +27,20 @@ export function Post({ post }: { post: Post; author?: Author }) {
           </div>
 
           <div dangerouslySetInnerHTML={{ __html: post.body }} />
+
+          <div className="flex flex-col gap-3">
+            <h2 className="text-2xl font-bold">About the author</h2>
+            <div className="flex gap-4 items-center">
+              <Image
+                src={author?.imageUrl || ""}
+                alt={author?.name || ""}
+                width={40}
+                height={40}
+                className="rounded-full"
+              />
+              <p>{author?.name}</p>
+            </div>
+          </div>
         </article>
       </Container>
     </>
