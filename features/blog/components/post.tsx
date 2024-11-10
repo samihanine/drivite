@@ -2,8 +2,17 @@ import { Image } from "@/components/image";
 import { type Post } from "../schemas/post";
 import { type Author } from "../schemas/author";
 import { Container } from "@/components/container";
+import { Category } from "../schemas/category";
 
-export function Post({ post, author }: { post: Post; author?: Author }) {
+export function Post({
+  post,
+  author,
+  categories,
+}: {
+  post: Post;
+  author?: Author;
+  categories: Category[];
+}) {
   return (
     <>
       <Container className="py-24">
@@ -17,13 +26,28 @@ export function Post({ post, author }: { post: Post; author?: Author }) {
         <article className="prose prose-lg max-w-none flex flex-col gap-10">
           <div className="flex flex-col gap-3">
             <h1 className="text-4xl font-bold mt-10">{post.title}</h1>
-            <time className="text-gray-500">
-              {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
+            <div className="flex gap-2 text-gray-500">
+              <time className="text-gray-500">
+                {new Date(post.publishedAt).toLocaleDateString("fr-FR", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </time>
+              {" | "}
+              <div className="flex gap-1">
+                {post.categoryIds?.map((id) => {
+                  const category = categories.find(
+                    (category) => category.id === id,
+                  );
+                  return (
+                    <span key={id} className="">
+                      {category?.title}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
           </div>
 
           <div dangerouslySetInnerHTML={{ __html: post.body }} />

@@ -42,7 +42,7 @@ const socialLinks = [
     href: "https://x.com/drivite_fr",
   },
   {
-    label: "Tiktok",
+    label: "Tik-tok",
     icon: TiktokIcon,
     href: "https://www.tiktok.com/@drivite_fr",
   },

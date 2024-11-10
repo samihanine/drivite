@@ -10,6 +10,7 @@ export const postSchema = z.object({
   description: z.string(),
   altText: z.string().optional(),
   authorId: z.string().optional(),
+  categoryIds: z.array(z.string()).optional(),
 });
 
 export type Post = z.infer<typeof postSchema>;

@@ -25,6 +25,11 @@ export type SanityPost = {
     _ref: string;
     _type: string;
   };
+  categories: {
+    _ref: string;
+    _type: string;
+    _key: string;
+  }[];
 };
 
 export const serializePost = ({
@@ -43,4 +48,5 @@ export const serializePost = ({
   description: locale === "fr" ? post.descriptionfr : post.description,
   altText: locale === "fr" ? post.mainImage.altfr : post.mainImage.alt,
   authorId: post.author._ref,
+  categoryIds: post.categories.map((category) => category._ref),
 });

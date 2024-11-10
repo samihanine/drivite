@@ -1,6 +1,7 @@
 import { Container } from "@/components/container";
 import { PostsGrid } from "@/features/blog/components/posts-grid";
 import { getAllAuthors } from "@/features/blog/queries/get-authors";
+import { getCategories } from "@/features/blog/queries/get-categories";
 import { getAllPosts } from "@/features/blog/queries/get-posts";
 import { Cta } from "@/features/landing/components/cta";
 import { Hero } from "@/features/landing/components/hero";
@@ -8,6 +9,7 @@ import { Hero } from "@/features/landing/components/hero";
 export default async function Page({ params }: { params: { locale: string } }) {
   const posts = await getAllPosts({ locale: params.locale });
   const authors = await getAllAuthors({ locale: params.locale });
+  const categories = await getCategories({ locale: params.locale });
 
   return (
     <>
@@ -17,7 +19,7 @@ export default async function Page({ params }: { params: { locale: string } }) {
         backgroundImagePath="/images/landing/question.jpeg"
       />
       <Container className="relative py-28">
-        <PostsGrid posts={posts} authors={authors} />
+        <PostsGrid posts={posts} authors={authors} categories={categories} />
       </Container>
       <Cta />
     </>

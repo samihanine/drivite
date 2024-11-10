@@ -14,14 +14,15 @@ export default async function Page({
     maxPrice: string;
     type: string;
     brand: string;
-    doors: string;
-    seats: string;
     exteriorColor: string;
     interiorColor: string;
-    manufacturingYear: string;
     fuelType: string;
     transmission: string;
     critAir: string;
+    minMileage: string;
+    maxMileage: string;
+    minYear: string;
+    maxYear: string;
   };
 }) {
   const cars = await getCars({ locale: params.locale });
@@ -32,16 +33,20 @@ export default async function Page({
         car.price >= parseInt(searchParams.minPrice)) &&
       (!searchParams.maxPrice ||
         car.price <= parseInt(searchParams.maxPrice)) &&
+      (!searchParams.minMileage ||
+        car.mileage >= parseInt(searchParams.minMileage)) &&
+      (!searchParams.maxMileage ||
+        car.mileage <= parseInt(searchParams.maxMileage)) &&
+      (!searchParams.minYear ||
+        car.manufacturingYear >= parseInt(searchParams.minYear)) &&
+      (!searchParams.maxYear ||
+        car.manufacturingYear <= parseInt(searchParams.maxYear)) &&
       (!searchParams.type || car.type === searchParams.type) &&
       (!searchParams.brand || car.brand === searchParams.brand) &&
-      (!searchParams.doors || car.doors === parseInt(searchParams.doors)) &&
-      (!searchParams.seats || car.seats === parseInt(searchParams.seats)) &&
       (!searchParams.exteriorColor ||
         car.exteriorColor === searchParams.exteriorColor) &&
       (!searchParams.interiorColor ||
         car.interiorColor === searchParams.interiorColor) &&
-      (!searchParams.manufacturingYear ||
-        car.manufacturingYear === parseInt(searchParams.manufacturingYear)) &&
       (!searchParams.fuelType || car.fuelType === searchParams.fuelType) &&
       (!searchParams.transmission ||
         car.transmission === searchParams.transmission) &&
@@ -52,7 +57,7 @@ export default async function Page({
   return (
     <>
       <div className="relative flex flex-col sm:flex-row">
-        <div className="w-full py-12 px-10 sm:w-80 sm:border-r sm:border-border flex flex-col gap-5">
+        <div className="w-full py-12 px-8 sm:w-80 sm:border-r sm:border-border flex flex-col gap-5">
           <CarFilters />
         </div>
         <div className="flex-1 py-12 px-12 sm:px-16 flex flex-col gap-10">

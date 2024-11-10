@@ -90,7 +90,7 @@ export const ContactForm = () => {
           <div className="flex items-center space-x-2">
             <RadioGroupItem value="sell" id="sell" />
             <Label className="text-muted-foreground font-normal" htmlFor="sell">
-              Vendre ma voiture
+              Vendre une voiture
             </Label>
           </div>
           <div className="flex items-center space-x-2">

@@ -18,7 +18,7 @@ export default {
     about: "À propos",
     contact: "Contact",
     cars: "Véhicules en vente",
-    sell: "Vendre ma voiture",
+    sell: "Vendre une voiture",
     buy: "Acheter une voiture",
     who: "Qui sommes-nous ?",
     faq: "FAQ",

@@ -1,3 +1,4 @@
+import { getBrands } from "@/features/cars/utils/get-brands";
 import { CarIcon } from "lucide-react";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
@@ -7,6 +8,11 @@ export const carType = defineType({
   type: "document",
   icon: CarIcon as any,
   fields: [
+    defineField({
+      name: "isSold",
+      title: "Is Sold",
+      type: "boolean",
+    }),
     defineField({
       name: "images",
       title: "Images",
@@ -51,6 +57,9 @@ export const carType = defineType({
       name: "brand",
       title: "Brand",
       type: "string",
+      options: {
+        list: getBrands().map((brand) => ({ title: brand, value: brand })),
+      },
     }),
     defineField({
       name: "model",

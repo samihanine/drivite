@@ -50,7 +50,7 @@ export const getQuestions = async (): Promise<Question[]> => {
     },
     {
       id: "8",
-      question: "Comment Drivite choisit-elle les véhicules pour moi ?",
+      question: "Comment Drivite choisit les véhicules pour moi ?",
       answer: `Nous tenons compte de vos critères de sélection (budget, modèle, préférences, etc.) et nous effectuons une recherche détaillée sur le marché pour trouver les options qui répondent le mieux à vos attentes. Si le véhicule proposé ne vous convient pas, vous êtes libre de nous le notifier et nous chercherons une alternative pour que vous soyez pleinement satisfait.`,
     },
     {
@@ -96,7 +96,7 @@ export const getQuestions = async (): Promise<Question[]> => {
     },
     {
       id: "16",
-      question: "Puis-je utiliser Drivite uniquement pour vendre ma voiture ?",
+      question: "Puis-je utiliser Drivite uniquement pour vendre une voiture ?",
       answer: `Oui, nous proposons plusieurs formules dont une complète pour la vente de votre voiture, incluant l'estimation, l'annonce, la gestion des visites, la négociation et les démarches administratives.`,
     },
     {

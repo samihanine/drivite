@@ -58,7 +58,7 @@ export const ServiceCards: React.FC = async () => {
             href="/buy"
           />
           <ServiceCard
-            title="Vendre ma voiture"
+            title="Vendre une voiture"
             description="Nous vous accompagnons tout au long du processus de vente, vous permettant ainsi de prendre des décisions éclairées et d’éviter les pièges courants. Assurez-vous d'une vente rapide et en toute sécurité."
             image={"/images/landing/car-key.png"}
             href="/sell"

@@ -13,6 +13,7 @@ import {
 } from "@/components/select";
 import { Typography } from "@/components/typography";
 import { Button } from "@/components/button";
+import { getBrands } from "../utils/get-brands";
 
 export const CarFilters: React.FC = () => {
   const router = useRouter();
@@ -47,29 +48,112 @@ export const CarFilters: React.FC = () => {
       </Typography>
 
       <div className="space-y-4">
-        <div className="space-x-4 flex">
-          <div>
-            <Label htmlFor="minPrice">Prix minimum</Label>
-            <Input
-              id="minPrice"
-              type="number"
-              value={searchParams.get("minPrice") || ""}
-              onChange={(e) => updateQuery("minPrice", e.target.value)}
-            />
-          </div>
+        <div>
+          <Label>Prix</Label>
 
-          <div>
-            <Label htmlFor="maxPrice">Prix maximum</Label>
-            <Input
-              id="maxPrice"
-              type="number"
-              value={searchParams.get("maxPrice") || ""}
-              onChange={(e) => updateQuery("maxPrice", e.target.value)}
-            />
+          <div className="space-x-4 flex">
+            <div>
+              <Input
+                id="minPrice"
+                type="number"
+                placeholder="min"
+                value={searchParams.get("minPrice") || ""}
+                onChange={(e) => updateQuery("minPrice", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Input
+                id="maxPrice"
+                type="number"
+                placeholder="max"
+                value={searchParams.get("maxPrice") || ""}
+                onChange={(e) => updateQuery("maxPrice", e.target.value)}
+              />
+            </div>
           </div>
         </div>
+
         <div>
-          <Label htmlFor="type">Type</Label>
+          <Label>Kilométrage</Label>
+
+          <div className="space-x-4 flex">
+            <div>
+              <Input
+                id="minMileage"
+                type="number"
+                placeholder="min"
+                value={searchParams.get("minMileage") || ""}
+                onChange={(e) => updateQuery("minMileage", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Input
+                id="maxMileage"
+                type="number"
+                placeholder="max"
+                value={searchParams.get("maxMileage") || ""}
+                onChange={(e) => updateQuery("maxMileage", e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <Label>Année</Label>
+
+          <div className="space-x-4 flex">
+            <div>
+              <Input
+                id="minYear"
+                type="number"
+                placeholder="min"
+                value={searchParams.get("minYear") || ""}
+                onChange={(e) => updateQuery("minYear", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Input
+                id="maxYear"
+                type="number"
+                placeholder="max"
+                value={searchParams.get("maxYear") || ""}
+                onChange={(e) => updateQuery("maxYear", e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <Label>Kilométrage</Label>
+
+          <div className="space-x-4 flex">
+            <div>
+              <Input
+                id="minMileage"
+                type="number"
+                placeholder="min"
+                value={searchParams.get("minMileage") || ""}
+                onChange={(e) => updateQuery("minMileage", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Input
+                id="maxMileage"
+                type="number"
+                placeholder="max"
+                value={searchParams.get("maxMileage") || ""}
+                onChange={(e) => updateQuery("maxMileage", e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="type">Type de véhicule</Label>
           <Select
             defaultValue={searchParams.get("type") as string}
             onValueChange={(value) => updateQuery("type", value)}
@@ -79,27 +163,39 @@ export const CarFilters: React.FC = () => {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="">Tous les types</SelectItem>
-              <SelectItem value="micro-city-car">Micro-city car</SelectItem>
-              <SelectItem value="city-car">City car</SelectItem>
-              <SelectItem value="compact">Compact</SelectItem>
-              <SelectItem value="sedan">Sedan</SelectItem>
-              <SelectItem value="station-wagon">Station wagon</SelectItem>
-              <SelectItem value="coupe">Coupe</SelectItem>
+              <SelectItem value="micro-city-car">
+                Voiture micro-citadine
+              </SelectItem>
+              <SelectItem value="city-car">Voiture de ville</SelectItem>
+              <SelectItem value="compact">Compacte</SelectItem>
+              <SelectItem value="sedan">Berline</SelectItem>
+              <SelectItem value="station-wagon">Break</SelectItem>
+              <SelectItem value="coupe">Coupé</SelectItem>
               <SelectItem value="SUV">SUV</SelectItem>
-              <SelectItem value="convertible">Convertible</SelectItem>
-              <SelectItem value="minivan">Minivan</SelectItem>
+              <SelectItem value="convertible">Cabriolet</SelectItem>
+              <SelectItem value="minivan">Monospace</SelectItem>
               <SelectItem value="limousine">Limousine</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div>
           <Label htmlFor="brand">Marque</Label>
-          <Input
-            id="brand"
-            type="text"
-            value={searchParams.get("brand") || ""}
-            onChange={(e) => updateQuery("brand", e.target.value)}
-          />
+          <Select
+            defaultValue={searchParams.get("brand") as string}
+            onValueChange={(value) => updateQuery("brand", value)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Exterior Color" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Toutes les couleurs</SelectItem>
+              {getBrands().map((brand) => (
+                <SelectItem key={brand} value={brand}>
+                  {brand}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         <div>
@@ -111,15 +207,45 @@ export const CarFilters: React.FC = () => {
             onChange={(e) => updateQuery("model", e.target.value)}
           />
         </div>
+      </div>
 
+      <Typography className="mb-3 mt-8 text-primary" variant="h5">
+        Caractéristiques techniques
+      </Typography>
+
+      <div className="space-y-4">
         <div>
-          <Label htmlFor="manufacturingYear">Manufacturing Year</Label>
-          <Input
-            id="manufacturingYear"
-            type="number"
-            value={searchParams.get("manufacturingYear") || ""}
-            onChange={(e) => updateQuery("manufacturingYear", e.target.value)}
-          />
+          <Label htmlFor="fuelType">Énergie</Label>
+          <Select
+            defaultValue={searchParams.get("fuelType") as string}
+            onValueChange={(value) => updateQuery("fuelType", value)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="fuelType" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="petrol">Pétrol</SelectItem>
+              <SelectItem value="diesel">Diesel</SelectItem>
+              <SelectItem value="electric">Électrique</SelectItem>
+              <SelectItem value="hybrid">Hybride</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div>
+          <Label htmlFor="transmission">Boite de vitesse</Label>
+          <Select
+            defaultValue={searchParams.get("transmission") as string}
+            onValueChange={(value) => updateQuery("transmission", value)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="transmission" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="">Tous les types</SelectItem>
+              <SelectItem value="Automatic">Automatic</SelectItem>
+              <SelectItem value="Manual">Manual</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
@@ -175,74 +301,6 @@ export const CarFilters: React.FC = () => {
               <SelectItem value="Purple">Purple</SelectItem>
             </SelectContent>
           </Select>
-        </div>
-
-        <div>
-          <Label htmlFor="type">Portes</Label>
-          <Input
-            id="doors"
-            value={searchParams.get("doors") || ""}
-            type="number"
-            onChange={(e) => updateQuery("doors", e.target.value)}
-          />
-        </div>
-        <div>
-          <Label htmlFor="type">Sièges</Label>
-          <Input
-            id="seats"
-            value={searchParams.get("seats") || ""}
-            type="number"
-            onChange={(e) => updateQuery("seats", e.target.value)}
-          />
-        </div>
-      </div>
-
-      <Typography className="mb-3 mt-8 text-primary" variant="h5">
-        Caractéristiques techniques
-      </Typography>
-
-      <div className="space-y-4">
-        <div>
-          <Label htmlFor="fuelType">Type de carburant</Label>
-          <Select
-            defaultValue={searchParams.get("fuelType") as string}
-            onValueChange={(value) => updateQuery("fuelType", value)}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="fuelType" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Petrol">Petrol</SelectItem>
-              <SelectItem value="Diesel">Diesel</SelectItem>
-              <SelectItem value="Electric">Electric</SelectItem>
-              <SelectItem value="Hybrid">Hybrid</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Label htmlFor="transmission">Transmission</Label>
-          <Select
-            defaultValue={searchParams.get("transmission") as string}
-            onValueChange={(value) => updateQuery("transmission", value)}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="transmission" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="">Tous les types</SelectItem>
-              <SelectItem value="Automatic">Automatic</SelectItem>
-              <SelectItem value="Manual">Manual</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Label htmlFor="critAir">Crit'Air</Label>
-          <Input
-            id="critAir"
-            type="text"
-            value={searchParams.get("critAir") || ""}
-            onChange={(e) => updateQuery("critAir", e.target.value)}
-          />
         </div>
       </div>
     </div>

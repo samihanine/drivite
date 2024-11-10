@@ -5,6 +5,7 @@ import { getAuthorByPostSlug } from "@/features/blog/queries/get-author-by-post-
 import { getPostBySlug } from "@/features/blog/queries/get-post-by-slug";
 import { getAllPosts } from "@/features/blog/queries/get-posts";
 import { Post } from "@/features/blog/components/post";
+import { getCategoriesByPostSlug } from "@/features/blog/queries/get-categories-by-post-slug";
 
 export async function generateMetadata({
   params,
@@ -83,6 +84,10 @@ export default async function PostPage({
   setStaticParamsLocale(locale);
   const post = await getPostBySlug({ locale, slug: params.post });
   const author = await getAuthorByPostSlug({ postSlug: params.post, locale });
+  const categories = await getCategoriesByPostSlug({
+    postSlug: params.post,
+    locale,
+  });
 
   if (!post) {
     return notFound();
@@ -90,7 +95,7 @@ export default async function PostPage({
 
   return (
     <>
-      <Post post={post} author={author || undefined} />
+      <Post post={post} categories={categories} author={author || undefined} />
     </>
   );
 }
