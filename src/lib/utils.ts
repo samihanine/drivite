@@ -56,6 +56,12 @@ export const showSuccess = ({ message }: { message: string }) => {
   });
 };
 
+export const showLoading = () => {
+  return toast.loading("Chargement...", {
+    position: "top-center",
+  });
+};
+
 export const htmlToTailwind = (text: string): string => {
   return text
     .replaceAll("<p>", '<p class="text-base mb-4">')

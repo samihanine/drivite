@@ -86,3 +86,8 @@
 .simplebar-content {
   display: none;
 }
+
+body,
+html {
+  height: 100%;
+}

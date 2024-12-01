@@ -95,7 +95,7 @@ export function AppSidebar({ user }: { user: User }) {
         icon: LayoutDashboard,
       },
       {
-        title: "Formulaire des rapports",
+        title: "Éditeur de formulaire",
         url: `/app/admin/form`,
         icon: ClipboardDocumentCheckIcon,
       },

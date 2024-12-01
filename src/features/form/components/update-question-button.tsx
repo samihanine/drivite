@@ -38,7 +38,7 @@ export const UpdateQuestionButton = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm<z.infer<typeof questionSchema>>({
-    resolver: zodResolver(questionSchema),
+    resolver: zodResolver(questionSchema.extend({ id: z.string() })),
     defaultValues: {
       pointConditionType: question.pointConditionType || "NONE",
       displayConditionType: question.displayConditionType || "ALWAYS",

@@ -13,11 +13,16 @@ import {
   DrawerClose,
 } from "@/components/drawer";
 import { Question } from "@/db";
-import { Bars2Icon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import {
+  Bars2Icon,
+  PencilSquareIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/react/24/outline";
 import { Badge } from "@/components/badge";
 import { UpdateQuestionButton } from "./update-question-button";
 import { cn } from "@/lib/utils";
 import { Cog6ToothIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { QuestionMarkIcon } from "@radix-ui/react-icons";
 
 export const QuestionCard = ({
   question,
@@ -36,13 +41,15 @@ export const QuestionCard = ({
     >
       {question.type !== "SECTION" && (
         <div className="flex gap-4 items-center">
-          <Bars2Icon className="w-5 h-5 mr-2" />
+          <QuestionMarkIcon className="w-5 h-5 mr-2" />
 
           <div className="flex gap-2">
             <h2>{question.label}</h2>
-            <Badge variant={"success"} className="w-fit">
-              + {question.points} points
-            </Badge>
+            {!!question.points && (
+              <Badge variant={"success"} className="w-fit">
+                + {question.points} points
+              </Badge>
+            )}
           </div>
         </div>
       )}

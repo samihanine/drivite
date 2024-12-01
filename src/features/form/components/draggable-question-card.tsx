@@ -61,13 +61,15 @@ const DraggableQuestionCard: React.FC<{
   return (
     <div
       ref={ref}
-      className="cursor-pointer flex-1"
+      className="relative flex-1"
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
-      <QuestionCard
-        question={question}
-        handleUpdateQuestion={handleUpdateQuestion}
-      />
+      <div className="relative flex-1 group cursor-pointer">
+        <QuestionCard
+          question={question}
+          handleUpdateQuestion={handleUpdateQuestion}
+        />
+      </div>
     </div>
   );
 };
