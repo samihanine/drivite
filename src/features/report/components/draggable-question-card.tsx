@@ -61,7 +61,7 @@ const DraggableQuestionCard: React.FC<{
   return (
     <div
       ref={ref}
-      className="relative flex-1"
+      className="relative flex-1 py-2"
       style={{ opacity: isDragging ? 0.5 : 1 }}
     >
       <div className="relative flex-1 group cursor-pointer">

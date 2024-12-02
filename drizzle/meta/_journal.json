@@ -64,6 +64,20 @@
       "when": 1733071833399,
       "tag": "0008_cultured_hobgoblin",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1733114199885,
+      "tag": "0009_handy_sunfire",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1733162860272,
+      "tag": "0010_nebulous_winter_soldier",
+      "breakpoints": true
     }
   ]
 }

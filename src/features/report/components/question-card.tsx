@@ -23,6 +23,8 @@ import { UpdateQuestionButton } from "./update-question-button";
 import { cn } from "@/lib/utils";
 import { Cog6ToothIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { QuestionMarkIcon } from "@radix-ui/react-icons";
+import QuestionTypeBage from "./question-type-badge";
+import { NetworkIcon } from "lucide-react";
 
 export const QuestionCard = ({
   question,
@@ -40,16 +42,20 @@ export const QuestionCard = ({
       )}
     >
       {question.type !== "SECTION" && (
-        <div className="flex gap-4 items-center">
-          <QuestionMarkIcon className="w-5 h-5 mr-2" />
+        <div className="flex gap-2 items-center">
+          {question.displayConditionType !== "ALWAYS" && (
+            <NetworkIcon className="w-5 h-5 mr-2 text-red-500" />
+          )}
+          <QuestionTypeBage type={question.type} />
 
-          <div className="flex gap-2">
+          {!!question.points && (
+            <Badge variant={"success"} className="w-fit">
+              + {question.points} pts
+            </Badge>
+          )}
+
+          <div className="flex ml-2">
             <h2>{question.label}</h2>
-            {!!question.points && (
-              <Badge variant={"success"} className="w-fit">
-                + {question.points} points
-              </Badge>
-            )}
           </div>
         </div>
       )}
@@ -68,7 +74,7 @@ export const QuestionCard = ({
         <Drawer>
           <DrawerTrigger asChild>
             <button>
-              <TrashIcon className="text-red-500 hover:text-red-500 w-7 h-7" />
+              <TrashIcon className="text-red-500 hover:text-red-500 w-7 h-7 hover:brightness-110" />
             </button>
           </DrawerTrigger>
           <DrawerContent>
@@ -103,7 +109,7 @@ export const QuestionCard = ({
           question={question}
           handleUpdateQuestion={handleUpdateQuestion}
         >
-          <Cog6ToothIcon className="w-7 h-7 text-primary" />
+          <Cog6ToothIcon className="w-7 h-7 text-primary hover:brightness-200" />
         </UpdateQuestionButton>
       </div>
     </Card>

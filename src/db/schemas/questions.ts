@@ -41,6 +41,7 @@ export const displayConditionTypeEnum = pgEnum("display_condition_type_enum", [
 export const questionsTable = pgTable("questions", {
   id: uuid().primaryKey().defaultRandom(),
   label: text().notNull(),
+  description: text(),
   type: questionTypeEnum().notNull(),
   required: boolean().default(true),
   points: integer().default(0),

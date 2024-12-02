@@ -6,7 +6,7 @@ import {
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
-import { reportsTable } from "./reports";
+import { inspectionsTable } from "./inspections";
 import { questionsTable } from "./questions";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import { z } from "zod";
@@ -18,14 +18,16 @@ export const answerTable = pgTable("answer", {
     .references(() => questionsTable.id, {
       onDelete: "cascade",
     }),
-  reportId: uuid()
+  inspectionId: uuid()
     .notNull()
-    .references(() => reportsTable.id, {
+    .references(() => inspectionsTable.id, {
       onDelete: "cascade",
     }),
   booleanValue: boolean(),
   textValue: text(),
   imageValue: text(),
+  numberValue: integer(),
+  dateValue: timestamp(),
   createdAt: timestamp().defaultNow().notNull(),
   updatedAt: timestamp().defaultNow(),
   deletedAt: timestamp(),

@@ -12,10 +12,10 @@ import { toast } from "sonner";
 import { upsertQuestions } from "../actions/upsert-questions";
 import DraggableQuestionCard from "./draggable-question-card";
 import { Typography } from "@/components/typography";
-import { Survey } from "./survey";
+import { ReportForm } from "./report-form";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
-export const FormEditor: React.FC<{ questions: Question[] }> = ({
+export const ReportEditor: React.FC<{ questions: Question[] }> = ({
   questions: initialQuestions,
 }) => {
   const [questions, setQuestions] = useState<Question[]>(
@@ -83,7 +83,7 @@ export const FormEditor: React.FC<{ questions: Question[] }> = ({
     <DndProvider backend={HTML5Backend}>
       <div className="w-full">
         <div className="fixed z-[20] border-b border-border bg-background w-full sm:!w-[calc(100%-255px)]">
-          <AppContainer className="flex items-center justify-between !py-5">
+          <AppContainer className="flex items-center justify-between !py-5 !max-w-none">
             <Typography variant="h4">Éditeur de formulaire</Typography>
 
             <div className="flex gap-3 items-center">
@@ -109,12 +109,19 @@ export const FormEditor: React.FC<{ questions: Question[] }> = ({
       </div>
 
       <div className="mt-20" />
-      {showPreview && <Survey questions={questions} />}
+      {showPreview && (
+        <ReportForm
+          questions={questions}
+          inspectionId=""
+          isPreview
+          answers={[]}
+        />
+      )}
 
       {!showPreview && (
         <AppContainer className="flex flex-col gap-5 py-10">
           <div className="flex flex-col justify-between">
-            <div className="flex gap-2 flex-col flex-1">
+            <div className="flex flex-col flex-1">
               {questions
                 .filter((q) => !q.deletedAt)
                 .sort((a, b) => a.order - b.order)
@@ -140,7 +147,7 @@ export const FormEditor: React.FC<{ questions: Question[] }> = ({
                           addQuestion({
                             ...question,
                             id: "new-question-" + Date.now(),
-                            label: "Nouvelle question",
+                            label: "[Nouvelle question]",
                             type: "TEXT",
                             order: question.order + 1,
                           });
@@ -156,7 +163,7 @@ export const FormEditor: React.FC<{ questions: Question[] }> = ({
                           addQuestion({
                             ...question,
                             id: "new-question-" + Date.now(),
-                            label: "Nouvelle section",
+                            label: "[Nouvelle section]",
                             type: "SECTION",
                             order: question.order + 1,
                           });

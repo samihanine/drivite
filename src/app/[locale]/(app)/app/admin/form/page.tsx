@@ -1,7 +1,7 @@
-import { getQuestions } from "@/features/form/queries/get-questions";
+import { getQuestions } from "@/features/report/queries/get-questions";
 import { getCurrentUser } from "@/features/user/queries/get-current-user";
 import { redirect } from "next/navigation";
-import { FormEditor } from "@/features/form/components/form-editor";
+import { ReportEditor } from "@/features/report/components/report-editor";
 import { Question } from "@/db";
 
 export default async function Page() {
@@ -13,5 +13,5 @@ export default async function Page() {
 
   const questions = await getQuestions();
 
-  return <FormEditor questions={questions as Question[]} />;
+  return <ReportEditor questions={questions as Question[]} />;
 }

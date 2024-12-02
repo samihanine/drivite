@@ -21,6 +21,7 @@ import {
   SelectValue,
 } from "@/components/select";
 import { Switch } from "@/components/switch";
+import { Textarea } from "@/components/textarea";
 import { questionSchema, type Question } from "@/db/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
@@ -51,6 +52,7 @@ export const UpdateQuestionButton = ({
       updatedAt: question.updatedAt,
       deletedAt: question.deletedAt,
       order: question.order || 0,
+      description: question.description || "",
     },
   });
 
@@ -81,17 +83,28 @@ export const UpdateQuestionButton = ({
                   <FormItem>
                     <FormLabel className="flex gap-2">Titre</FormLabel>
                     <FormControl>
-                      <Input
-                        placeholder="ex: Quelle est la capitale de la France ?"
-                        type="name"
-                        {...field}
-                        value={field.value}
-                      />
+                      <Input type="text" {...field} value={field.value} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+              {question.type === "SECTION" && (
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="flex gap-2">Description</FormLabel>
+                      <FormControl>
+                        <Textarea {...field} value={field.value || ""} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              )}
 
               {question.type !== "SECTION" && (
                 <>
@@ -175,6 +188,7 @@ export const UpdateQuestionButton = ({
                       </FormItem>
                     )}
                   />
+
                   <FormField
                     control={form.control}
                     name="displayConditionType"
@@ -204,7 +218,7 @@ export const UpdateQuestionButton = ({
                               <SelectItem value="IF_TRUE">
                                 Seulement si la réponse précédente est valide
                               </SelectItem>
-                              <SelectItem value="TEXT">
+                              <SelectItem value="IF_FALSE">
                                 Seulement si la réponse précédente est invalide
                               </SelectItem>
                             </SelectContent>
@@ -214,54 +228,61 @@ export const UpdateQuestionButton = ({
                       </FormItem>
                     )}
                   />
-                  <Divider className="my-5" />
-                  <FormField
-                    control={form.control}
-                    name="pointConditionType"
-                    render={({ field }) => (
-                      <FormItem defaultValue={field.value}>
-                        <FormLabel className="flex gap-2">
-                          Calcul des points
-                        </FormLabel>
-                        <FormControl>
-                          <Select
-                            value={field.value}
-                            onValueChange={(value) =>
-                              form.setValue(
-                                "pointConditionType",
-                                value as Question["pointConditionType"],
-                              )
-                            }
-                            defaultValue={field.value}
-                          >
-                            <SelectTrigger className="flex-1">
-                              <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="NONE">
-                                Pas de points
-                              </SelectItem>
-                              <SelectItem value="IF_TRUE">
-                                Seulement si la réponse à cette question est
-                                valide
-                              </SelectItem>
-                              <SelectItem value="IF_FALSE">
-                                Seulement si la réponse à cette question est
-                                invalide
-                              </SelectItem>
-                              <SelectItem value="PERCENTAGE">
-                                En dessous de 50 = +1 point et en dessous de 25
-                                = +2 points
-                              </SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  {(form.getValues("pointConditionType") === "IF_TRUE" ||
-                    form.getValues("pointConditionType") === "IF_FALSE") && (
+
+                  {(form.watch("type") === "BOOLEAN" ||
+                    form.watch("type") === "STATE" ||
+                    form.watch("type") === "CONFORM" ||
+                    form.watch("type") === "FUNCTIONAL" ||
+                    form.watch("type") === "NOT_EQUIPPED") && (
+                    <FormField
+                      control={form.control}
+                      name="pointConditionType"
+                      render={({ field }) => (
+                        <FormItem defaultValue={field.value}>
+                          <FormLabel className="flex gap-2">
+                            Calcul des points
+                          </FormLabel>
+                          <FormControl>
+                            <Select
+                              value={field.value}
+                              onValueChange={(value) =>
+                                form.setValue(
+                                  "pointConditionType",
+                                  value as Question["pointConditionType"],
+                                )
+                              }
+                              defaultValue={field.value}
+                            >
+                              <SelectTrigger className="flex-1">
+                                <SelectValue />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="NONE">
+                                  Pas de points
+                                </SelectItem>
+                                <SelectItem value="IF_TRUE">
+                                  Seulement si la réponse à cette question est
+                                  valide
+                                </SelectItem>
+                                <SelectItem value="IF_FALSE">
+                                  Seulement si la réponse à cette question est
+                                  invalide
+                                </SelectItem>
+                                <SelectItem value="PERCENTAGE">
+                                  En dessous de 50 = +1 point et en dessous de
+                                  25 = +2 points
+                                </SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  )}
+
+                  {(form.watch("pointConditionType") === "IF_TRUE" ||
+                    form.watch("pointConditionType") === "IF_FALSE") && (
                     <FormField
                       control={form.control}
                       name="points"
@@ -273,7 +294,13 @@ export const UpdateQuestionButton = ({
                               placeholder="ex: 10"
                               type="number"
                               {...field}
-                              value={field.value || 0}
+                              value={parseInt(String(field.value)) || 0}
+                              onChange={(e) =>
+                                form.setValue(
+                                  "points",
+                                  parseInt(e.target.value),
+                                )
+                              }
                             />
                           </FormControl>
                           <FormMessage />
