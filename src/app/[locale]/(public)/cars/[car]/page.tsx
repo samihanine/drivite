@@ -9,14 +9,15 @@ import { Cta } from "@/features/landing/components/cta";
 export async function generateMetadata({
   params,
 }: {
-  params: {
+  params: Promise<{
     car: string;
     locale: string;
-  };
+  }>;
 }): Promise<Metadata> {
+  const data = await params;
   const car = await getCarById({
-    locale: params.locale,
-    id: params.car,
+    locale: data.locale,
+    id: data.car,
   });
 
   if (!car) {
@@ -28,7 +29,7 @@ export async function generateMetadata({
     openGraph: {
       title: car.brand + " - TVL Conseils",
       images: car.images[0],
-      locale: params.locale,
+      locale: data.locale,
     },
     twitter: {
       card: "summary_large_image",
@@ -40,9 +41,9 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams({}: {
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }) {
   const slugEn = (await getCars({ locale: "fr" })).map((car) => ({
     slug: car.id,
@@ -60,14 +61,15 @@ export async function generateStaticParams({}: {
 export default async function CarPage({
   params,
 }: {
-  params: {
+  params: Promise<{
     car: string;
     locale: string;
-  };
+  }>;
 }) {
-  const locale = params.locale;
+  const data = await params;
+  const locale = data.locale;
   setStaticParamsLocale(locale);
-  const car = await getCarById({ locale, id: params.car });
+  const car = await getCarById({ locale, id: data.car });
 
   if (!car) {
     return notFound();

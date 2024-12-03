@@ -76,6 +76,7 @@ export const ReportForm = ({
       textValue,
       numberValue,
       imageValue,
+      dateValue: dateValue ? new Date(dateValue) : undefined,
     });
     setAnswers(newAnswers);
   };
@@ -255,8 +256,11 @@ export const ReportForm = ({
                       }
                     >
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="TRUE" id="TRUE" />
-                        <Label className="cursor-pointer" htmlFor="TRUE">
+                        <RadioGroupItem value="TRUE" id={q.id + "TRUE"} />
+                        <Label
+                          className="cursor-pointer"
+                          htmlFor={q.id + "TRUE"}
+                        >
                           {q.type === "BOOLEAN" && "Oui"}
                           {q.type === "CONFORM" && "Conforme"}
                           {q.type === "FUNCTIONAL" && "Fonctionnel"}
@@ -264,8 +268,11 @@ export const ReportForm = ({
                         </Label>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="FALSE" id="FALSE" />
-                        <Label className="cursor-pointer" htmlFor="FALSE">
+                        <RadioGroupItem value="FALSE" id={q.id + "FALSE"} />
+                        <Label
+                          className="cursor-pointer"
+                          htmlFor={q.id + "FALSE"}
+                        >
                           {q.type === "BOOLEAN" && "Non"}
                           {q.type === "CONFORM" && "Non conforme"}
                           {q.type === "FUNCTIONAL" && "Non fonctionnel"}
@@ -364,7 +371,7 @@ export const ReportForm = ({
                 Précédent
               </Button>
             )}
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading} className="px-10">
               {currentStep === sections.length - 1
                 ? "Générer le rapport"
                 : "Suivant"}

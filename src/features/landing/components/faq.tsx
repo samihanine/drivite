@@ -1,14 +1,14 @@
 import { Container } from "@/components/container";
 import React from "react";
-import { Question } from "../queries/get-faq";
 import { QuestionAccordion } from "./question-accordion";
 import { cn } from "@/lib/utils";
+import { FAQ } from "../queries/get-faq";
 
 export const Faq = async ({
   questions,
   background,
 }: {
-  questions: Question[];
+  questions: FAQ[];
   background?: "primary" | "background";
 }) => {
   return (

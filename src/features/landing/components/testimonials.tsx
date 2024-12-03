@@ -63,7 +63,8 @@ export const Testimonials = async (props: { testimonials: Testimonial[] }) => {
           variant="paragraph"
           className="max-w-xl text-center text-white"
         >
-          Nos clients sont notre priorité, découvrez ce qu'ils pensent de nous.
+          Nos clients sont notre priorité, découvrez ce qu&apos;ils pensent de
+          nous.
         </Typography>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full mt-8">

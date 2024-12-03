@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Question } from "../queries/get-faq";
+import { FAQ } from "../queries/get-faq";
 import { Typography } from "@/components/typography";
 
-export const QuestionAccordion = ({ question }: { question: Question }) => {
+export const QuestionAccordion = ({ question }: { question: FAQ }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleAccordion = () => {

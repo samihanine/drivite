@@ -1,27 +1,25 @@
-import { Image } from "@/components/image";
-import { type Car } from "../schemas/car";
-import { Container } from "@/components/container";
+import { Badge } from "@/components/badge";
+import { Button } from "@/components/button";
+import { Card, CardFooter, CardHeader, CardTitle } from "@/components/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselPrevious,
   CarouselNext,
+  CarouselPrevious,
 } from "@/components/carousel";
-import { Card, CardFooter, CardHeader, CardTitle } from "@/components/card";
-import { Button } from "@/components/button";
-import { Typography } from "@/components/typography";
+import { Container } from "@/components/container";
+import { Image } from "@/components/image";
 import {
   Table,
-  TableCell,
-  TableFooter,
-  TableHeader,
-  TableHead,
-  TableCaption,
   TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
   TableRow,
 } from "@/components/table";
-import { Badge } from "@/components/badge";
+import { Typography } from "@/components/typography";
+import { type Car } from "../schemas/car";
 
 export function Car({ car }: { car: Car }) {
   return (
@@ -96,7 +94,7 @@ export function Car({ car }: { car: Car }) {
                 <TableCell>{car.transmission}</TableCell>
               </TableRow>
               <TableRow>
-                <TableCell>Crit'Air</TableCell>
+                <TableCell>Crit&apos;Air</TableCell>
                 <TableCell>{car.critAir}</TableCell>
               </TableRow>
               <TableRow>

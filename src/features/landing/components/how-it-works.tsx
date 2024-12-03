@@ -3,7 +3,6 @@ import { CarIcon, ChatIcon, ClickIcon, DocumentIcon } from "@/components/icons";
 import { Image } from "@/components/image";
 import { Typography } from "@/components/typography";
 import { getI18n } from "@/locale/server";
-import { CreditCardIcon } from "@heroicons/react/24/solid";
 
 const HowItWorksCard = ({
   title,

@@ -30,7 +30,7 @@ export const ContactHero = async () => {
             </div>
 
             <p>
-              Pour toute informations complémentaires, n'hésitez pas à nous
+              Pour toute informations complémentaires, n&apos;hésitez pas à nous
               contacter par mail :
             </p>
 

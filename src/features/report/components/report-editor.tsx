@@ -174,6 +174,31 @@ export const ReportEditor: React.FC<{ questions: Question[] }> = ({
                     </div>
                   </React.Fragment>
                 ))}
+
+              {questions.filter((q) => !q.deletedAt).length === 0 && (
+                <div className="w-full flex justify-center gap-3">
+                  <Button
+                    onClick={() => {
+                      addQuestion({
+                        id: "new-question-" + Date.now(),
+                        label: "[Nouvelle section]",
+                        type: "SECTION",
+                        order: 0,
+                        description: "",
+                        required: false,
+                        points: 0,
+                        pointConditionType: "NONE",
+                        displayConditionType: "ALWAYS",
+                        createdAt: new Date(),
+                        updatedAt: new Date(),
+                        deletedAt: null,
+                      });
+                    }}
+                  >
+                    Ajouter une section
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </AppContainer>

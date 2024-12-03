@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import Image from "next/image";
 import Logo from "/public/images/logos/logo-text.svg";
 

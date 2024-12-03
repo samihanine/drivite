@@ -4,12 +4,9 @@ import { CarsGrid } from "@/features/cars/components/cars-grid";
 import { getCars } from "@/features/cars/queries/get-cars";
 import { Cta } from "@/features/landing/components/cta";
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { locale: string };
-  searchParams: {
+export default async function Page(props: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{
     minPrice: string;
     maxPrice: string;
     type: string;
@@ -23,8 +20,10 @@ export default async function Page({
     maxMileage: string;
     minYear: string;
     maxYear: string;
-  };
+  }>;
 }) {
+  const params = await props.params;
+  const searchParams = await props.searchParams;
   const cars = await getCars({ locale: params.locale });
 
   const filteredCars = cars.filter((car) => {

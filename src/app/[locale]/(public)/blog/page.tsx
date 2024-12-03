@@ -6,10 +6,15 @@ import { getAllPosts } from "@/features/blog/queries/get-posts";
 import { Cta } from "@/features/landing/components/cta";
 import { Hero } from "@/features/landing/components/hero";
 
-export default async function Page({ params }: { params: { locale: string } }) {
-  const posts = await getAllPosts({ locale: params.locale });
-  const authors = await getAllAuthors({ locale: params.locale });
-  const categories = await getCategories({ locale: params.locale });
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const data = await params;
+  const posts = await getAllPosts({ locale: data.locale });
+  const authors = await getAllAuthors({ locale: data.locale });
+  const categories = await getCategories({ locale: data.locale });
 
   return (
     <>
