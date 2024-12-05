@@ -1,8 +1,9 @@
 import { getQuestions } from "@/features/report/queries/get-questions";
 import { getCurrentUser } from "@/features/user/queries/get-current-user";
-import { redirect } from "next/navigation";
 import { ReportEditor } from "@/features/report/components/report-editor";
-import { Question } from "@/db";
+import { getConditions } from "@/features/report/queries/get-conditions";
+import { getSections } from "@/features/report/queries/get-sections";
+import { redirect } from "next/navigation";
 
 export default async function Page() {
   const user = await getCurrentUser();
@@ -12,6 +13,14 @@ export default async function Page() {
   }
 
   const questions = await getQuestions();
+  const conditions = await getConditions();
+  const sections = await getSections();
 
-  return <ReportEditor questions={questions as Question[]} />;
+  return (
+    <ReportEditor
+      questions={questions}
+      conditions={conditions}
+      sections={sections}
+    />
+  );
 }

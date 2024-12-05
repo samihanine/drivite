@@ -23,10 +23,7 @@ export const answerTable = pgTable("answer", {
     .references(() => inspectionsTable.id, {
       onDelete: "cascade",
     }),
-  booleanValue: boolean(),
-  textValue: text(),
-  imageValue: text(),
-  numberValue: integer(),
+  value: text().notNull(),
   dateValue: timestamp(),
   createdAt: timestamp().defaultNow().notNull(),
   updatedAt: timestamp().defaultNow(),

@@ -1,6 +1,6 @@
 {
-  "id": "ef9794dc-bbca-4927-aa3c-80c8bdb823b0",
-  "prevId": "2d621959-cfd4-4a5c-8611-141905c348a0",
+  "id": "49e37d30-822f-4566-b4df-21cf5e654557",
+  "prevId": "a840c14e-9793-4089-bc39-42f855813a94",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -65,7 +65,7 @@
           "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         },
         "updatedAt": {
@@ -109,6 +109,18 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
+        "conditionId": {
+          "name": "conditionId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sectionId": {
+          "name": "sectionId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
         "label": {
           "name": "label",
           "type": "text",
@@ -117,7 +129,7 @@
         },
         "type": {
           "name": "type",
-          "type": "questionTypeEnum",
+          "type": "question_type_enum",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
@@ -127,7 +139,7 @@
           "type": "boolean",
           "primaryKey": false,
           "notNull": false,
-          "default": false
+          "default": true
         },
         "points": {
           "name": "points",
@@ -136,10 +148,9 @@
           "notNull": false,
           "default": 0
         },
-        "pointConditionType": {
-          "name": "pointConditionType",
-          "type": "conditionTypeEnum",
-          "typeSchema": "public",
+        "valueForPoints": {
+          "name": "valueForPoints",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -149,10 +160,23 @@
           "primaryKey": false,
           "notNull": true
         },
-        "displayConditionType": {
-          "name": "displayConditionType",
-          "type": "conditionTypeEnum",
-          "typeSchema": "public",
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "deletedAt": {
+          "name": "deletedAt",
+          "type": "timestamp",
           "primaryKey": false,
           "notNull": false
         },
@@ -160,12 +184,39 @@
           "name": "options",
           "type": "text[]",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "'{}'"
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "questions_conditionId_conditions_id_fk": {
+          "name": "questions_conditionId_conditions_id_fk",
+          "tableFrom": "questions",
+          "tableTo": "conditions",
+          "columnsFrom": [
+            "conditionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "questions_sectionId_sections_id_fk": {
+          "name": "questions_sectionId_sections_id_fk",
+          "tableFrom": "questions",
+          "tableTo": "sections",
+          "columnsFrom": [
+            "sectionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -185,91 +236,7 @@
         },
         "questionId": {
           "name": "questionId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "reportId": {
-          "name": "reportId",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "booleanValue": {
-          "name": "booleanValue",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "textValue": {
-          "name": "textValue",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "imageValue": {
-          "name": "imageValue",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "createdAt": {
-          "name": "createdAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
-        },
-        "updatedAt": {
-          "name": "updatedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false,
-          "default": "now()"
-        },
-        "deletedAt": {
-          "name": "deletedAt",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "answer_reportId_reports_id_fk": {
-          "name": "answer_reportId_reports_id_fk",
-          "tableFrom": "answer",
-          "tableTo": "reports",
-          "columnsFrom": [
-            "reportId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
-    "public.reports": {
-      "name": "reports",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
           "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "title": {
-          "name": "title",
-          "type": "text",
           "primaryKey": false,
           "notNull": true
         },
@@ -279,11 +246,23 @@
           "primaryKey": false,
           "notNull": true
         },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "dateValue": {
+          "name": "dateValue",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
         "createdAt": {
           "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         },
         "updatedAt": {
@@ -302,9 +281,22 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "reports_inspectionId_inspections_id_fk": {
-          "name": "reports_inspectionId_inspections_id_fk",
-          "tableFrom": "reports",
+        "answer_questionId_questions_id_fk": {
+          "name": "answer_questionId_questions_id_fk",
+          "tableFrom": "answer",
+          "tableTo": "questions",
+          "columnsFrom": [
+            "questionId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "answer_inspectionId_inspections_id_fk": {
+          "name": "answer_inspectionId_inspections_id_fk",
+          "tableFrom": "answer",
           "tableTo": "inspections",
           "columnsFrom": [
             "inspectionId"
@@ -333,15 +325,49 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "title": {
-          "name": "title",
-          "type": "text",
+        "consultantId": {
+          "name": "consultantId",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "deletedAt": {
+          "name": "deletedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "inspections_consultantId_consultants_id_fk": {
+          "name": "inspections_consultantId_consultants_id_fk",
+          "tableFrom": "inspections",
+          "tableTo": "consultants",
+          "columnsFrom": [
+            "consultantId"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -432,7 +458,7 @@
           "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         },
         "updatedAt": {
@@ -506,7 +532,7 @@
           "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "default": "now()"
         },
         "updatedAt": {
@@ -620,7 +646,117 @@
           "name": "createdAt",
           "type": "timestamp",
           "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
           "notNull": false,
+          "default": "now()"
+        },
+        "deletedAt": {
+          "name": "deletedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.sections": {
+      "name": "sections",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "order": {
+          "name": "order",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updatedAt": {
+          "name": "updatedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "deletedAt": {
+          "name": "deletedAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.conditions": {
+      "name": "conditions",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "questionId": {
+          "name": "questionId",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "createdAt": {
+          "name": "createdAt",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
           "default": "now()"
         },
         "updatedAt": {
@@ -664,35 +800,17 @@
         "CREDENTIALS"
       ]
     },
-    "public.displayConditionTypeEnum": {
-      "name": "displayConditionTypeEnum",
-      "schema": "public",
-      "values": [
-        "IF_FALSE",
-        "IF_TRUE"
-      ]
-    },
-    "public.conditionTypeEnum": {
-      "name": "conditionTypeEnum",
-      "schema": "public",
-      "values": [
-        "BELLOW_50_AND_25",
-        "IF_TRUE",
-        "IF_FALSE"
-      ]
-    },
-    "public.questionTypeEnum": {
-      "name": "questionTypeEnum",
+    "public.question_type_enum": {
+      "name": "question_type_enum",
       "schema": "public",
       "values": [
         "TEXT",
         "SELECT",
-        "RANGE",
+        "PERCENTAGE",
+        "NUMBER",
         "IMAGE",
-        "STATE",
-        "CONFORM",
-        "FUNCTIONAL",
-        "NOT_EQUIPPED"
+        "DATE",
+        "DATETIME"
       ]
     }
   },

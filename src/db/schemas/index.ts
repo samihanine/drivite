@@ -5,3 +5,5 @@ export * from "./inspections";
 export * from "./consultants";
 export * from "./customers";
 export * from "./cars";
+export * from "./sections";
+export * from "./conditions";

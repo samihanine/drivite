@@ -1,116 +1,115 @@
 "use client";
 
+import { Badge } from "@/components/badge";
 import { Button } from "@/components/button";
 import { Card } from "@/components/card";
-import {
-  Drawer,
-  DrawerTrigger,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerClose,
-} from "@/components/drawer";
-import { Question } from "@/db";
-import {
-  Bars2Icon,
-  PencilSquareIcon,
-  QuestionMarkCircleIcon,
-} from "@heroicons/react/24/outline";
-import { Badge } from "@/components/badge";
-import { UpdateQuestionButton } from "./update-question-button";
+import { InsertCondition, InsertQuestion } from "@/db";
 import { cn } from "@/lib/utils";
-import { Cog6ToothIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { QuestionMarkIcon } from "@radix-ui/react-icons";
+import { TrashIcon } from "@heroicons/react/24/solid";
+import { Edit2Icon, Network } from "lucide-react";
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { ActionButton } from "./action-button";
+import { ConditionForm } from "./condition-form";
+import { QuestionForm } from "./question-form";
 import QuestionTypeBage from "./question-type-badge";
-import { NetworkIcon } from "lucide-react";
 
 export const QuestionCard = ({
   question,
   handleUpdateQuestion,
+  handleAddCondition,
 }: {
-  question: Question;
-  handleUpdateQuestion: (question: Question) => void;
+  question: InsertQuestion;
+  handleUpdateQuestion: (question: InsertQuestion) => void;
+  handleAddCondition?: (condition: InsertCondition) => void;
 }) => {
+  const [isEditQuestionFormOpen, setIsEditQuestionFormOpen] = useState(false);
+  const [isDeleteQuestionFormOpen, setIsDeleteQuestionFormOpen] =
+    useState(false);
+  const [isAddConditionFormOpen, setIsAddConditionFormOpen] = useState(false);
+
   return (
     <Card
-      className={cn(
-        "flex-1 flex justify-between items-center p-4 rounded-sm",
-        question.type === "SECTION" &&
-          "border-primary bg-slate-50 border-l-4 border-l-primary",
-      )}
+      className={cn("flex-1 flex justify-between items-center p-4 rounded-sm")}
     >
-      {question.type !== "SECTION" && (
-        <div className="flex gap-2 items-center">
-          {question.displayConditionType !== "ALWAYS" && (
-            <NetworkIcon className="w-5 h-5 mr-2 text-red-500" />
-          )}
-          <QuestionTypeBage type={question.type} />
+      <div className="flex gap-2 items-center">
+        <QuestionTypeBage type={question.type} />
 
-          {!!question.points && (
-            <Badge variant={"success"} className="w-fit">
-              + {question.points} pts
-            </Badge>
-          )}
+        {!!question.points && (
+          <Badge variant={"success"} className="w-fit">
+            + {question.points} pts
+          </Badge>
+        )}
 
-          <div className="flex ml-2">
-            <h2>{question.label}</h2>
-          </div>
+        <div className="flex ml-2">
+          <h2>{question.label}</h2>
         </div>
-      )}
-
-      {question.type === "SECTION" && (
-        <div className="flex gap-4 items-center">
-          <Bars2Icon className="w-5 h-5 mr-2" />
-
-          <div className="flex flex-col gap-1">
-            <h2>{question.label}</h2>
-          </div>
-        </div>
-      )}
+      </div>
 
       <div className="flex gap-4 items-center">
-        <Drawer>
-          <DrawerTrigger asChild>
-            <button>
-              <TrashIcon className="text-red-500 hover:text-red-500 w-7 h-7 hover:brightness-110" />
-            </button>
-          </DrawerTrigger>
-          <DrawerContent>
-            <div className="mx-auto w-full max-w-sm">
-              <DrawerHeader>
-                <DrawerTitle>Supprimer la question</DrawerTitle>
-                <DrawerDescription>
-                  Êtes-vous sûr de vouloir supprimer cette question ?
-                </DrawerDescription>
-              </DrawerHeader>
-              <div className="p-4 pb-0"></div>
-              <DrawerFooter>
-                <Button
-                  onClick={() => {
-                    handleUpdateQuestion({
-                      ...question,
-                      deletedAt: new Date(),
-                    });
-                  }}
-                >
-                  Supprimer
-                </Button>
-                <DrawerClose asChild>
-                  <Button variant="outline">Annuler</Button>
-                </DrawerClose>
-              </DrawerFooter>
+        <ActionButton
+          isOpen={isDeleteQuestionFormOpen}
+          setIsOpen={setIsDeleteQuestionFormOpen}
+          renderForm={() => (
+            <div className="flex flex-col gap-10">
+              <Button
+                onClick={() => {
+                  handleUpdateQuestion({
+                    ...question,
+                    deletedAt: new Date(),
+                  });
+                }}
+                className="w-full bg-red-500 hover:bg-red-600"
+              >
+                Supprimer
+              </Button>
             </div>
-          </DrawerContent>
-        </Drawer>
-
-        <UpdateQuestionButton
-          question={question}
-          handleUpdateQuestion={handleUpdateQuestion}
+          )}
+          modalTitle="Supprimer la question"
         >
-          <Cog6ToothIcon className="w-7 h-7 text-primary hover:brightness-200" />
-        </UpdateQuestionButton>
+          <TrashIcon className="text-red-500 w-5 h-5 hover:brightness-110" />
+        </ActionButton>
+
+        <ActionButton
+          isOpen={isEditQuestionFormOpen}
+          setIsOpen={setIsEditQuestionFormOpen}
+          renderForm={() => (
+            <QuestionForm
+              question={question}
+              handleUpdateQuestion={(q) => {
+                handleUpdateQuestion(q);
+                setIsEditQuestionFormOpen(false);
+              }}
+            />
+          )}
+          modalTitle="Modifier la question"
+        >
+          <Edit2Icon className="text-primary hover:text-primary w-5 h-5 hover:brightness-110" />
+        </ActionButton>
+
+        {handleAddCondition && (
+          <ActionButton
+            isOpen={isAddConditionFormOpen}
+            setIsOpen={setIsAddConditionFormOpen}
+            renderForm={() => (
+              <ConditionForm
+                question={question}
+                handleUpdateCondition={async (condition) => {
+                  handleAddCondition(condition);
+                  setIsAddConditionFormOpen(false);
+                }}
+                condition={{
+                  id: uuidv4(),
+                  questionId: question.id as string,
+                  value: "",
+                }}
+              />
+            )}
+            modalTitle="Ajouter une condition"
+          >
+            <Network className="text-purple-500 hover:text-purple-500 w-5 h-5 hover:brightness-110" />{" "}
+          </ActionButton>
+        )}
       </div>
     </Card>
   );

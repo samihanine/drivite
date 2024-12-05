@@ -1,6 +1,6 @@
 "use server";
 
-import { answerSchema, db, Question, questionsTable } from "@/db";
+import { answerSchema, db, questionsTable, sectionsTable } from "@/db";
 import { authActionClient } from "@/lib/safe-action";
 import { z } from "zod";
 import { PDFDocument, PDFFont, PDFPage, rgb, StandardFonts } from "pdf-lib";
@@ -8,36 +8,13 @@ import { isNull } from "drizzle-orm";
 import fs from "fs";
 import path from "path";
 
-const imageToBase64 = (imagePath: string) => {
-  const absolutePath = path.join(process.cwd(), imagePath);
-  const imageBuffer = fs.readFileSync(absolutePath);
-  return `data:image/png;base64,${imageBuffer.toString("base64")}`;
-};
-
-const addPageIfNeeded = (
-  doc: PDFDocument,
-  page: PDFPage,
-  yPosition: number,
-  neededSpace = 30,
-) => {
-  if (yPosition < neededSpace) {
-    page = doc.addPage([595.28, 841.89]);
-    yPosition = page.getSize().height - 50;
-  }
-  return { page, yPosition };
-};
-
 export const generateReportPdf = authActionClient
   .schema(
     z.object({
       answers: z.array(
         answerSchema.pick({
           questionId: true,
-          textValue: true,
-          booleanValue: true,
-          numberValue: true,
-          imageValue: true,
-          dateValue: true,
+          value: true,
         }),
       ),
     }),
@@ -66,95 +43,78 @@ export const generateReportPdf = authActionClient
         title: "Drivite - Inspection du véhicule",
       });
 
-      const questions = (
-        await db.query.questionsTable.findMany({
-          where: isNull(questionsTable.deletedAt),
+      const questions = await db.query.questionsTable.findMany({
+        where: isNull(questionsTable.deletedAt),
+      });
+      const sections = (
+        await db.query.sectionsTable.findMany({
+          where: isNull(sectionsTable.deletedAt),
         })
       ).sort((a, b) => a.order - b.order);
 
-      for (const question of questions) {
-        if (question.type === "SECTION") {
-          ({ page, yPosition } = addPageIfNeeded(pdfDoc, page, yPosition, 50));
-          yPosition = addSection({
-            page,
-            font: boldFont,
-            yPosition,
-            section: question.label,
-          });
+      for (const section of sections) {
+        const sectionQuestions = questions
+          .filter((q) => q.sectionId === section.id)
+          .sort((a, b) => a.order - b.order);
+
+        if (sectionQuestions.length === 0) {
           continue;
         }
 
-        const answer = parsedInput.answers.find(
-          (a) => a.questionId === question.id,
-        );
+        ({ page, yPosition } = addPageIfNeeded({
+          doc: pdfDoc,
+          page,
+          yPosition,
+          neededSpace: 50 + sectionQuestions.length * 30,
+        }));
 
-        if (!answer) {
-          continue;
-        }
+        yPosition = addSection({
+          page,
+          font,
+          yPosition,
+          section: section.title,
+        });
 
-        if (
-          ["TEXT", "NUMBER", "PERCENTAGE", "DATE", "DATETIME"].includes(
-            question.type,
-          )
-        ) {
-          let answerText = answer.textValue || "";
-          if (question.type === "NUMBER" || question.type === "PERCENTAGE") {
-            answerText = answer.numberValue?.toString() || "";
-            if (question.type === "PERCENTAGE") {
-              answerText += "%";
-            }
+        for (const question of sectionQuestions) {
+          const answer = parsedInput.answers.find(
+            (a) => a.questionId === question.id,
+          );
+
+          if (!answer) {
+            continue;
           }
-          if (question.type === "DATE" || question.type === "DATETIME") {
-            answerText = new Date(answer.dateValue || "").toLocaleDateString();
-            if (question.type === "DATETIME") {
-              answerText = new Date(answer.dateValue || "").toLocaleString();
-            }
+
+          if (question.type === "IMAGE") {
+            ({ page, yPosition } = addPageIfNeeded({
+              doc: pdfDoc,
+              page,
+              yPosition,
+              neededSpace: 200,
+            }));
+            yPosition = await addImageResponse({
+              page,
+              yPosition,
+              imageBase64: answer.value,
+              question: question.label,
+              font,
+              boldFont,
+            });
+          } else {
+            ({ page, yPosition } = addPageIfNeeded({
+              doc: pdfDoc,
+              page,
+              yPosition,
+              neededSpace: 50,
+            }));
+            yPosition = addTextResponse({
+              page,
+              font,
+              boldFont,
+              yPosition,
+              question: question.label,
+              answer: answer.value,
+            });
           }
-          ({ page, yPosition } = addPageIfNeeded(pdfDoc, page, yPosition));
-          yPosition = addTextResponse({
-            page,
-            font,
-            boldFont,
-            yPosition,
-            question: question.label,
-            answer: answerText,
-          });
-        } else if (
-          ["BOOLEAN", "STATE", "CONFORM", "FUNCTIONAL"].includes(question.type)
-        ) {
-          let positiveText = "Oui",
-            negativeText = "Non";
-          if (question.type === "STATE") {
-            positiveText = "Bon état";
-            negativeText = "Mauvais état";
-          } else if (question.type === "CONFORM") {
-            positiveText = "Conforme";
-            negativeText = "Non conforme";
-          } else if (question.type === "FUNCTIONAL") {
-            positiveText = "Fonctionnel";
-            negativeText = "Non fonctionnel";
-          }
-          ({ page, yPosition } = addPageIfNeeded(pdfDoc, page, yPosition));
-          yPosition = addBooleanResponse({
-            page,
-            font,
-            boldFont,
-            yPosition,
-            question: question.label,
-            isPositive: answer.booleanValue ?? false,
-            positiveText,
-            negativeText,
-          });
-        } else if (question.type === "IMAGE" && answer.imageValue) {
-          ({ page, yPosition } = addPageIfNeeded(pdfDoc, page, yPosition, 200));
-          yPosition = await addImageResponse({
-            page,
-            yPosition,
-            imageBase64: answer.imageValue,
-            question: question.label,
-            font,
-            boldFont,
-          });
         }
       }
 
@@ -164,53 +124,6 @@ export const generateReportPdf = authActionClient
       return { success: false, message: "Failed to generate report PDF" };
     }
   });
-
-interface TextResponseParams {
-  page: PDFPage;
-  font: PDFFont;
-  boldFont: PDFFont;
-  yPosition: number;
-  question: string;
-  answer: string;
-}
-
-function addTextResponse({
-  page,
-  font,
-  boldFont,
-  yPosition,
-  question,
-  answer,
-}: TextResponseParams): number {
-  const lineHeight = 30;
-  const margin = 50;
-
-  page.drawText(question, {
-    x: margin,
-    y: yPosition,
-    size: 10,
-    font: boldFont,
-    color: rgb(0, 0, 0),
-  });
-
-  const answerWidth = font.widthOfTextAtSize(answer, 10);
-  page.drawText(answer, {
-    x: page.getWidth() - margin - answerWidth,
-    y: yPosition,
-    size: 10,
-    font,
-    color: rgb(0.5, 0.5, 0.5),
-  });
-
-  page.drawLine({
-    start: { x: margin, y: yPosition - 5 },
-    end: { x: page.getWidth() - margin, y: yPosition - 5 },
-    thickness: 1,
-    color: rgb(0.8, 0.8, 0.8),
-  });
-
-  return yPosition - lineHeight;
-}
 
 interface SectionParams {
   page: PDFPage;
@@ -242,29 +155,30 @@ function addSection({ page, font, yPosition, section }: SectionParams): number {
   return yPosition - lineHeight - 10;
 }
 
-interface BooleanResponseParams {
+interface ResponseParams {
   page: PDFPage;
   font: PDFFont;
   boldFont: PDFFont;
   yPosition: number;
   question: string;
-  isPositive: boolean;
-  positiveText: string;
-  negativeText: string;
+  answer: string;
+  backgroundColor?: string;
 }
 
-function addBooleanResponse({
+function addTextResponse({
   page,
   font,
   boldFont,
   yPosition,
   question,
-  positiveText,
-  negativeText,
-  isPositive,
-}: BooleanResponseParams): number {
+  answer,
+  backgroundColor,
+}: ResponseParams): number {
   const lineHeight = 30;
   const margin = 50;
+  const rgbColor = backgroundColor
+    ?.match(/[A-Za-z0-9]{2}/g)
+    ?.map((v) => parseInt(v, 16));
 
   page.drawText(question, {
     x: margin,
@@ -273,9 +187,6 @@ function addBooleanResponse({
     font: boldFont,
     color: rgb(0, 0, 0),
   });
-
-  const answer = isPositive ? positiveText : negativeText;
-  const answerWidth = font.widthOfTextAtSize(answer, 10);
 
   const rectangleWidth = 100;
   const rectangleHeight = 15;
@@ -287,15 +198,16 @@ function addBooleanResponse({
     y: rectangleY,
     width: rectangleWidth,
     height: rectangleHeight,
-    color: isPositive ? rgb(0, 0.8, 0) : rgb(0.8, 0, 0),
+    color: rgbColor ? rgb(rgbColor[0], rgbColor[1], rgbColor[2]) : rgb(1, 1, 1),
   });
 
+  const answerWidth = font.widthOfTextAtSize(answer, 10);
   page.drawText(answer, {
-    x: rectangleX + rectangleWidth / 2 - answerWidth / 2,
-    y: rectangleY + 4,
+    x: page.getWidth() - margin - answerWidth,
+    y: yPosition,
     size: 10,
     font,
-    color: rgb(1, 1, 1),
+    color: rgb(0.5, 0.5, 0.5),
   });
 
   page.drawLine({
@@ -400,4 +312,28 @@ async function addImage({
   });
 
   return yPosition - height - 20;
+}
+
+function imageToBase64(imagePath: string): string {
+  const absolutePath = path.join(process.cwd(), imagePath);
+  const imageBuffer = fs.readFileSync(absolutePath);
+  return `data:image/png;base64,${imageBuffer.toString("base64")}`;
+}
+
+function addPageIfNeeded({
+  doc,
+  page,
+  yPosition,
+  neededSpace,
+}: {
+  doc: PDFDocument;
+  page: PDFPage;
+  yPosition: number;
+  neededSpace: number;
+}) {
+  if (yPosition < neededSpace) {
+    page = doc.addPage([595.28, 841.89]);
+    yPosition = page.getSize().height - 50;
+  }
+  return { page, yPosition };
 }

@@ -10,6 +10,7 @@
     "prettier": "prettier . --write"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.705.0",
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.1",
@@ -44,9 +45,12 @@
     "@vercel/analytics": "^1.4.1",
     "@vercel/postgres": "^0.10.0",
     "autoprefixer": "^10.4.20",
+    "aws-sdk": "^2.1692.0",
     "bcrypt": "^5.1.1",
+    "browser-image-compression": "^2.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "compressorjs": "^1.2.1",
     "date-fns": "^2.30.0",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.4",
@@ -85,6 +89,7 @@
     "tailwindcss": "^3.4.15",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
+    "uuid": "^11.0.3",
     "vaul": "^0.9.9",
     "zod": "^3.23.8",
     "zod-form-data": "^2.0.2"

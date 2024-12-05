@@ -16,26 +16,18 @@ export default function QuestionTypeBage({
         type === "NUMBER" && "bg-yellow-50 text-yellow-600",
         type === "DATE" && "bg-green-50 text-green-600",
         type === "DATETIME" && "bg-green-50 text-green-600",
-        type === "BOOLEAN" && "bg-purple-50 text-purple-600",
         type === "IMAGE" && "bg-pink-50 text-pink-600",
-        type === "STATE" && "bg-indigo-50 text-indigo-600",
-        type === "CONFORM" && "bg-indigo-50 text-indigo-600",
-        type === "FUNCTIONAL" && "bg-indigo-50 text-indigo-600",
-        type === "NOT_EQUIPPED" && "bg-indigo-50 text-indigo-600",
+        type === "SELECT" && "bg-indigo-50 text-indigo-600",
         type === "PERCENTAGE" && "bg-red-50 text-red-600",
       )}
       {...props}
     >
-      {type === "BOOLEAN" && "Vrai/Faux"}
       {type === "TEXT" && "Texte"}
       {type === "NUMBER" && "Nombre"}
       {type === "DATE" && "Date"}
       {type === "DATETIME" && "Date et heure"}
       {type === "IMAGE" && "Image"}
-      {type === "STATE" && "État"}
-      {type === "CONFORM" && "Conforme"}
-      {type === "FUNCTIONAL" && "Fonctionnel"}
-      {type === "NOT_EQUIPPED" && "Équipé"}
+      {type === "SELECT" && "Choix multiple"}
       {type === "PERCENTAGE" && "Pourcentage"}
     </span>
   );
