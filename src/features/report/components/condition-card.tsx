@@ -31,14 +31,14 @@ export const ConditionCard = ({
   return (
     <Card
       className={cn(
-        "flex-1 flex justify-between items-center p-4 rounded-sm border-purple-500 border border-l-4",
+        "flex-1 flex justify-between cursor-move items-center p-4 rounded-sm border-purple-500 border border-l-4",
       )}
     >
       <div className="flex gap-4 items-center">
         <Network className="w-5 h-5 mr-2 text-purple-500" />
 
         <div className="flex flex-col gap-1">
-          <h2>Si la valeur est égale à "{condition.value}"</h2>
+          <h2>Si la valeur est égale à &quot;{condition.value}&quot;</h2>
         </div>
       </div>
 

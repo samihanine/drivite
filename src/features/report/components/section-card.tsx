@@ -3,7 +3,6 @@
 import { Button } from "@/components/button";
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -29,7 +28,7 @@ export const SectionCard = ({
   return (
     <Card
       className={cn(
-        "flex-1 flex justify-between items-center p-4 rounded-sm border-primary bg-slate-50 border-l-4 border-l-primary",
+        "flex-1 flex justify-between cursor-move items-center p-4 rounded-sm border-primary bg-slate-50 border-l-4 border-l-primary",
       )}
     >
       <div className="flex gap-4 items-center">

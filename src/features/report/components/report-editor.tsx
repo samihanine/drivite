@@ -14,7 +14,7 @@ import {
 import { showError, showLoading, showSuccess } from "@/lib/utils";
 import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import { useAction } from "next-safe-action/hooks";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { toast } from "sonner";
@@ -26,6 +26,9 @@ import { ConditionCard } from "./condition-card";
 import { QuestionCard } from "./question-card";
 import { ReportForm } from "./report-form";
 import { SectionCard } from "./section-card";
+import { DraggableSection } from "./draggable-section";
+import { DraggableQuestion } from "./draggable-question";
+import { DraggableCondition } from "./draggable-condition";
 
 export const ReportEditor: React.FC<{
   questions: InsertQuestion[];
@@ -53,18 +56,15 @@ export const ReportEditor: React.FC<{
 
   const onSave = async () => {
     const idToast = showLoading();
-
     const result = await executeSaveFormData({
       sections: sections.map((s) => ({ ...s })),
       questions: questions.map((q) => ({ ...q })),
       conditions: conditions.map((c) => ({ ...c })),
     });
-
     if (!result?.data?.success) {
       showError({ message: "Erreur lors de la sauvegarde des données" });
       return;
     }
-
     toast.dismiss(idToast);
     showSuccess({ message: "Données sauvegardées avec succès" });
   };
@@ -100,7 +100,6 @@ export const ReportEditor: React.FC<{
       }
       return q;
     });
-
     setQuestions(
       [...updatedQuestions, { ...question }].sort((a, b) => a.order - b.order),
     );
@@ -108,7 +107,6 @@ export const ReportEditor: React.FC<{
 
   const updateQuestion = (question: InsertQuestion) => {
     const oldQuestion = questions.find((q) => q.id === question.id);
-
     if (oldQuestion?.order !== question.order) {
       const updatedQuestions = questions.map((q) => {
         if (
@@ -120,7 +118,6 @@ export const ReportEditor: React.FC<{
         }
         return q;
       });
-
       setQuestions(
         updatedQuestions
           .filter((q) => q.id !== question.id)
@@ -129,11 +126,9 @@ export const ReportEditor: React.FC<{
       );
       return;
     }
-
     const updatedQuestions = questions.map((q) =>
       q.id === question.id ? question : q,
     );
-
     setQuestions(updatedQuestions);
   };
 
@@ -144,13 +139,11 @@ export const ReportEditor: React.FC<{
       }
       return s;
     });
-
     setSections([...updatedSections, section]);
   };
 
   const updateSection = (section: InsertSection) => {
     const oldSection = sections.find((s) => s.id === section.id);
-
     if (oldSection?.order !== section.order) {
       const updatedSections = sections.map((s) => {
         if (s.order >= section.order) {
@@ -158,7 +151,6 @@ export const ReportEditor: React.FC<{
         }
         return s;
       });
-
       setSections(
         updatedSections
           .filter((s) => s.id !== section.id)
@@ -167,11 +159,9 @@ export const ReportEditor: React.FC<{
       );
       return;
     }
-
     const updatedSections = sections.map((s) =>
       s.id === section.id ? section : s,
     );
-
     setSections(updatedSections);
   };
 
@@ -181,31 +171,77 @@ export const ReportEditor: React.FC<{
 
   const updateCondition = (condition: InsertCondition) => {
     const oldCondition = conditions.find((c) => c.id === condition.id);
-
     if (oldCondition?.value !== condition.value) {
       const updatedConditions = conditions.map((c) =>
         c.id === condition.id ? condition : c,
       );
-
       setConditions(updatedConditions);
       return;
     }
-
     const updatedConditions = conditions.map((c) =>
       c.id === condition.id ? condition : c,
     );
-
     setConditions(updatedConditions);
   };
 
-  const isLoading = statusSaveFormData === "executing";
+  const moveSection = useCallback(
+    (dragIndex: number, hoverIndex: number) => {
+      const reordered = [...sections];
+      const [removed] = reordered.splice(dragIndex, 1);
+      reordered.splice(hoverIndex, 0, removed);
+      setSections(reordered.map((item, index) => ({ ...item, order: index })));
+    },
+    [sections],
+  );
+
+  const moveQuestion = useCallback(
+    (
+      dragIndex: number,
+      hoverIndex: number,
+      parentId?: string,
+      grandParentId?: string | null,
+    ) => {
+      const filteredQuestions = questions.filter(
+        (q) =>
+          q.sectionId === parentId &&
+          q.conditionId === (grandParentId || null) &&
+          !q.deletedAt,
+      );
+      const [draggedItem] = filteredQuestions.splice(dragIndex, 1);
+      filteredQuestions.splice(hoverIndex, 0, draggedItem);
+      const updated = questions.map((q) => {
+        if (
+          q.sectionId === parentId &&
+          q.conditionId === (grandParentId || null)
+        ) {
+          const newIndex = filteredQuestions.findIndex((x) => x.id === q.id);
+          return { ...q, order: newIndex };
+        }
+        return q;
+      });
+      setQuestions(updated.sort((a, b) => a.order - b.order));
+    },
+    [questions],
+  );
+
+  const moveCondition = useCallback(
+    (dragIndex: number, hoverIndex: number, parentId: string) => {
+      const filteredConditions = conditions.filter(
+        (c) => c.questionId === parentId,
+      );
+      const [draggedItem] = filteredConditions.splice(dragIndex, 1);
+      filteredConditions.splice(hoverIndex, 0, draggedItem);
+      setConditions([...conditions]);
+    },
+    [conditions],
+  );
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="w-full">
         <div className="fixed z-[20] border-b border-border bg-background w-full sm:!w-[calc(100%-255px)]">
           <AppContainer className="flex items-center justify-between !py-5 !max-w-none">
             <Typography variant="h4">Éditeur de formulaire</Typography>
-
             <div className="flex gap-3 items-center">
               <button
                 onClick={() => setShowPreview(!showPreview)}
@@ -217,63 +253,76 @@ export const ReportEditor: React.FC<{
                   <EyeOpenIcon className="w-6 h-6" />
                 )}
               </button>
-              <Button onClick={onSave} disabled={isLoading || !isDraft}>
+              <Button
+                onClick={onSave}
+                disabled={statusSaveFormData === "executing" || !isDraft}
+              >
                 Sauvegarder
               </Button>
             </div>
           </AppContainer>
         </div>
       </div>
-
       <div className="mt-20" />
       {showPreview && (
-        <>
-          <ReportForm
-            answers={[]}
-            inspectionId=""
-            questions={questions as Question[]}
-            sections={sections as Section[]}
-            conditions={conditions as Condition[]}
-            isPreview
-          />
-        </>
+        <ReportForm
+          answers={[]}
+          inspectionId=""
+          questions={questions as Question[]}
+          sections={sections as Section[]}
+          conditions={conditions as Condition[]}
+          isPreview
+        />
       )}
-
       {!showPreview && (
         <AppContainer className="flex flex-col gap-5 py-10">
           <div className="flex flex-col gap-5">
             {sections
               .sort((a, b) => a.order - b.order)
               .filter((s) => !s.deletedAt)
-              .map((section) => (
+              .map((section, sectionIndex) => (
                 <React.Fragment key={section.id}>
-                  <SectionCard
+                  <DraggableSection
                     section={section}
-                    handleUpdateSection={updateSection}
-                  />
+                    index={sectionIndex}
+                    moveSection={moveSection}
+                  >
+                    <SectionCard
+                      section={section}
+                      handleUpdateSection={updateSection}
+                    />
+                  </DraggableSection>
                   {section.isToggled && (
                     <div className="pl-5 flex flex-col gap-5 border-l border-border">
                       {questions
                         .filter(
                           (q) =>
                             q.sectionId === section.id &&
-                            !q.conditionId &&
+                            q.conditionId == null &&
                             !q.deletedAt,
                         )
                         .sort((a, b) => a.order - b.order)
-                        .map((question) => (
+                        .map((question, qIndex) => (
                           <React.Fragment key={question.id}>
-                            <QuestionCard
+                            <DraggableQuestion
                               question={question}
-                              handleUpdateQuestion={updateQuestion}
-                              handleAddCondition={(condition) => {
-                                addCondition({
-                                  questionId: question.id as string,
-                                  value: condition.value,
-                                  id: uuidv4(),
-                                });
-                              }}
-                            />
+                              index={qIndex}
+                              parentId={section.id}
+                              grandParentId={null}
+                              moveQuestion={moveQuestion}
+                            >
+                              <QuestionCard
+                                question={question}
+                                handleUpdateQuestion={updateQuestion}
+                                handleAddCondition={(condition) => {
+                                  addCondition({
+                                    questionId: question.id as string,
+                                    value: condition.value,
+                                    id: uuidv4(),
+                                  });
+                                }}
+                              />
+                            </DraggableQuestion>
                             {!!conditions.filter(
                               (c) =>
                                 c.questionId === question.id && !c.deletedAt,
@@ -285,61 +334,76 @@ export const ReportEditor: React.FC<{
                                       c.questionId === question.id &&
                                       !c.deletedAt,
                                   )
-                                  .map((condition) => (
-                                    <div
+                                  .map((condition, cIndex) => (
+                                    <DraggableCondition
                                       key={condition.id}
-                                      className="flex flex-col gap-5"
+                                      condition={condition}
+                                      index={cIndex}
+                                      parentId={question.id as string}
+                                      moveCondition={moveCondition}
                                     >
-                                      <ConditionCard
-                                        condition={condition}
-                                        question={question}
-                                        handleUpdateCondition={updateCondition}
-                                      />
-
-                                      {!!questions.length &&
-                                        questions
-                                          .filter(
-                                            (q) =>
-                                              q.sectionId === section.id &&
-                                              q.conditionId === condition.id &&
-                                              !q.deletedAt,
-                                          )
-                                          .sort((a, b) => a.order - b.order)
-                                          .map((question) => (
-                                            <QuestionCard
-                                              key={question.id}
-                                              question={question}
-                                              handleUpdateQuestion={
-                                                updateQuestion
-                                              }
-                                            />
-                                          ))}
-
-                                      <AddQuestionButton
-                                        addQuestion={addQuestion}
-                                        sectionId={section.id as string}
-                                        conditionId={condition.id as string}
-                                        order={
-                                          questions.filter(
-                                            (q) =>
-                                              q.sectionId === section.id &&
-                                              q.conditionId === condition.id,
-                                          ).length
-                                        }
-                                      />
-                                    </div>
+                                      <div className="flex flex-col gap-5">
+                                        <ConditionCard
+                                          condition={condition}
+                                          question={question}
+                                          handleUpdateCondition={
+                                            updateCondition
+                                          }
+                                        />
+                                        {!!questions.length &&
+                                          questions
+                                            .filter(
+                                              (q) =>
+                                                q.sectionId === section.id &&
+                                                q.conditionId ===
+                                                  condition.id &&
+                                                !q.deletedAt,
+                                            )
+                                            .sort((a, b) => a.order - b.order)
+                                            .map((subQuestion, sqIndex) => (
+                                              <DraggableQuestion
+                                                key={subQuestion.id}
+                                                question={subQuestion}
+                                                index={sqIndex}
+                                                parentId={section.id}
+                                                grandParentId={condition.id}
+                                                moveQuestion={moveQuestion}
+                                              >
+                                                <QuestionCard
+                                                  question={subQuestion}
+                                                  handleUpdateQuestion={
+                                                    updateQuestion
+                                                  }
+                                                />
+                                              </DraggableQuestion>
+                                            ))}
+                                        <AddQuestionButton
+                                          addQuestion={addQuestion}
+                                          sectionId={section.id as string}
+                                          conditionId={condition.id as string}
+                                          order={
+                                            questions.filter(
+                                              (q) =>
+                                                q.sectionId === section.id &&
+                                                q.conditionId === condition.id,
+                                            ).length
+                                          }
+                                        />
+                                      </div>
+                                    </DraggableCondition>
                                   ))}
                               </div>
                             )}
                           </React.Fragment>
                         ))}
-
                       <AddQuestionButton
                         addQuestion={addQuestion}
                         sectionId={section.id as string}
                         order={
                           questions.filter(
-                            (q) => q.sectionId === section.id && !q.conditionId,
+                            (q) =>
+                              q.sectionId === section.id &&
+                              q.conditionId == null,
                           ).length
                         }
                       />
@@ -347,7 +411,6 @@ export const ReportEditor: React.FC<{
                   )}
                 </React.Fragment>
               ))}
-
             <AddSectionButton addSection={addSection} order={sections.length} />
           </div>
         </AppContainer>

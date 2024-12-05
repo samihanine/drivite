@@ -30,7 +30,9 @@ export const QuestionCard = ({
 
   return (
     <Card
-      className={cn("flex-1 flex justify-between items-center p-4 rounded-sm")}
+      className={cn(
+        "flex-1 cursor-move flex justify-between items-center p-4 rounded-sm",
+      )}
     >
       <div className="flex gap-2 items-center">
         <QuestionTypeBage type={question.type} />

@@ -20,8 +20,8 @@ export default function AddQuestionButton({
   return (
     <ActionButton
       className={cn(
-        "w-full text-left text-sm font-medium text-primary",
-        conditionId ? "text-purple-500" : "text-primary",
+        "w-full text-left text-sm font-medium",
+        conditionId ? "text-purple-500" : "text-muted-foreground",
       )}
       renderForm={() => (
         <QuestionForm

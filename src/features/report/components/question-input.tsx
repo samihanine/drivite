@@ -2,7 +2,7 @@ import { Input } from "@/components/input";
 import { Label } from "@/components/label";
 import { RadioGroup, RadioGroupItem } from "@/components/radio-group";
 import { Slider } from "@/components/slider";
-import { InsertAnswer, Question } from "@/db";
+import { Question } from "@/db";
 
 export default function QuestionInput({
   question,
@@ -93,7 +93,7 @@ export default function QuestionInput({
           value={value}
         >
           {question.options.map((option) => (
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2" key={option}>
               <RadioGroupItem value={option} id={question.id + option} />
               <Label className="cursor-pointer" htmlFor={question.id + option}>
                 {option}
