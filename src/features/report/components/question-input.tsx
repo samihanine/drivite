@@ -3,6 +3,8 @@ import { Label } from "@/components/label";
 import { RadioGroup, RadioGroupItem } from "@/components/radio-group";
 import { Slider } from "@/components/slider";
 import { Question } from "@/db";
+import S3Image from "@/features/upload/components/s3-image";
+import UploadImageInput from "@/features/upload/components/upload-image-input";
 
 export default function QuestionInput({
   question,
@@ -13,6 +15,7 @@ export default function QuestionInput({
   updateAnswer: (answer: { questionId: string; value: string }) => void;
   value: string;
 }) {
+  console.log(value);
   return (
     <>
       {" "}
@@ -105,20 +108,18 @@ export default function QuestionInput({
       {question.type === "IMAGE" && (
         <div className="flex flex-col gap-2">
           {!!value?.length && (
-            <img src={value} className="h-40 w-full object-contain" />
+            <S3Image
+              className="w-auto h-40 object-contain rounded-lg"
+              imagePath={value}
+            />
           )}
 
-          <Input
-            type="file"
-            accept="image/*"
+          <UploadImageInput
             required={question.required || false}
-            onChange={async (e) => {
-              const file = e.target.files?.[0];
-              if (!file) return;
-              const imageValue = URL.createObjectURL(file);
+            setImagePath={async (key) => {
               updateAnswer({
                 questionId: question.id,
-                value: imageValue,
+                value: key,
               });
             }}
           />

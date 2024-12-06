@@ -15,6 +15,7 @@ import { createAnswers } from "../actions/create-answers";
 import { generateReportPdf } from "../actions/generate-report-pdf";
 import QuestionInput from "./question-input";
 import React from "react";
+import ReportPage from "./render-report";
 
 export const ReportForm = ({
   questions,
@@ -36,6 +37,8 @@ export const ReportForm = ({
 
   const { executeAsync: generateReportAsync, status: generateReportStatus } =
     useAction(generateReportPdf);
+
+  const [showReport, setShowReport] = useState(false);
 
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -79,14 +82,7 @@ export const ReportForm = ({
     if (currentStep === sections.length - 1) {
       if (isPreview) {
         console.log(answers);
-        const reponse = await generateReportAsync({
-          answers: answers.map((a) => ({
-            value: a.value === undefined ? "" : a.value,
-            questionId: a.questionId,
-          })),
-        });
-
-        console.log(reponse?.data);
+        setShowReport(true);
         return;
       }
 
@@ -122,6 +118,17 @@ export const ReportForm = ({
 
   const isLoading =
     createAnswersStatus === "executing" || generateReportStatus === "executing";
+
+  if (showReport) {
+    return (
+      <ReportPage
+        answers={answers as Answer[]}
+        questions={questions}
+        sections={sections}
+        onCancel={() => setShowReport(false)}
+      />
+    );
+  }
 
   return (
     <div className="h-[calc(100vh-80px)]">

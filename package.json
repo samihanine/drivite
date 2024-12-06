@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.705.0",
+    "@aws-sdk/s3-request-presigner": "^3.705.0",
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.2.0",
     "@hookform/resolvers": "^3.9.1",
@@ -60,7 +61,9 @@
     "formdata-node": "^6.0.3",
     "geist": "^1.3.1",
     "googleapis": "^134.0.0",
+    "html2canvas": "^1.4.1",
     "jsonwebtoken": "^9.0.2",
+    "jspdf": "^2.5.2",
     "lucide-react": "^0.291.0",
     "moment": "^2.30.1",
     "next": "^15.0.3",

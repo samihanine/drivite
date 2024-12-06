@@ -7,6 +7,9 @@ import { PDFDocument, PDFFont, PDFPage, rgb, StandardFonts } from "pdf-lib";
 import { isNull } from "drizzle-orm";
 import fs from "fs";
 import path from "path";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { s3Client } from "@/lib/s3";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
 
 export const generateReportPdf = authActionClient
   .schema(
@@ -94,7 +97,7 @@ export const generateReportPdf = authActionClient
             yPosition = await addImageResponse({
               page,
               yPosition,
-              imageBase64: answer.value,
+              imagePath: answer.value,
               question: question.label,
               font,
               boldFont,
@@ -225,21 +228,27 @@ interface ImageResponseParams {
   font: PDFFont;
   boldFont: PDFFont;
   yPosition: number;
-  imageBase64: string;
+  imagePath: string;
   question: string;
 }
 
 async function addImageResponse({
   page,
   yPosition,
-  imageBase64,
+  imagePath,
   question,
   font,
   boldFont,
 }: ImageResponseParams): Promise<number> {
   const lineHeight = 30;
   const imageHeight = 150;
-  const buffer = Buffer.from(imageBase64.split(",")[1], "base64");
+  const command = new GetObjectCommand({
+    Bucket: process.env.DO_BUCKET,
+    Key: imagePath,
+  });
+  const src = await getSignedUrl(s3Client, command, { expiresIn: 3600 });
+  const response = await fetch(src);
+  const buffer = await response.arrayBuffer();
   const uint8Array = new Uint8Array(buffer);
   const image = await page.doc.embedPng(uint8Array);
   const imageWidth = (image.width / image.height) * imageHeight;

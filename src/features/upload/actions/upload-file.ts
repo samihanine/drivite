@@ -1,19 +1,29 @@
 "use server";
 
-import { uploadFileToS3 } from "@/lib/s3";
+import { s3Client } from "@/lib/s3";
 import { authActionClient } from "@/lib/safe-action";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 
-export const uploadFileSchema = zfd.formData({
+const uploadFileSchema = zfd.formData({
   file: z.any(),
 });
-
-export type UploadFile = z.infer<typeof uploadFileSchema>;
 
 export const uploadFile = authActionClient
   .schema(uploadFileSchema)
   .action(async ({ parsedInput }) => {
     const { file } = parsedInput;
-    return uploadFileToS3(file);
+    const key = `${Date.now()}-${file.name}`;
+    const Body = (await file.arrayBuffer()) as Buffer;
+
+    await s3Client.send(
+      new PutObjectCommand({
+        Bucket: process.env.DO_BUCKET as string,
+        Key: key,
+        Body,
+      }),
+    );
+
+    return key;
   });

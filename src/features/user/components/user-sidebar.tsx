@@ -191,7 +191,8 @@ export function AppSidebar({ user }: { user: User }) {
                               )}
                             >
                               <SidebarMenuSubButton asChild>
-                                <a
+                                <Link
+                                  prefetch
                                   href={subItem.url}
                                   onClick={(e) => {
                                     e.preventDefault();
@@ -200,7 +201,7 @@ export function AppSidebar({ user }: { user: User }) {
                                   }}
                                 >
                                   <span>{subItem.title}</span>
-                                </a>
+                                </Link>
                               </SidebarMenuSubButton>
                             </SidebarMenuSubItem>
                           ))}
