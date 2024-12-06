@@ -45,10 +45,7 @@ export const ReportForm = ({
   const currentSection = sections[currentStep];
 
   const currentQuestions = questions.filter(
-    (q) =>
-      q.sectionId === currentSection.id &&
-      q.deletedAt === null &&
-      !q.conditionId,
+    (q) => q.sectionId === currentSection.id && !q.conditionId,
   );
 
   const [answers, setAnswers] = useState<InsertAnswer[]>(initialAnswers);
@@ -64,18 +61,10 @@ export const ReportForm = ({
     questionId: string;
     value: string;
   }) => {
-    const newAnswers = [...answers].filter((a) => a.questionId !== questionId);
-
-    if (!value) {
-      return;
-    }
-
-    newAnswers.push({
-      questionId,
-      inspectionId,
-      value,
-    });
-    setAnswers(newAnswers);
+    setAnswers((oldAnswers) => [
+      ...oldAnswers.filter((a) => a.questionId !== questionId),
+      { questionId, value, inspectionId },
+    ]);
   };
 
   const handleNextStep = async () => {

@@ -95,6 +95,7 @@ const ReportPage: React.FC<ReportProps> = ({
   const handleDownload = async () => {
     const input = document.getElementById("report");
     if (!input) return;
+    input.setAttribute("style", "width: 793px");
     const images = document.querySelectorAll(
       "#report img",
     ) as NodeListOf<HTMLImageElement>;
@@ -155,50 +156,53 @@ const ReportPage: React.FC<ReportProps> = ({
     textInRectangle.forEach((element) => {
       element.removeAttribute("style");
     });
+    input.removeAttribute("style");
 
     console.log(pdf.output("datauristring"));
     pdf.save("rapport.pdf");
   };
 
   return (
-    <Container>
-      <div className="py-10 flex justify-between items-center">
-        <h2 className="text-2xl font-bold">Rapport d&apos;inspection</h2>
-        <div className="flex gap-4">
-          <Button variant="ghost" onClick={onCancel}>
-            Retour
-          </Button>
-          <Button onClick={handleDownload}>Télécharger le rapport</Button>
-        </div>
-      </div>
-      <Card className="rounded-none w-fit mx-auto">
-        <div
-          className="p-8 border-l-[40px] border-l-primary w-[793px] h-[1121px]"
-          id="report"
-        >
-          <div className="flex justify-center mb-8">
-            <Image
-              src={LogoImage}
-              alt="Drivite Logo"
-              className=""
-              height={96}
-              width={200}
-            />
+    <>
+      <Container>
+        <div className="py-10 flex justify-between items-center">
+          <h2 className="text-2xl font-bold">Rapport d&apos;inspection</h2>
+          <div className="flex gap-4">
+            <Button variant="ghost" onClick={onCancel}>
+              Retour
+            </Button>
+            <Button onClick={handleDownload}>Télécharger le rapport</Button>
           </div>
-          <h1 className="text-2xl font-bold mb-8">
-            Drivite - Inspection du véhicule
-          </h1>
-          {sortedSections.map((section) => (
-            <SectionComponent
-              key={section.id}
-              section={section}
-              questions={questions}
-              answers={answers}
-            />
-          ))}
         </div>
-      </Card>
-    </Container>
+        <Card className="rounded-none w-full max-w-3xl mx-auto">
+          <div
+            className="p-8 border-l-[40px] border-l-primary aspect-[1.4157/2] w-full"
+            id="report"
+          >
+            <div className="flex justify-center mb-8">
+              <Image
+                src={LogoImage}
+                alt="Drivite Logo"
+                className=""
+                height={96}
+                width={200}
+              />
+            </div>
+            <h1 className="text-2xl font-bold mb-8">
+              Drivite - Inspection du véhicule
+            </h1>
+            {sortedSections.map((section) => (
+              <SectionComponent
+                key={section.id}
+                section={section}
+                questions={questions}
+                answers={answers}
+              />
+            ))}
+          </div>
+        </Card>
+      </Container>
+    </>
   );
 };
 

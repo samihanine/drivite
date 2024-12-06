@@ -268,9 +268,9 @@ export const ReportEditor: React.FC<{
         <ReportForm
           answers={[]}
           inspectionId=""
-          questions={questions as Question[]}
-          sections={sections as Section[]}
-          conditions={conditions as Condition[]}
+          questions={questions.filter((q) => !q.deletedAt) as Question[]}
+          sections={sections.filter((s) => !s.deletedAt) as Section[]}
+          conditions={conditions.filter((c) => !c.deletedAt) as Condition[]}
           isPreview
         />
       )}
