@@ -42,7 +42,9 @@ const TextResponse: React.FC<{ question: Question; answer?: Answer }> = ({
   return (
     <div className="flex items-center justify-between border-b border-gray-300 py-2">
       <span className="font-medium">{question.label}</span>
-      <div className="px-2 py-1 bg-gray-100 rounded">{answer.value}</div>
+      <div className="px-2 py-1 bg-gray-100 rounded">
+        <span className="pdf-in-rectangle">{answer.value}</span>
+      </div>
     </div>
   );
 };
@@ -61,7 +63,7 @@ const SectionComponent: React.FC<{
   return (
     <div className="mb-8">
       <div className="bg-[#E7F1FB] py-2 px-4 font-medium mb-4">
-        {section.title}
+        <span className="pdf-in-rectangle">{section.title}</span>
       </div>
       {sectionQuestions.map((q) =>
         q.type === "IMAGE" ? (
@@ -93,11 +95,10 @@ const ReportPage: React.FC<ReportProps> = ({
   const handleDownload = async () => {
     const input = document.getElementById("report");
     if (!input) return;
-
-    // Précharger les images pour éviter les problèmes de CORS
     const images = document.querySelectorAll(
       "#report img",
     ) as NodeListOf<HTMLImageElement>;
+
     for (const img of images) {
       const response = await fetch(img.src);
       const blob = await response.blob();
@@ -109,41 +110,53 @@ const ReportPage: React.FC<ReportProps> = ({
       img.src = reader.result as string;
     }
 
+    const textInRectangle = document.querySelectorAll(".pdf-in-rectangle");
+
+    textInRectangle.forEach((element) => {
+      element.setAttribute(
+        "style",
+        `position: relative; top: -6px; ${element.getAttribute("style")}`,
+      );
+    });
+
+    const canvas = await html2canvas(input, {
+      scale: 2,
+      useCORS: true,
+    });
+
+    const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "pt", "a4");
     const pdfWidth = pdf.internal.pageSize.getWidth();
     const pdfHeight = pdf.internal.pageSize.getHeight();
+    const imgProps = pdf.getImageProperties(imgData);
+    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    let heightLeft = imgHeight;
+    let position = 0;
 
-    let yPosition = 0; // Position Y sur la page actuelle
-    const margin = 20; // Marge pour le contenu
-    const elements = input.querySelectorAll("*"); // Sélectionnez tous les éléments
+    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight, "", "FAST");
+    heightLeft -= pdfHeight;
 
-    for (const element of elements) {
-      const canvas = await html2canvas(element as HTMLElement, {
-        scale: 2,
-        useCORS: true,
-      });
-      const imgData = canvas.toDataURL("image/png");
-      const imgProps = pdf.getImageProperties(imgData);
-      const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-
-      if (yPosition + imgHeight > pdfHeight - margin) {
-        pdf.addPage(); // Ajoutez une nouvelle page si le contenu dépasse
-        yPosition = margin; // Réinitialisez la position
-      }
-
+    while (heightLeft > 0) {
+      position = heightLeft - imgHeight;
+      pdf.addPage();
       pdf.addImage(
         imgData,
         "PNG",
-        margin,
-        yPosition,
-        pdfWidth - margin * 2,
+        0,
+        position,
+        pdfWidth,
         imgHeight,
         "",
         "FAST",
       );
-      yPosition += imgHeight; // Mettez à jour la position Y
+      heightLeft -= pdfHeight;
     }
 
+    textInRectangle.forEach((element) => {
+      element.removeAttribute("style");
+    });
+
+    console.log(pdf.output("datauristring"));
     pdf.save("rapport.pdf");
   };
 
@@ -158,8 +171,11 @@ const ReportPage: React.FC<ReportProps> = ({
           <Button onClick={handleDownload}>Télécharger le rapport</Button>
         </div>
       </div>
-      <Card className="rounded-none">
-        <div className="p-8 border-l-[40px] border-l-primary" id="report">
+      <Card className="rounded-none w-fit mx-auto">
+        <div
+          className="p-8 border-l-[40px] border-l-primary w-[793px] h-[1121px]"
+          id="report"
+        >
           <div className="flex justify-center mb-8">
             <Image
               src={LogoImage}
