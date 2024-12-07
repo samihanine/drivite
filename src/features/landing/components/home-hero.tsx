@@ -8,7 +8,7 @@ export const HomeHero = async () => {
   const t = await getI18n();
 
   return (
-    <div className="relative h-[calc(100vh-80px)]">
+    <div className="relative h-[calc(100vh-120px)]">
       <div className="absolute flex w-full h-full">
         <div className="bg-primary h-full w-full sm:w-1/2"></div>
         <Image
