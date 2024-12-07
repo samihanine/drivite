@@ -84,7 +84,7 @@ export default function QuestionInput({
       )}
       {question.type === "SELECT" && (
         <RadioGroup
-          className="flex gap-5 flex-row"
+          className="flex gap-5 flex-row flex-wrap"
           required={question.required || false}
           onValueChange={(value) => {
             updateAnswer({

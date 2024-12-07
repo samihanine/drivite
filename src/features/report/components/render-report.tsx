@@ -65,21 +65,24 @@ const SectionComponent: React.FC<{
       <div className="bg-[#E7F1FB] py-2 px-4 font-medium mb-4">
         <span className="pdf-in-rectangle">{section.title}</span>
       </div>
-      {sectionQuestions.map((q) =>
-        q.type === "IMAGE" ? (
-          <ImageResponse
-            key={q.id}
-            question={q}
-            answer={answers.find((a) => a.questionId === q.id)}
-          />
-        ) : (
-          <TextResponse
-            key={q.id}
-            question={q}
-            answer={answers.find((a) => a.questionId === q.id)}
-          />
-        ),
-      )}
+      {questions
+        .filter((q) => q.sectionId === section.id)
+        .sort((a, b) => a.order - b.order)
+        .map((q) =>
+          q.type === "IMAGE" ? (
+            <ImageResponse
+              key={q.id}
+              question={q}
+              answer={answers.find((a) => a.questionId === q.id)}
+            />
+          ) : (
+            <TextResponse
+              key={q.id}
+              question={q}
+              answer={answers.find((a) => a.questionId === q.id)}
+            />
+          ),
+        )}
     </div>
   );
 };
@@ -95,6 +98,7 @@ const ReportPage: React.FC<ReportProps> = ({
   const handleDownload = async () => {
     const input = document.getElementById("report");
     if (!input) return;
+
     input.setAttribute("style", "width: 793px");
     const images = document.querySelectorAll(
       "#report img",
@@ -112,7 +116,6 @@ const ReportPage: React.FC<ReportProps> = ({
     }
 
     const textInRectangle = document.querySelectorAll(".pdf-in-rectangle");
-
     textInRectangle.forEach((element) => {
       element.setAttribute(
         "style",
@@ -121,44 +124,20 @@ const ReportPage: React.FC<ReportProps> = ({
     });
 
     const canvas = await html2canvas(input, {
-      scale: 2,
+      scale: 1,
       useCORS: true,
     });
 
     const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "pt", "a4");
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-    const imgProps = pdf.getImageProperties(imgData);
-    const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
-    let heightLeft = imgHeight;
-    let position = 0;
+    const pdf = new jsPDF("p", "pt", [canvas.width, canvas.height]);
 
-    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, imgHeight, "", "FAST");
-    heightLeft -= pdfHeight;
-
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(
-        imgData,
-        "PNG",
-        0,
-        position,
-        pdfWidth,
-        imgHeight,
-        "",
-        "FAST",
-      );
-      heightLeft -= pdfHeight;
-    }
+    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height, "", "FAST");
 
     textInRectangle.forEach((element) => {
       element.removeAttribute("style");
     });
     input.removeAttribute("style");
 
-    console.log(pdf.output("datauristring"));
     pdf.save("rapport.pdf");
   };
 

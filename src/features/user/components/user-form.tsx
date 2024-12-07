@@ -18,7 +18,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Avatar, AvatarFallback } from "@/components/avatar";
 import UploadImageInput from "@/features/upload/components/upload-image-input";
-import { getFileUrlByKey } from "@/lib/s3";
 import { User, userSchema } from "@/db/schemas";
 
 const formSchema = userSchema.partial();
@@ -66,7 +65,7 @@ export function UserForm({
           <Avatar className="w-20 h-20 text-xl">
             {!!imagePath?.length && typeof imagePath === "string" ? (
               <img
-                src={getFileUrlByKey(imagePath)}
+                src={imagePath}
                 alt="Avatar"
                 width={44}
                 height={44}

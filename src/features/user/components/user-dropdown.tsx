@@ -8,7 +8,6 @@ import { LogOut } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import EditUserButton from "./edit-user-button";
-import { getFileUrlByKey } from "@/lib/s3";
 import { User } from "@/db/schemas";
 
 export default function UserDropdown({ user }: { user: User }) {
@@ -26,7 +25,7 @@ export default function UserDropdown({ user }: { user: User }) {
             <Avatar className="h-10 w-10 text-xl">
               {user.imagePath?.length && (
                 <img
-                  src={getFileUrlByKey(user.imagePath)}
+                  src={undefined}
                   className="object-cover w-full"
                   alt={user.email}
                 />

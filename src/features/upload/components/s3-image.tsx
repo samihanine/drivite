@@ -6,10 +6,6 @@ export default function S3Image({
 }: React.ComponentProps<"img"> & { imagePath: string }) {
   const [url, setUrl] = useState<string | null>(null);
 
-  if (!imagePath) {
-    return null;
-  }
-
   useEffect(() => {
     const getUrl = async () => {
       const response = await fetch(`/api/file/${imagePath}`);
@@ -22,6 +18,10 @@ export default function S3Image({
 
     getUrl();
   }, [imagePath]);
+
+  if (!imagePath) {
+    return null;
+  }
 
   return url ? <img src={url} {...props} /> : null;
 }

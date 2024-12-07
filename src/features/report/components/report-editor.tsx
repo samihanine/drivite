@@ -4,7 +4,9 @@ import { AppContainer } from "@/components/app-container";
 import { Button } from "@/components/button";
 import { Typography } from "@/components/typography";
 import {
+  Answer,
   Condition,
+  InsertAnswer,
   InsertCondition,
   InsertQuestion,
   InsertSection,
@@ -48,6 +50,7 @@ export const ReportEditor: React.FC<{
   const [conditions, setConditions] = useState<InsertCondition[]>([
     ...initialConditions,
   ]);
+  const [answers, setAnswers] = useState<InsertAnswer[]>([]);
 
   const [showPreview, setShowPreview] = useState(false);
 
@@ -236,6 +239,27 @@ export const ReportEditor: React.FC<{
     [conditions],
   );
 
+  const createFakeAnswers = () => {
+    const fakeAnswers = questions
+      .filter((q) => !q.deletedAt)
+      .map((q) => {
+        let value = "Lorem ipsum";
+        if (q.type === "IMAGE") {
+          value = "1733518907083-firm.png";
+        } else if (q.options?.length) {
+          value = q.options[0];
+        }
+
+        return {
+          id: uuidv4(),
+          questionId: q.id as string,
+          value,
+          inspectionId: "",
+        };
+      });
+    setAnswers(fakeAnswers);
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="w-full">
@@ -266,7 +290,7 @@ export const ReportEditor: React.FC<{
       <div className="mt-20" />
       {showPreview && (
         <ReportForm
-          answers={[]}
+          answers={answers as Answer[]}
           inspectionId=""
           questions={questions.filter((q) => !q.deletedAt) as Question[]}
           sections={sections.filter((s) => !s.deletedAt) as Section[]}

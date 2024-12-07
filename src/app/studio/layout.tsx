@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Studio - TVL Conseils",
+  title: "Studio - Drivite",
   description: "This is the cms studio page",
 };
 
