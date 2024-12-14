@@ -1,12 +1,12 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { ContactButton } from "@/features/landing/components/contact-button";
 import { Container } from "@/components/container";
 import { Image } from "@/components/image";
 import { Typography } from "@/components/typography";
-import { getI18n } from "@/locale/server";
 
-export const HomeHero = async () => {
-  const t = await getI18n();
-
+export const HomeHero = () => {
   return (
     <div className="relative h-[calc(100vh-120px)]">
       <div className="absolute flex w-full h-full">
@@ -19,19 +19,67 @@ export const HomeHero = async () => {
       </div>
 
       <Container className="relative py-20 h-full">
-        <div className="flex flex-col gap-8 max-w-xl h-full justify-center">
+        <motion.div
+          className="flex flex-col gap-8 max-w-xl h-full justify-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0, y: 50 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
           <Typography variant="h1" className="text-white">
-            <span className="text-gray-200">{t("home.hero.title.line1")}</span>
+            <motion.span
+              className="text-gray-200"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{
+                hidden: { opacity: 0, x: -30 },
+                visible: { opacity: 1, x: 0 },
+              }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            >
+              Drivite,
+            </motion.span>
             <br />
-            {t("home.hero.title.line2")}
+            l'expert qui éclaire
             <br />
-            {t("home.hero.title.line3")}
+            vos choix automobiles
           </Typography>
-          <Typography variant="lead" className="text-white">
-            {t("home.hero.description")}
-          </Typography>
-          <ContactButton />
-        </div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0, y: 30 },
+              visible: { opacity: 1, y: 0 },
+            }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
+          >
+            <Typography variant="lead" className="text-white">
+              Nous offrons des services sur-mesure pour l'achat et la vente de
+              véhicules. Notre accompagnement personnalisé rend le processus
+              simple et sécurisé.
+            </Typography>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{
+              hidden: { opacity: 0, scale: 0.8 },
+              visible: { opacity: 1, scale: 1 },
+            }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
+          >
+            <ContactButton />
+          </motion.div>
+        </motion.div>
       </Container>
     </div>
   );

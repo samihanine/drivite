@@ -4,7 +4,7 @@ import { QuestionAccordion } from "./question-accordion";
 import { cn } from "@/lib/utils";
 import { FAQ } from "../queries/get-faq";
 
-export const Faq = async ({
+export const Faq = ({
   questions,
   background,
 }: {

@@ -1,10 +1,11 @@
+"use client";
+
 import { Container } from "@/components/container";
-import { CreditCardIcon } from "@heroicons/react/24/outline";
+import { Image } from "@/components/image";
+import { Typography } from "@/components/typography";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
-import { Typography } from "@/components/typography";
-import { CarIcon } from "@/components/icons";
-import { Image } from "@/components/image";
 
 const ServiceCard = ({
   title,
@@ -18,9 +19,29 @@ const ServiceCard = ({
   image: string;
 }) => {
   return (
-    <div className="bg-background rounded-lg p-6 max-w-lg shadow-md shadow-[#E7F1FB]">
+    <motion.div
+      className="bg-background rounded-lg p-6 max-w-lg shadow-md shadow-[#E7F1FB]"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true }}
+      variants={{
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0 },
+      }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <div className="flex flex-col items-center justify-between h-full gap-6">
-        <div className="flex flex-col gap-2 items-center justify-center">
+        <motion.div
+          className="flex flex-col gap-2 items-center justify-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { scale: 0.8, opacity: 0 },
+            visible: { scale: 1, opacity: 1 },
+          }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
           <div className="w-20 h-20 flex items-center justify-center">
             <Image
               src={image}
@@ -31,25 +52,61 @@ const ServiceCard = ({
             />
           </div>
           <Typography variant="h3">{title}</Typography>
-        </div>
-        <Typography variant="paragraph" className="text-center">
-          {description}
-        </Typography>
-        <Link href={href} className="text-primary font-medium hover:underline">
-          En savoir plus →
-        </Link>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ delay: 0.3, duration: 0.6, ease: "easeOut" }}
+        >
+          <Typography variant="paragraph" className="text-center">
+            {description}
+          </Typography>
+        </motion.div>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 },
+          }}
+          transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
+        >
+          <Link
+            href={href}
+            className="text-primary font-medium hover:underline"
+          >
+            En savoir plus →
+          </Link>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-export const ServiceCards: React.FC = async () => {
+export const ServiceCards: React.FC = () => {
   return (
     <div className="px-8 py-20 bg-[#F8F9FF]">
       <Container>
-        <Typography variant="h2" className="text-center mb-12">
-          Définissez votre Parcours
-        </Typography>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: { opacity: 0, y: -30 },
+            visible: { opacity: 1, y: 0 },
+          }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <Typography variant="h2" className="text-center mb-12">
+            Définissez votre Parcours
+          </Typography>
+        </motion.div>
         <div className="flex flex-wrap justify-center gap-8">
           <ServiceCard
             title="Acheter ma voiture"
