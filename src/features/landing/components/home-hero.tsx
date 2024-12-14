@@ -45,7 +45,7 @@ export const HomeHero = () => {
               Drivite,
             </motion.span>
             <br />
-            l'expert qui éclaire
+            l&apos;expert qui éclaire
             <br />
             vos choix automobiles
           </Typography>
@@ -61,8 +61,8 @@ export const HomeHero = () => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
           >
             <Typography variant="lead" className="text-white">
-              Nous offrons des services sur-mesure pour l'achat et la vente de
-              véhicules. Notre accompagnement personnalisé rend le processus
+              Nous offrons des services sur-mesure pour l&apos;achat et la vente
+              de véhicules. Notre accompagnement personnalisé rend le processus
               simple et sécurisé.
             </Typography>
           </motion.div>

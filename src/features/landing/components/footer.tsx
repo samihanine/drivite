@@ -15,6 +15,7 @@ import { LocaleSwitcher } from "@/components/locale-switcher";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { PhoneButton } from "./phone-button";
+import { PageLink } from "../queries/get-page-links";
 
 const socialLinks = [
   {
@@ -79,7 +80,7 @@ function SocialLink({
   );
 }
 
-export function Footer() {
+export function Footer({ pageLinks }: { pageLinks: PageLink[] }) {
   return (
     <section>
       <footer className="overflow-hidden border-t border-t-border bg-background py-8 sm:py-16">
@@ -97,7 +98,7 @@ export function Footer() {
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
               <h3 className="text-center font-display text-4xl font-semibold text-foreground sm:text-5xl lg:max-w-xl lg:text-left">
-                Drivite, l'expert qui éclaire vos choix automobiles
+                Drivite, l&apos;expert qui éclaire vos choix automobiles
               </h3>
               <div className="mt-8 flex items-center gap-4 flex-wrap">
                 <PhoneButton />
@@ -122,9 +123,9 @@ export function Footer() {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             >
               <p className="text-center text-base text-muted-foreground lg:text-left">
-                Nous offrons des services sur-mesure pour l'achat et la vente de
-                véhicules. Notre accompagnement personnalisé rend le processus
-                simple et sécurisé.
+                Nous offrons des services sur-mesure pour l&apos;achat et la
+                vente de véhicules. Notre accompagnement personnalisé rend le
+                processus simple et sécurisé.
               </p>
               <div className="mt-16 grid w-full max-w-sm grid-cols-2 gap-3.5 sm:max-w-none sm:grid-cols-3 lg:mt-8 lg:gap-2.5 xl:gap-3.5">
                 {socialLinks.map((socialLink, index) => (

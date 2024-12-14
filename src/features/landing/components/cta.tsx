@@ -45,9 +45,9 @@ export const Cta = () => {
             variant="paragraph"
             className="max-w-xl text-white text-center"
           >
-            Contactez Drivite aujourd'hui et découvrez comment nous pouvons vous
-            aider ! Nos services d'accompagnement sont disponibles partout en
-            France.
+            Contactez Drivite aujourd&apos;hui et découvrez comment nous pouvons
+            vous aider ! Nos services d&apos;accompagnement sont disponibles
+            partout en France.
           </Typography>
 
           <ContactButton />
