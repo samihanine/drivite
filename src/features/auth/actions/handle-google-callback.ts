@@ -6,6 +6,8 @@ import { createUser } from "@/features/user/actions/create-user";
 import { googleClient } from "@/lib/google";
 import { eq } from "drizzle-orm";
 import { createCookie } from "../utils/create-cookie";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "@/lib/s3";
 
 export const handleGoogleCallback = async ({
   code,
@@ -40,6 +42,23 @@ export const handleGoogleCallback = async ({
 
   if (!user) {
     let picture = undefined;
+
+    if (data.picture) {
+      const response = await fetch(data.picture);
+      const buffer = await response.arrayBuffer();
+
+      const key = `${Date.now()}-${data.email}.png`;
+
+      await s3Client.send(
+        new PutObjectCommand({
+          Bucket: process.env.DO_BUCKET as string,
+          Key: key,
+          Body: new Uint8Array(buffer),
+        }),
+      );
+
+      picture = key;
+    }
 
     const newUser = await createUser({
       email: data.email,

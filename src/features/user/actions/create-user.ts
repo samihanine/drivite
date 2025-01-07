@@ -1,3 +1,5 @@
+"use server";
+
 import { db } from "@/db";
 import { InsertUser, usersTable } from "@/db/schemas";
 import { sendEmail } from "@/lib/resend";

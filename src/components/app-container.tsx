@@ -7,7 +7,7 @@ export function AppContainer({ className, ...props }: ContainerProps) {
   return (
     <div
       className={clsx(
-        "mx-auto max-w-screen-md px-5 sm:px-6 lg:px-8 ",
+        "mx-auto max-w-screen-lg px-5 sm:px-6 lg:px-8 ",
         className,
       )}
       {...props}

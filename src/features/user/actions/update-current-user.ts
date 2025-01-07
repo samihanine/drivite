@@ -1,18 +1,18 @@
+"use server";
+
 import { db } from "@/db";
 import { getCurrentUser } from "../queries/get-current-user";
-import { usersTable } from "@/db/schemas";
+import { userSchema, usersTable } from "@/db/schemas";
+import { adminActionClient } from "@/lib/safe-action";
 
-export const updateCurrentUser = async (data: {
-  name?: string;
-  phoneNumber?: string;
-  email?: string;
-  imagePath?: string;
-}) => {
-  const user = await getCurrentUser();
+export const updateCurrentUser = adminActionClient
+  .schema(userSchema.partial())
+  .action(async ({ parsedInput }) => {
+    const user = await getCurrentUser();
 
-  if (!user) {
-    return null;
-  }
+    if (!user) {
+      return null;
+    }
 
-  return await db.update(usersTable).set(data).returning();
-};
+    return await db.update(usersTable).set(parsedInput).returning();
+  });

@@ -1,4 +1,3 @@
-import { Container } from "@/components/container";
 import { CarFilters } from "@/features/cars/components/car-filters";
 import { CarsGrid } from "@/features/cars/components/cars-grid";
 import { getCars } from "@/features/cars/queries/get-cars";

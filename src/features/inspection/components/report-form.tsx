@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/button";
 import { Card } from "@/components/card";
 import { Stepper } from "@/components/stepper";
@@ -11,11 +13,12 @@ import {
 import { showError } from "@/lib/utils";
 import { useAction } from "next-safe-action/hooks";
 import { useEffect, useState } from "react";
-import { createAnswers } from "../actions/create-answers";
-import { generateReportPdf } from "../actions/generate-report-pdf";
+import { saveAnswers } from "../actions/save-answers";
+import { updateInspection } from "../actions/update-inspection";
 import QuestionInput from "./question-input";
 import React from "react";
-import ReportPage from "./render-report";
+import ReportPage from "./report-page";
+import { useRouter } from "next/navigation";
 
 export const ReportForm = ({
   questions,
@@ -32,12 +35,14 @@ export const ReportForm = ({
   isPreview?: boolean;
   answers: Answer[];
 }) => {
-  const { executeAsync: createAnswersAsync, status: createAnswersStatus } =
-    useAction(createAnswers);
+  const { executeAsync: saveAnswersAsync, status: createAnswersStatus } =
+    useAction(saveAnswers);
 
-  const { executeAsync: generateReportAsync, status: generateReportStatus } =
-    useAction(generateReportPdf);
-
+  const {
+    executeAsync: executeUpdateInspection,
+    status: generateUpdateInspectionStatus,
+  } = useAction(updateInspection);
+  const router = useRouter();
   const [showReport, setShowReport] = useState(false);
 
   const [currentStep, setCurrentStep] = useState(0);
@@ -68,6 +73,17 @@ export const ReportForm = ({
   };
 
   const handleNextStep = async () => {
+    const response = await saveAnswersAsync({
+      answers,
+      inspectionId,
+    });
+
+    if (!response?.data?.length) {
+      return showError({
+        message: "Une erreur s'est produite lors de la sauvegarde des réponses",
+      });
+    }
+
     if (currentStep === sections.length - 1) {
       if (isPreview) {
         console.log(answers);
@@ -75,22 +91,12 @@ export const ReportForm = ({
         return;
       }
 
-      const response = await createAnswersAsync({
-        answers,
+      await executeUpdateInspection({
+        id: inspectionId,
+        status: "COMPLETED",
       });
 
-      if (!response?.data?.length) {
-        return showError({
-          message:
-            "Une erreur s'est produite lors de la sauvegarde des réponses",
-        });
-      }
-
-      const reponse = await generateReportAsync({
-        answers: response.data,
-      });
-
-      console.log(reponse?.data);
+      setShowReport(true);
       return;
     }
 
@@ -106,7 +112,8 @@ export const ReportForm = ({
   };
 
   const isLoading =
-    createAnswersStatus === "executing" || generateReportStatus === "executing";
+    createAnswersStatus === "executing" ||
+    generateUpdateInspectionStatus === "executing";
 
   if (showReport) {
     return (
@@ -114,7 +121,13 @@ export const ReportForm = ({
         answers={answers as Answer[]}
         questions={questions}
         sections={sections}
-        onCancel={() => setShowReport(false)}
+        onCancel={() => {
+          if (isPreview) {
+            setShowReport(false);
+          } else {
+            router.push("/app");
+          }
+        }}
       />
     );
   }

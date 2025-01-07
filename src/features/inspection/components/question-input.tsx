@@ -19,10 +19,10 @@ export default function QuestionInput({
   return (
     <>
       {" "}
-      <Label>
+      <Label className="flex !flex-row gap-1">
         {question.label}
 
-        {question.required && <span className="text-red-500 ml-1">*</span>}
+        {question.required && <span className="text-red-500">*</span>}
       </Label>
       {question.type === "TEXT" && (
         <Input

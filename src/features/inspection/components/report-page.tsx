@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Answer, Question, Section } from "@/db/schemas";
 import { Image } from "@/components/image";
@@ -8,12 +10,13 @@ import { Button } from "@/components/button";
 import S3Image from "@/features/upload/components/s3-image";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
+import { AppContainer } from "@/components/app-container";
 
 interface ReportProps {
   questions: Question[];
   sections: Section[];
   answers: Answer[];
-  onCancel: () => void;
+  onCancel?: () => void;
 }
 
 const ImageResponse: React.FC<{ question: Question; answer?: Answer }> = ({
@@ -143,21 +146,20 @@ const ReportPage: React.FC<ReportProps> = ({
 
   return (
     <>
-      <Container>
+      <AppContainer>
         <div className="py-10 flex justify-between items-center">
           <h2 className="text-2xl font-bold">Rapport d&apos;inspection</h2>
           <div className="flex gap-4">
-            <Button variant="ghost" onClick={onCancel}>
-              Retour
-            </Button>
+            {onCancel && (
+              <Button variant="ghost" onClick={onCancel}>
+                Retour
+              </Button>
+            )}
             <Button onClick={handleDownload}>Télécharger le rapport</Button>
           </div>
         </div>
         <Card className="rounded-none w-full max-w-3xl mx-auto">
-          <div
-            className="p-8 border-l-[40px] border-l-primary aspect-[1.4157/2] w-full"
-            id="report"
-          >
+          <div className="p-8 aspect-[1.4157/2] w-full" id="report">
             <div className="flex justify-center mb-8">
               <Image
                 src={LogoImage}
@@ -180,7 +182,7 @@ const ReportPage: React.FC<ReportProps> = ({
             ))}
           </div>
         </Card>
-      </Container>
+      </AppContainer>
     </>
   );
 };

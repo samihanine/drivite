@@ -22,6 +22,20 @@
       "when": 1733295495983,
       "tag": "0002_oval_william_stryker",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1735929119664,
+      "tag": "0003_blue_shriek",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1736241363009,
+      "tag": "0004_motionless_stellaris",
+      "breakpoints": true
     }
   ]
 }

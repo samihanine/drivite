@@ -3,10 +3,10 @@
 import { db } from "@/db";
 import { usersTable, userSchema } from "@/db/schemas";
 import { getCurrentUser } from "@/features/user/queries/get-current-user";
-import { authActionClient } from "@/lib/safe-action";
+import { adminActionClient } from "@/lib/safe-action";
 import { revalidatePath } from "next/cache";
 
-export const updateUser = authActionClient
+export const updateUser = adminActionClient
   .schema(userSchema)
   .action(async ({ parsedInput }) => {
     const user = await getCurrentUser();

@@ -1,4 +1,4 @@
-import { timestamp, pgTable, uuid, text } from "drizzle-orm/pg-core";
+import { timestamp, pgTable, uuid, text, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import z from "zod";
 import { usersTable } from "./users";
@@ -22,6 +22,7 @@ export const consultantsTable = pgTable("consultants", {
   createdAt: timestamp().defaultNow().notNull(),
   updatedAt: timestamp().defaultNow(),
   deletedAt: timestamp(),
+  isVerifiedByAdmin: boolean().default(false),
 });
 
 export const insertConsultantSchema = createInsertSchema(consultantsTable);

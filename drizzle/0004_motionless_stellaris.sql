@@ -1,0 +1,1 @@
+ALTER TABLE "inspections" ADD COLUMN "status" "inspection_status_enum" DEFAULT 'IN_PROGRESS' NOT NULL;

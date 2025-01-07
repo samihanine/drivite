@@ -3,7 +3,7 @@ import { Footer } from "@/features/landing/components/footer";
 import { getI18n } from "@/locale/server";
 import { getPageLinks } from "@/features/landing/queries/get-page-links";
 import Script from "next/script";
-import { getCurrentUser } from "@/features/user/queries/get-current-user";
+import { cookies } from "next/headers";
 
 export async function generateMetadata(_: {
   params: Promise<{ lang: string }>;
@@ -29,7 +29,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const pageLinks = await getPageLinks();
-  const user = await getCurrentUser();
+  const cookiesData = (await cookies()).get("accessToken");
 
   return (
     <>
@@ -66,7 +66,7 @@ export default async function RootLayout({
         })}
       </Script>
 
-      <Header pageLinks={pageLinks} isLogged={!!user} />
+      <Header pageLinks={pageLinks} isLogged={!!cookiesData?.value?.length} />
       <main>{children}</main>
       <Footer pageLinks={pageLinks} />
     </>

@@ -47,6 +47,7 @@ export function AppSidebar({ user }: { user: User }) {
         url: `/app`,
         icon: LayoutDashboard,
       },
+      /*
       {
         title: "Reports",
         url: `/reports`,
@@ -63,6 +64,7 @@ export function AppSidebar({ user }: { user: User }) {
           },
         ],
       },
+      */
     ];
   }
 
@@ -73,6 +75,7 @@ export function AppSidebar({ user }: { user: User }) {
         url: `/app`,
         icon: LayoutDashboard,
       },
+      /*
       {
         title: "Settings",
         url: "#",
@@ -84,6 +87,7 @@ export function AppSidebar({ user }: { user: User }) {
           },
         ],
       },
+      */
     ];
   }
 
@@ -104,6 +108,7 @@ export function AppSidebar({ user }: { user: User }) {
         url: `/app/admin/users`,
         icon: User2,
       },
+      /*
       {
         title: "Settings",
         url: "#",
@@ -115,6 +120,7 @@ export function AppSidebar({ user }: { user: User }) {
           },
         ],
       },
+      */
     ];
   }
 

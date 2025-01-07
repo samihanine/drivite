@@ -20,6 +20,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
+import UserAvatar from "./user-avatar";
 
 export const UserMenu = ({
   email,
@@ -39,16 +40,7 @@ export const UserMenu = ({
           size="lg"
           className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
         >
-          <Avatar className="h-8 w-8 rounded-lg">
-            <AvatarImage src={imagePath} alt={name} />
-            <AvatarFallback className="rounded-lg">
-              {" "}
-              {name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
-            </AvatarFallback>
-          </Avatar>
+          <UserAvatar imagePath={imagePath} name={name} />
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-semibold">{name}</span>
             <span className="truncate text-xs">{email}</span>
@@ -64,15 +56,8 @@ export const UserMenu = ({
       >
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <Avatar className="h-8 w-8 rounded-lg">
-              <AvatarImage src={imagePath} alt={name} />
-              <AvatarFallback className="rounded-lg">
-                {name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
+            <UserAvatar imagePath={imagePath} name={name} />
+
             <div className="grid flex-1 text-left text-sm leading-tight">
               <span className="truncate font-semibold">{name}</span>
               <span className="truncate text-xs">{email}</span>
