@@ -44,7 +44,7 @@ export default async function Page() {
       return (
         <AppContainer className="mt-20 flex justify-center items-center flex-col gap-5">
           <Typography variant="lead" className="text-red-500">
-            Votre compte n'est pas encore validé par un administrateur.
+            Votre compte n&apos;est pas encore validé par un administrateur.
           </Typography>
           <Typography variant="lead" className="text-red-500">
             Merci de patienter.

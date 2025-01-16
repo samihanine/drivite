@@ -169,8 +169,8 @@ export default function DynamicPricing({
           >
             Cette formule est idéale pour ceux qui manquent de temps ou de
             connaissances pour acheter leur future voiture. Si vous êtes
-            dépassé, notre équipe d'experts s'occupe de tout, de vos besoins à
-            la remise des clés.
+            dépassé, notre équipe d&apos;experts s&apos;occupe de tout, de vos
+            besoins à la remise des clés.
           </Typography>
         </div>
 
