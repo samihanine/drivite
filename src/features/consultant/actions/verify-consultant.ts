@@ -3,6 +3,7 @@
 import { consultantsTable, db } from "@/db";
 import { adminActionClient } from "@/lib/safe-action";
 import { eq } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const verifyConsultantSchema = z.object({
@@ -19,6 +20,9 @@ export const verifyConsultant = adminActionClient
       .set({ isVerifiedByAdmin: true })
       .where(eq(consultantsTable.userId, userId))
       .returning();
+
+    revalidatePath("/app/admin/users");
+    revalidatePath("/app");
 
     return result[0];
   });

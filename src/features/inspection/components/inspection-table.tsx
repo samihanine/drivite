@@ -49,12 +49,17 @@ const InspectionTable = ({ inspections }: { inspections: Inspection[] }) => {
         const row = ctx.row.original;
         return (
           <div className="flex gap-2">
-            <Link href={`/app/inspections/${ctx.row.original.id}`}>
-              <Button>
-                {row.status === "IN_PROGRESS" ? "Continuer" : "Voir"}
-              </Button>
-            </Link>
-            <Button variant={"outline"}>Archiver</Button>
+            {row.status === "IN_PROGRESS" && (
+              <Link href={`/app/inspections/${ctx.row.original.id}`}>
+                <Button>Continuer</Button>
+              </Link>
+            )}
+
+            {row.status === "COMPLETED" && (
+              <Link href={`/app/inspections/${ctx.row.original.id}`}>
+                <Button variant={"outline"}>Voir</Button>
+              </Link>
+            )}
           </div>
         );
       },

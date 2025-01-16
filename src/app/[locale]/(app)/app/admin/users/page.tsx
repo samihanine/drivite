@@ -1,5 +1,6 @@
 import { AppContainer } from "@/components/app-container";
 import { Typography } from "@/components/typography";
+import { getConsultants } from "@/features/consultant/queries/get-consultants";
 import AdminUserTable from "@/features/user/components/admin-user-table";
 import { getCurrentUser } from "@/features/user/queries/get-current-user";
 import { getUsers } from "@/features/user/queries/get-users";
@@ -8,6 +9,7 @@ import { redirect } from "next/navigation";
 export default async function Page() {
   const user = await getCurrentUser();
   const users = await getUsers();
+  const consultants = await getConsultants();
 
   if (!user) {
     return redirect("/login");
@@ -18,7 +20,7 @@ export default async function Page() {
       <Typography variant="h3" className="mb-5">
         Gestion des utilisateurs
       </Typography>
-      <AdminUserTable users={users} />
+      <AdminUserTable users={users} consultants={consultants} />
     </AppContainer>
   );
 }

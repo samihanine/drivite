@@ -11,14 +11,20 @@ import {
   DialogTrigger,
 } from "@/components/dialog";
 import { Typography } from "@/components/typography";
-import { User } from "@/db";
+import { Consultant, User } from "@/db/schemas";
 import { verifyConsultant } from "@/features/consultant/actions/verify-consultant";
 import { ColumnDef } from "@tanstack/react-table";
 import { useAction } from "next-safe-action/hooks";
 import React from "react";
 import UserAvatar from "./user-avatar";
 
-const AdminUserTable = ({ users }: { users: User[] }) => {
+const AdminUserTable = ({
+  users,
+  consultants,
+}: {
+  users: User[];
+  consultants: Consultant[];
+}) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const { executeAsync, status } = useAction(verifyConsultant);
 
@@ -88,8 +94,16 @@ const AdminUserTable = ({ users }: { users: User[] }) => {
       id: "actions",
       header: "Actions",
       cell: (ctx) => {
+        const consultant = consultants.find(
+          (consultant) => consultant.userId === ctx.row.original.id,
+        );
+
         if (ctx.row.original.role !== "CONSULTANT") {
-          return <Button disabled>Vérifier le compte</Button>;
+          return null;
+        }
+
+        if (consultant?.isVerifiedByAdmin === true) {
+          return <Badge variant={"outline"}>Compte vérifié</Badge>;
         }
 
         return (

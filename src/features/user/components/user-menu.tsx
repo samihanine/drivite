@@ -1,24 +1,16 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/avatar";
 import {
   DropdownMenu,
-  DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/dropdowmenu";
 import { SidebarMenuButton } from "@/components/sidebar";
 import { logOut } from "@/features/auth/actions/log-out";
 import { cn } from "@/lib/utils";
-import {
-  ChevronsUpDown,
-  Sparkles,
-  BadgeCheck,
-  CreditCard,
-  Bell,
-  LogOut,
-} from "lucide-react";
+import { BadgeCheck, ChevronsUpDown, LogOut } from "lucide-react";
 import { useAction } from "next-safe-action/hooks";
 import UserAvatar from "./user-avatar";
 

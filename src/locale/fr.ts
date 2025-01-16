@@ -11,7 +11,7 @@ export default {
     },
   },
   header: {
-    cta: "06 33 82 71 73",
+    cta: "0411665611",
     home: "Accueil",
     services: "Services",
     blog: "Blog",

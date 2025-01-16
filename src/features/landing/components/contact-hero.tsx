@@ -23,8 +23,8 @@ export const ContactHero = async () => {
             <div className="flex gap-4 items-center">
               <PhoneIcon className="h-6 w-6 text-primary" />
               <Typography variant="paragraph">
-                <a href="tel:" className="text-primary font-medium">
-                  06 33 82 71 73
+                <a href="tel:0411665611" className="text-primary font-medium">
+                  0411665611
                 </a>
               </Typography>
             </div>
@@ -51,7 +51,7 @@ export const ContactHero = async () => {
               Entrons en contact
             </Typography>
             <Typography variant="paragraph">
-              Prennez rendez-vous pour une consultation gratuite
+              Prenez rendez-vous pour une consultation gratuite
             </Typography>
           </div>
 

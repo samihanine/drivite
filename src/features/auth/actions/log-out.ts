@@ -9,5 +9,5 @@ export const logOut = authActionClient.action(async () => {
 
   cookieStore.delete("accessToken");
 
-  redirect(`/`);
+  redirect(`/login`);
 });

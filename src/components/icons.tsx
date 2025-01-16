@@ -266,3 +266,137 @@ export function TiktokIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
+
+export function WheelIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="70"
+      height="70"
+      viewBox="0 0 70 70"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M34.7244 6.0791C50.6683 6.0791 63.5925 19.0034 63.5925 34.9473C63.5925 50.8912 50.6683 63.8154 34.7244 63.8154C18.7805 63.8154 5.8562 50.8912 5.8562 34.9473C5.8562 19.0034 18.7805 6.0791 34.7244 6.0791ZM12.2216 40.1724C13.2319 44.5095 15.473 48.4626 18.6757 51.5567C21.8784 54.6509 25.9064 56.7544 30.2758 57.6145C29.7186 50.0367 27.2273 45.4899 24.0807 42.9755C21.0668 40.565 16.9791 39.6326 12.2216 40.1695V40.1724ZM45.3681 42.9726C42.2214 45.4928 39.7301 50.0367 39.173 57.6145C43.5427 56.7542 47.5709 54.6502 50.7737 51.5556C53.9764 48.4609 56.2173 44.5071 57.2271 40.1695C52.4696 39.6326 48.3819 40.565 45.3681 42.9755V42.9726ZM34.7244 11.8527C29.3434 11.8518 24.131 13.7298 19.9872 17.1626C15.8434 20.5954 13.0284 25.3674 12.0282 30.6546L11.9041 31.3705L18.2839 30.0945C19.9641 29.7597 21.5605 28.8734 23.3445 27.6696L24.7215 26.7112C27.0223 25.0772 30.4317 23.4 34.7244 23.4C38.7313 23.4 41.9674 24.8607 44.2509 26.385L46.1042 27.6696C47.6631 28.7233 49.0834 29.5316 50.5383 29.9444L51.1648 30.0945L57.5447 31.3705C56.6919 25.931 53.9239 20.9752 49.7397 17.3965C45.5554 13.8178 40.2303 11.8517 34.7244 11.8527Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+export function SpeedIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="42"
+      height="41"
+      viewBox="0 0 42 41"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <g clip-path="url(#clip0_344_700)">
+        <g clip-path="url(#clip1_344_700)">
+          <mask
+            id="mask0_344_700"
+            maskUnits="userSpaceOnUse"
+            x="6"
+            y="5"
+            width="39"
+            height="36"
+          >
+            <path
+              d="M19.8154 11.4561H8.40894"
+              stroke="white"
+              strokeWidth="3.80215"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M19.8154 19.0596H8.40894"
+              stroke="white"
+              strokeWidth="3.80215"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M19.8154 26.6641H8.40894"
+              stroke="white"
+              strokeWidth="3.80215"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M19.8154 34.2686H8.40894"
+              stroke="white"
+              strokeWidth="3.80215"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M38.8262 22.8622C38.8262 16.5696 32.1724 10.9805 23.1423 10.9805C22.1918 10.9805 19.8154 16.2084 19.8154 22.8622C19.8154 29.5159 22.1918 34.7439 23.1423 34.7439C32.1724 34.7439 38.8262 29.1547 38.8262 22.8622Z"
+              stroke="black"
+              strokeWidth="11.4064"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M38.8262 22.8622C38.8262 16.5696 32.1724 10.9805 23.1423 10.9805C22.1918 10.9805 19.8154 16.2084 19.8154 22.8622C19.8154 29.5159 22.1918 34.7439 23.1423 34.7439C32.1724 34.7439 38.8262 29.1547 38.8262 22.8622Z"
+              fill="currentcolor"
+              stroke="white"
+              strokeWidth="3.80215"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </mask>
+          <g mask="url(#mask0_344_700)">
+            <path
+              d="M44.5296 0.0498047H-1.09619V45.6756H44.5296V0.0498047Z"
+              fill="currentcolor"
+            />
+          </g>
+        </g>
+      </g>
+      <defs>
+        <clipPath id="clip0_344_700">
+          <rect
+            width="40.5563"
+            height="40.5563"
+            fill="currentcolor"
+            transform="translate(0.92334 0.380859)"
+          />
+        </clipPath>
+        <clipPath id="clip1_344_700">
+          <rect
+            width="45.6258"
+            height="45.6258"
+            fill="currentcolor"
+            transform="translate(-1.09595 0.0507812)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+}
+
+export function ClockIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="34"
+      height="34"
+      viewBox="0 0 34 34"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M16.9375 0.182617C7.83772 0.182617 0.461548 7.55878 0.461548 16.6586C0.461548 25.7584 7.83772 33.1346 16.9375 33.1346C26.0373 33.1346 33.4135 25.7584 33.4135 16.6586C33.4135 7.55878 26.0373 0.182617 16.9375 0.182617ZM18.2049 6.51953C18.2049 6.1834 18.0714 5.86104 17.8337 5.62336C17.596 5.38568 17.2737 5.25215 16.9375 5.25215C16.6014 5.25215 16.279 5.38568 16.0414 5.62336C15.8037 5.86104 15.6701 6.1834 15.6701 6.51953V16.6586C15.6701 17.3582 16.2379 17.926 16.9375 17.926H24.5418C24.878 17.926 25.2003 17.7924 25.438 17.5548C25.6757 17.3171 25.8092 16.9947 25.8092 16.6586C25.8092 16.3225 25.6757 16.0001 25.438 15.7624C25.2003 15.5247 24.878 15.3912 24.5418 15.3912H18.2049V6.51953Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}

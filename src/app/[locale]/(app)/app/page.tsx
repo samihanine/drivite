@@ -1,3 +1,5 @@
+import { AppContainer } from "@/components/app-container";
+import { Typography } from "@/components/typography";
 import ConsultantDashboard from "@/features/consultant/components/consultant-dashboard";
 import { getConsultantByUserId } from "@/features/consultant/queries/get-consultant-by-user-id";
 import { getConsultants } from "@/features/consultant/queries/get-consultants";
@@ -36,6 +38,19 @@ export default async function Page() {
 
     if (!consultant) {
       return redirect("/onboarding");
+    }
+
+    if (!consultant.isVerifiedByAdmin) {
+      return (
+        <AppContainer className="mt-20 flex justify-center items-center flex-col gap-5">
+          <Typography variant="lead" className="text-red-500">
+            Votre compte n'est pas encore validé par un administrateur.
+          </Typography>
+          <Typography variant="lead" className="text-red-500">
+            Merci de patienter.
+          </Typography>
+        </AppContainer>
+      );
     }
 
     const inspections = await getInspectionsByConsultantId(consultant.id);

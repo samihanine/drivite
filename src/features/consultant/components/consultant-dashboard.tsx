@@ -1,16 +1,15 @@
 "use client";
 
 import { AppContainer } from "@/components/app-container";
-import { Consultant, Inspection } from "@/db/schemas";
-import InspectionTable from "../../inspection/components/inspection-table";
-import { Typography } from "@/components/typography";
 import { Button } from "@/components/button";
-import { PlusIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
-import { useAction } from "next-safe-action/hooks";
+import { Typography } from "@/components/typography";
+import { Consultant, Inspection } from "@/db/schemas";
 import { createInspection } from "@/features/inspection/actions/create-inspection";
-import { useRouter } from "next/navigation";
 import { showError } from "@/lib/utils";
+import { PlusIcon } from "@radix-ui/react-icons";
+import { useAction } from "next-safe-action/hooks";
+import { useRouter } from "next/navigation";
+import InspectionTable from "../../inspection/components/inspection-table";
 
 const ConsultantDashboard = ({
   inspections,
@@ -33,9 +32,9 @@ const ConsultantDashboard = ({
   };
 
   return (
-    <AppContainer className="py-20 flex flex-col gap-10">
+    <AppContainer className="pt-10 flex flex-col gap-10">
       <div className="flex justify-between gap-5 flex-wrap items-center">
-        <Typography variant="h3" className="mb-5">
+        <Typography variant="h3" className="">
           Mes rapports d&#39;inspection
         </Typography>
 

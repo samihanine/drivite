@@ -19,18 +19,24 @@ export const getPageLinks = async (): Promise<PageLink[]> => {
       label: t("header.services"),
       children: [
         { label: t("header.cars"), href: "/cars" },
+        /*
         { label: t("header.buy"), href: "/buy" },
         { label: t("header.sell"), href: "/sell" },
+         */
       ],
     },
     {
       label: t("header.about"),
       children: [
+        /*
         { label: t("header.who"), href: "/about-us" },
+         */
         { label: t("header.faq"), href: "/faq" },
+        /*
         { label: t("header.join"), href: "/join-us" },
         { label: t("header.testimonials"), href: "/testimonials" },
         { label: t("header.partners"), href: "/partners" },
+         */
       ],
     },
     { label: t("header.blog"), href: "/blog" },
