@@ -21,19 +21,19 @@ export default function Page() {
           <a href="mailto:contact@drivite.fr">contact@drivite.fr</a>.
         </p>
         <p>
-          L'hébergeur de ce site est <strong>OVH SAS</strong>, au capital de 50
-          000 000 euros, situé 2 rue Kellermann, 59100 Roubaix, immatriculé au
-          RCS Lille Métropole B 424 761 419, SIRET 537 407 926 sise 2,
-          accessible à l'adresse{" "}
+          L&apos;hébergeur de ce site est <strong>OVH SAS</strong>, au capital
+          de 50 000 000 euros, situé 2 rue Kellermann, 59100 Roubaix,
+          immatriculé au RCS Lille Métropole B 424 761 419, SIRET 537 407 926
+          sise 2, accessible à l&apos;adresse{" "}
           <a href="https://www.ovh.fr" target="_blank">
             www.ovh.fr
           </a>
           .
         </p>
         <p>
-          L'éditeur de ce site est <strong>Otopio</strong>, agence web
-          spécialisée dans la création de sites et d'applications sur mesure,
-          joignable à l'adresse électronique suivante :
+          L&apos;éditeur de ce site est <strong>Otopio</strong>, agence web
+          spécialisée dans la création de sites et d&apos;applications sur
+          mesure, joignable à l&apos;adresse électronique suivante :
           <a href="mailto:contact@otopio.net">contact@otopio.net</a>, accessible
           à l’adresse{" "}
           <a href="https://www.otopio.net" target="_blank">
@@ -53,10 +53,11 @@ export default function Page() {
         </p>
         <p>
           Le site a pour but de fournir des informations sur l’ensemble des
-          activités de l'entreprise. Nous nous efforçons de proposer des
+          activités de l&apos;entreprise. Nous nous efforçons de proposer des
           informations aussi précises que possible. Cependant, nous ne pouvons
           être tenus responsables des omissions, inexactitudes ou lacunes dans
-          la mise à jour, qu'elles soient de notre fait ou dues à des tiers.
+          la mise à jour, qu&apos;elles soient de notre fait ou dues à des
+          tiers.
         </p>
       </section>
       <section>
@@ -76,9 +77,9 @@ export default function Page() {
       <section>
         <h2>Limitations de responsabilité</h2>
         <p>
-          La responsabilité de l'éditeur ne saurait être engagée en cas de
-          défaillance, de panne ou d'interruption du service. L'utilisateur est
-          responsable de son matériel et de sa sécurité.
+          La responsabilité de l&apos;éditeur ne saurait être engagée en cas de
+          défaillance, de panne ou d&apos;interruption du service.
+          L&apos;utilisateur est responsable de son matériel et de sa sécurité.
         </p>
         <p>
           En cas de litige, le droit français est applicable, avec attribution

@@ -139,14 +139,15 @@ export default function Page() {
         <Container className="pb-20">
           <p className="">
             <strong>Pour les vendeurs,</strong> notre modèle représente une
-            opportunité de réaliser <strong>jusqu'à 25% de plus</strong> par
-            rapport à une vente en concession ou chez un garage traditionnel.
-            Pour les acheteurs, Drivite offre la possibilité d'acquérir un{" "}
-            <strong>véhicule</strong> à un tarif inférieur de 5 à 10% par
-            rapport aux concessions classiques. Sur un <strong>véhicule</strong>{" "}
-            d'une valeur de 20 000€ vendu par Drivite, cela signifie un{" "}
-            <strong>gain potentiel</strong> de 4 000€ pour le vendeur et des{" "}
-            <strong>économies</strong> d’environ 1 500€ pour l'acheteur.
+            opportunité de réaliser <strong>jusqu&apos;à 25% de plus</strong>{" "}
+            par rapport à une vente en concession ou chez un garage
+            traditionnel. Pour les acheteurs, Drivite offre la possibilité
+            d&apos;acquérir un <strong>véhicule</strong> à un tarif inférieur de
+            5 à 10% par rapport aux concessions classiques. Sur un{" "}
+            <strong>véhicule</strong> d&apos;une valeur de 20 000€ vendu par
+            Drivite, cela signifie un <strong>gain potentiel</strong> de 4 000€
+            pour le vendeur et des <strong>économies</strong> d’environ 1 500€
+            pour l&apos;acheteur.
           </p>
         </Container>
       </div>
