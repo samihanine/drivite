@@ -12,7 +12,7 @@ export const LocaleSwitcher = () => {
       <button
         onClick={() => changeLocale("fr")}
         className={`rounded-full flex flex-col items-center gap-[2px] ${
-          locale === "fr" ? "text-primary font-bold" : "opacity-50"
+          locale === "fr" ? "text-primary font-medium" : "opacity-50"
         }`}
       >
         <span className="">FR</span>
@@ -21,7 +21,7 @@ export const LocaleSwitcher = () => {
       <button
         onClick={() => changeLocale("en")}
         className={`rounded-full flex flex-col items-center gap-[2px] ${
-          locale === "en" ? "text-primary font-bold" : "opacity-50"
+          locale === "en" ? "text-primary font-medium" : "opacity-50"
         }`}
       >
         <span>EN</span>

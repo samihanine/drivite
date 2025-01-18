@@ -17,7 +17,7 @@ export const usersTable = pgTable("users", {
   imagePath: varchar(),
   provider: providerEnum().notNull().default("CREDENTIALS"),
   password: varchar(),
-  role: privilegeEnum().default("CUSTOMER").notNull(),
+  role: privilegeEnum().default("CONSULTANT").notNull(),
   createdAt: timestamp().defaultNow().notNull(),
   updatedAt: timestamp().defaultNow(),
   deletedAt: timestamp(),

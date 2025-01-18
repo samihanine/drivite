@@ -30,7 +30,7 @@ export const LoginForm = () => {
   return (
     <div>
       <div className="space-y-3 mb-10">
-        <h3 className="text-xl font-semibold">Se connecter</h3>
+        <h3 className="text-xl font-medium">Se connecter</h3>
         <p className="text-sm text-muted-foreground">
           Connectez-vous à votre compte pour accéder à votre espace personnel.
         </p>
@@ -58,7 +58,7 @@ export const LoginForm = () => {
           Vous n&apos;avez pas de compte ?{" "}
           <Link
             href={`/register`}
-            className="font-bold !w-full hover:underline text-primary"
+            className="font-medium !w-full hover:underline text-primary"
           >
             S&apos;inscrire
           </Link>

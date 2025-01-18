@@ -22,7 +22,10 @@ export const Typography = ({
       return (
         <h1
           {...props}
-          className={cn("text-5xl font-bold leading-[3.5rem]", props.className)}
+          className={cn(
+            "text-5xl font-medium leading-[3.5rem]",
+            props.className,
+          )}
         />
       );
     case "h2":
@@ -30,7 +33,7 @@ export const Typography = ({
         <h2
           {...props}
           className={cn(
-            "text-4xl font-semibold leading-[3.25rem]",
+            "text-4xl font-medium leading-[3.25rem]",
             props.className,
           )}
         />

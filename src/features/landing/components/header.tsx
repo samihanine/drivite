@@ -60,14 +60,12 @@ export function Header({
                   {pageLinks.map((link) =>
                     link.children ? (
                       <div className="flex flex-col gap-3" key={link.label}>
-                        <span className="font-semibold text-slate-700">
-                          {link.label}
-                        </span>
+                        <span className="text-slate-700">{link.label}</span>
                         {link.children.map((child) => (
                           <Link
                             key={`${child.label}-mobile`}
                             href={child.href}
-                            className="block ml-4 text-base font-semibold text-slate-700 duration-200 hover:text-slate-900"
+                            className="block ml-4 text-base text-slate-700 duration-200 hover:text-slate-900"
                           >
                             {child.label}
                           </Link>
@@ -77,7 +75,7 @@ export function Header({
                       <Link
                         key={`${link.label}-mobile`}
                         href={link.href || "#"}
-                        className="block text-base font-semibold text-slate-700 duration-200 hover:text-slate-900"
+                        className="block text-base text-slate-700 duration-200 hover:text-slate-900"
                       >
                         {link.label}
                       </Link>
@@ -118,7 +116,7 @@ export function Header({
             {pageLinks.map((link) =>
               link.children ? (
                 <div key={link.label} className="group relative">
-                  <button className="relative z-10 font-medium text-slate-700 duration-200 hover:text-slate-900">
+                  <button className="relative z-10 text-slate-700 duration-200 hover:text-slate-900">
                     {link.label}{" "}
                     <ChevronDown className="h-4 w-4 inline-block" />
                   </button>
@@ -132,8 +130,8 @@ export function Header({
                           className={clsx(
                             'relative w-fit duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[""]',
                             pathname == link.href
-                              ? "font-semibold text-slate-900 after:opacity-100"
-                              : "font-medium text-slate-700 hover:text-slate-900 hover:after:opacity-25",
+                              ? "text-slate-900 after:opacity-100"
+                              : "text-slate-700 hover:text-slate-900 hover:after:opacity-25",
                           )}
                         >
                           {child.label}
@@ -149,8 +147,8 @@ export function Header({
                   className={clsx(
                     'relative duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[""]',
                     pathname == link.href
-                      ? "font-semibold text-slate-900 after:opacity-100"
-                      : "font-medium text-slate-700 hover:text-slate-900 hover:after:opacity-25",
+                      ? "text-slate-900 after:opacity-100"
+                      : "text-slate-700 hover:text-slate-900 hover:after:opacity-25",
                   )}
                 >
                   {link.label}

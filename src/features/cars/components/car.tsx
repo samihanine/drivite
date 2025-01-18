@@ -50,7 +50,7 @@ export function Car({ car }: { car: Car }) {
 
           <Card className="w-full sm:w-[400px]">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold">
+              <CardTitle className="text-2xl font-medium">
                 {car.price} €
               </CardTitle>
             </CardHeader>

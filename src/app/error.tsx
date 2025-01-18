@@ -11,7 +11,7 @@ export default function NotFound() {
       <span className="bg-gradient-to-b from-foreground to-transparent bg-clip-text text-[10rem] font-extrabold leading-none text-transparent">
         500
       </span>
-      <h2 className="my-2 font-heading text-2xl font-bold mt-5">
+      <h2 className="my-2 font-heading text-2xl font-medium mt-5">
         Une erreur est survenue
       </h2>
       <p>Désolé, une erreur est survenue. Veuillez réessayer plus tard.</p>

@@ -148,7 +148,7 @@ const ReportPage: React.FC<ReportProps> = ({
     <>
       <AppContainer>
         <div className="py-10 flex justify-between items-center">
-          <h2 className="text-2xl font-bold">Rapport d&apos;inspection</h2>
+          <h2 className="text-2xl font-medium">Rapport d&apos;inspection</h2>
           <div className="flex gap-4">
             {onCancel && (
               <Button variant="ghost" onClick={onCancel}>
@@ -169,7 +169,7 @@ const ReportPage: React.FC<ReportProps> = ({
                 width={200}
               />
             </div>
-            <h1 className="text-2xl font-bold mb-8">
+            <h1 className="text-2xl font-medium mb-8">
               Drivite - Inspection du véhicule
             </h1>
             {sortedSections.map((section) => (

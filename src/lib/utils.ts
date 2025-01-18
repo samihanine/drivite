@@ -65,11 +65,11 @@ export const showLoading = () => {
 export const htmlToTailwind = (text: string): string => {
   return text
     .replaceAll("<p>", '<p class="text-base mb-4">')
-    .replaceAll("<h2>", '<h2 class="text-2xl font-bold mt-10">')
-    .replaceAll("<h3>", '<h3 class="text-xl font-bold mt-8">')
-    .replaceAll("<h4>", '<h4 class="text-lg font-bold mt-6">')
-    .replaceAll("<h5>", '<h5 class="text-base font-bold mt-4">')
-    .replaceAll("<h6>", '<h6 class="text-sm font-bold mt-2">')
+    .replaceAll("<h2>", '<h2 class="text-2xl font-medium mt-10">')
+    .replaceAll("<h3>", '<h3 class="text-xl font-medium mt-8">')
+    .replaceAll("<h4>", '<h4 class="text-lg font-medium mt-6">')
+    .replaceAll("<h5>", '<h5 class="text-base font-medium mt-4">')
+    .replaceAll("<h6>", '<h6 class="text-sm font-medium mt-2">')
     .replaceAll("<ul>", '<ul class="list-disc list-inside">')
     .replaceAll("<ol>", '<ol class="list-decimal list-inside">')
     .replaceAll("<li>", '<li class="text-base">')

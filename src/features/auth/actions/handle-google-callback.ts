@@ -64,7 +64,7 @@ export const handleGoogleCallback = async ({
       email: data.email,
       name: data.name || "",
       provider: "GOOGLE",
-      role: "CUSTOMER",
+      role: "CONSULTANT",
       imagePath: picture,
     });
 

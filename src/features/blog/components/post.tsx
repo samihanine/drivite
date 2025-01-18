@@ -25,7 +25,7 @@ export function Post({
         />
         <article className="prose prose-lg max-w-none flex flex-col gap-10">
           <div className="flex flex-col gap-3">
-            <h1 className="text-4xl font-bold mt-10">{post.title}</h1>
+            <h1 className="text-4xl font-medium mt-10">{post.title}</h1>
             <div className="flex gap-2 text-gray-500">
               <time className="text-gray-500">
                 {new Date(post.publishedAt).toLocaleDateString("fr-FR", {
@@ -53,7 +53,7 @@ export function Post({
           <div dangerouslySetInnerHTML={{ __html: post.body }} />
 
           <div className="flex flex-col gap-3">
-            <h2 className="text-2xl font-bold">About the author</h2>
+            <h2 className="text-2xl font-medium">About the author</h2>
             <div className="flex gap-4 items-center">
               <Image
                 src={author?.imageUrl || ""}

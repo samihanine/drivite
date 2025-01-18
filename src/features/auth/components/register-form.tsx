@@ -58,7 +58,7 @@ export const RegisterForm = () => {
   return (
     <div>
       <div className="space-y-3 mb-4">
-        <h3 className="text-xl font-semibold">S&apos;inscrire</h3>
+        <h3 className="text-xl font-medium">S&apos;inscrire</h3>
         <p className="text-sm text-muted-foreground">
           Créez un compte pour accéder à votre espace personnel.
         </p>
@@ -147,7 +147,7 @@ export const RegisterForm = () => {
         Vous avez déjà un compte ?{" "}
         <Link
           href={`/login`}
-          className="font-bold text-primary !w-full hover:underline"
+          className="font-medium text-primary !w-full hover:underline"
         >
           Se connecter
         </Link>

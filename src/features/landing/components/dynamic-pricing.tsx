@@ -2,8 +2,15 @@
 
 import { Button } from "@/components/button";
 import { Container } from "@/components/container";
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/tooltip";
 import { Typography } from "@/components/typography";
 import { cn } from "@/lib/utils";
+import { QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -52,12 +59,25 @@ function PricingCard({
         </div>
         <div
           className={cn(
-            "mx-auto border border-blue-500/50 rounded-lg px-5 py-1 w-fit",
+            "mx-auto border border-blue-500/50 rounded-lg px-3 py-1 w-fit",
             position !== "center" ? "bg-[#003F88]" : "bg-white text-primary",
           )}
         >
           <Typography variant="h4" className="text-center text-lg">
-            {pricing.title}
+            <p className="flex items-center gap-2">
+              {pricing.title}
+
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <QuestionMarkCircleIcon className="w-5 h-5" />
+                  </TooltipTrigger>
+                  <TooltipContent className="max-w-lg font-medium">
+                    <p>{pricing.description}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </p>
           </Typography>
         </div>
 
@@ -67,7 +87,7 @@ function PricingCard({
 
         <Typography
           variant="paragraph"
-          className="text-white font-bold text-center text-5xl"
+          className="text-white font-medium text-center text-5xl"
         >
           {pricing.price} €
         </Typography>
@@ -161,17 +181,6 @@ export default function DynamicPricing({
           >
             <ArrowRight className="h-7 w-7" onClick={handleNext} />
           </Button>
-        </div>
-        <div className="mt-12 max-w-2xl mx-auto text-center text-sm text-gray-700 hidden lg:flex">
-          <Typography
-            variant="small"
-            className="bg-[#1A62B6]/80 p-5 rounded-lg border-primary text-white"
-          >
-            Cette formule est idéale pour ceux qui manquent de temps ou de
-            connaissances pour acheter leur future voiture. Si vous êtes
-            dépassé, notre équipe d&apos;experts s&apos;occupe de tout, de vos
-            besoins à la remise des clés.
-          </Typography>
         </div>
 
         <div className="mt-6 mx-auto lg:flex justify-center gap-2 hidden">

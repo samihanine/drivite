@@ -17,7 +17,7 @@ function CardStats({
         <CardTitle className="text-sm font-normal">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold text-primary">{value}</div>
+        <div className="text-2xl font-medium text-primary">{value}</div>
         {subtitle && (
           <p className="text-xs text-muted-foreground">{subtitle}</p>
         )}

@@ -65,7 +65,7 @@ const MarketStatisticCard = ({
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       <div className="flex flex-col items-center justify-between h-full gap-6">
-        <Typography variant="h3" className="text-center text-4xl font-bold">
+        <Typography variant="h3" className="text-center text-4xl font-medium">
           {count} %
         </Typography>
 

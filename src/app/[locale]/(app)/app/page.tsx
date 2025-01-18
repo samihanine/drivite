@@ -36,6 +36,8 @@ export default async function Page() {
   if (user.role === "CONSULTANT") {
     const consultant = await getConsultantByUserId(user.id);
 
+    console.log(consultant);
+
     if (!consultant) {
       return redirect("/onboarding");
     }
@@ -64,7 +66,7 @@ export default async function Page() {
     const customer = await getCustomerByUserId(user.id);
 
     if (!customer) {
-      return redirect("/onboarding");
+      return <></>;
     }
 
     return <CustomerDashboard customer={customer} />;

@@ -97,7 +97,7 @@ export function Footer({ pageLinks }: { pageLinks: PageLink[] }) {
               }}
               transition={{ duration: 0.8, ease: "easeOut" }}
             >
-              <h3 className="text-center font-display text-4xl font-semibold text-foreground sm:text-5xl lg:max-w-xl lg:text-left">
+              <h3 className="text-center font-display text-4xl font-medium text-foreground sm:text-5xl lg:max-w-xl lg:text-left">
                 Drivite, l&apos;expert qui éclaire vos choix automobiles
               </h3>
               <div className="mt-8 flex items-center gap-4 flex-wrap">

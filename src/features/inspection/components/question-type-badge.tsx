@@ -10,7 +10,7 @@ export default function QuestionTypeBage({
   return (
     <span
       className={cn(
-        `px-2 py-0.5 border border-border text-xs font-semibold rounded-full`,
+        `px-2 py-0.5 border border-border text-xs font-medium rounded-full`,
         className,
         type === "TEXT" && "bg-blue-50 text-blue-600",
         type === "NUMBER" && "bg-yellow-50 text-yellow-600",
