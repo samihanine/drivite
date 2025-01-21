@@ -23,8 +23,11 @@ export const ContactHero = async () => {
             <div className="flex gap-4 items-center">
               <PhoneIcon className="h-6 w-6 text-primary" />
               <Typography variant="paragraph">
-                <a href="tel:0411665611" className="text-primary font-medium">
-                  0411665611
+                <a
+                  href="tel:04 11 66 56 11"
+                  className="text-primary font-medium"
+                >
+                  04 11 66 56 11
                 </a>
               </Typography>
             </div>

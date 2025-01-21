@@ -21,5 +21,7 @@ export async function getCategoriesByPostSlug({
         }[0].categories`;
 
   const categories = await client.fetch<SanityCategory[]>(query, { postSlug });
-  return categories.map((category) => serializeCategory({ category, locale }));
+  return (
+    categories?.map((category) => serializeCategory({ category, locale })) || []
+  );
 }

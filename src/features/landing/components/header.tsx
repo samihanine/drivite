@@ -91,85 +91,88 @@ export function Header({
   }
 
   return (
-    <header className="h-20 border-b border-border bg-white">
-      <Container className="flex h-full w-full items-center">
-        <nav className="relative z-50 flex w-full items-center justify-between">
-          <div className="flex shrink-0 items-center">
-            <Link
-              href="/"
-              aria-label="Home"
-              className="flex flex-shrink-0 items-center"
-            >
-              <Image
-                src={"/images/logos/logo-text.svg"}
-                alt=""
-                className="h-8 w-auto sm:h-9 md:hidden lg:block lg:h-12"
-              />
-              <Image
-                src={"/images/logos/logo-text.svg"}
-                alt=""
-                className="hidden h-8 w-auto md:block lg:hidden"
-              />
-            </Link>
-          </div>
-          <div className="hidden items-center md:flex md:space-x-6 lg:space-x-8">
-            {pageLinks.map((link) =>
-              link.children ? (
-                <div key={link.label} className="group relative">
-                  <button className="relative z-10 text-slate-700 duration-200 hover:text-slate-900">
-                    {link.label}{" "}
-                    <ChevronDown className="h-4 w-4 inline-block" />
-                  </button>
-                  {/* Place le sous-menu plus proche du bouton */}
-                  <div className="absolute left-0 hidden w-max rounded-md bg-white shadow-xl border border-border group-hover:block">
-                    <div className="flex flex-col gap-5 p-5">
-                      {link.children.map((child) => (
-                        <Link
-                          key={`${child.label}-desktop`}
-                          href={child.href}
-                          className={clsx(
-                            'relative w-fit duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[""]',
-                            pathname == link.href
-                              ? "text-slate-900 after:opacity-100"
-                              : "text-slate-700 hover:text-slate-900 hover:after:opacity-25",
-                          )}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
+    <>
+      <header className="h-20 border-b border-border bg-white/95 fixed top-0 z-50 w-full">
+        <Container className="flex h-full w-full items-center">
+          <nav className="relative z-50 flex w-full items-center justify-between">
+            <div className="flex shrink-0 items-center">
+              <Link
+                href="/"
+                aria-label="Home"
+                className="flex flex-shrink-0 items-center"
+              >
+                <Image
+                  src={"/images/logos/logo-text.svg"}
+                  alt=""
+                  className="h-8 w-auto sm:h-9 md:hidden lg:block lg:h-12"
+                />
+                <Image
+                  src={"/images/logos/logo-text.svg"}
+                  alt=""
+                  className="hidden h-8 w-auto md:block lg:hidden"
+                />
+              </Link>
+            </div>
+            <div className="hidden items-center md:flex md:space-x-6 lg:space-x-8">
+              {pageLinks.map((link) =>
+                link.children ? (
+                  <div key={link.label} className="group relative">
+                    <button className="relative z-10 text-slate-700 duration-200 hover:text-slate-900">
+                      {link.label}{" "}
+                      <ChevronDown className="h-4 w-4 inline-block" />
+                    </button>
+                    {/* Place le sous-menu plus proche du bouton */}
+                    <div className="absolute left-0 hidden w-max rounded-md bg-white shadow-xl border border-border group-hover:block">
+                      <div className="flex flex-col gap-5 p-5">
+                        {link.children.map((child) => (
+                          <Link
+                            key={`${child.label}-desktop`}
+                            href={child.href}
+                            className={clsx(
+                              'relative w-fit duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[""]',
+                              pathname == link.href
+                                ? "text-slate-900 after:opacity-100"
+                                : "text-slate-700 hover:text-slate-900 hover:after:opacity-25",
+                            )}
+                          >
+                            {child.label}
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <Link
-                  key={`${link.label}-desktop`}
-                  href={link.href || "#"}
-                  className={clsx(
-                    'relative duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[""]',
-                    pathname == link.href
-                      ? "text-slate-900 after:opacity-100"
-                      : "text-slate-700 hover:text-slate-900 hover:after:opacity-25",
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ),
-            )}
-          </div>
-          <div className="flex items-center">
-            {/* <LocaleSwitcher />*/}
-            <Link href={isLogged ? "/app" : "/login"}>
-              <Button className="text-white" size={"lg"}>
-                {isLogged ? "Mon compte" : "Se connecter"}
-              </Button>
-            </Link>
-
-            <div className="ml-4 md:hidden">
-              <MobileNav />
+                ) : (
+                  <Link
+                    key={`${link.label}-desktop`}
+                    href={link.href || "#"}
+                    className={clsx(
+                      'relative duration-200 after:absolute after:left-1/2 after:-bottom-2.5 after:h-0.5 after:w-4 after:-translate-x-1/2 after:rounded-full after:bg-slate-900 after:opacity-0 after:content-[""]',
+                      pathname == link.href
+                        ? "text-slate-900 after:opacity-100"
+                        : "text-slate-700 hover:text-slate-900 hover:after:opacity-25",
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ),
+              )}
             </div>
-          </div>
-        </nav>
-      </Container>
-    </header>
+            <div className="flex items-center">
+              {/* <LocaleSwitcher />*/}
+              <Link href={isLogged ? "/app" : "/login"}>
+                <Button className="text-white" size={"lg"}>
+                  {isLogged ? "Mon compte" : "Se connecter"}
+                </Button>
+              </Link>
+
+              <div className="ml-4 md:hidden">
+                <MobileNav />
+              </div>
+            </div>
+          </nav>
+        </Container>
+      </header>
+      <div className="h-20"></div>
+    </>
   );
 }

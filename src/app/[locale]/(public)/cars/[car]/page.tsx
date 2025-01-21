@@ -25,9 +25,9 @@ export async function generateMetadata({
   }
 
   return {
-    title: car.brand + " - TVL Conseils",
+    title: car.brand + " - Drivite",
     openGraph: {
-      title: car.brand + " - TVL Conseils",
+      title: car.brand + " - Drivite",
       images: car.images[0],
       locale: data.locale,
     },

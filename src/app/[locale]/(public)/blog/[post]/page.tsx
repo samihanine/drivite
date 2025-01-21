@@ -31,11 +31,11 @@ export async function generateMetadata({
   });
 
   return {
-    title: post.title + " - TVL Conseils",
+    title: post.title + " - Drivite",
     creator: author?.name,
     description: post.description,
     openGraph: {
-      title: post.title + " - TVL Conseils",
+      title: post.title + " - Drivite",
       description: post.description,
       images: post.imageUrl,
       locale: locale,

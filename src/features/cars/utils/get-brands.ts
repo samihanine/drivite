@@ -33,7 +33,6 @@ export const getBrands = () => {
     "Lynk & Co",
     "Maserati",
     "Man",
-    "Maserati",
     "Mazda",
     "McLaren",
     "AMG",

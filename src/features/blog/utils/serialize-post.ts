@@ -48,5 +48,5 @@ export const serializePost = ({
   description: locale === "fr" ? post.descriptionfr : post.description,
   altText: locale === "fr" ? post.mainImage.altfr : post.mainImage.alt,
   authorId: post.author._ref,
-  categoryIds: post.categories.map((category) => category._ref),
+  categoryIds: post.categories?.map((category) => category._ref) || [],
 });

@@ -21,6 +21,7 @@ export const carSchema = z.object({
   doors: z.number(),
   seats: z.number(),
   publishedAt: z.string(),
+  isSold: z.boolean().optional(),
 });
 
 export type Car = z.infer<typeof carSchema>;

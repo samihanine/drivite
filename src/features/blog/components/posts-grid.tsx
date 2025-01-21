@@ -55,7 +55,7 @@ export async function PostsGrid({
                   day: "numeric",
                 })}
                 {" | "}
-                {postCategories.map((category) => (
+                {postCategories?.map((category) => (
                   <span key={category.id} className="text-gray-500">
                     {category.title}
                   </span>

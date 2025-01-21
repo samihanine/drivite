@@ -13,5 +13,7 @@ export async function getCategories({
     {},
     { next: { revalidate: 0 } },
   );
-  return categories.map((category) => serializeCategory({ category, locale }));
+  return (
+    categories?.map((category) => serializeCategory({ category, locale })) || []
+  );
 }

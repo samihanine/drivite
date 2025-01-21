@@ -1,13 +1,13 @@
+import { Container } from "@/components/container";
 import { CarFilters } from "@/features/cars/components/car-filters";
 import { CarsGrid } from "@/features/cars/components/cars-grid";
 import { getCars } from "@/features/cars/queries/get-cars";
+import { getBudgets } from "@/features/cars/utils/get-budgets";
 import { Cta } from "@/features/landing/components/cta";
 
 export default async function Page(props: {
   params: Promise<{ locale: string }>;
   searchParams: Promise<{
-    minPrice: string;
-    maxPrice: string;
     type: string;
     brand: string;
     exteriorColor: string;
@@ -19,6 +19,8 @@ export default async function Page(props: {
     maxMileage: string;
     minYear: string;
     maxYear: string;
+    budget: string;
+    query: string;
   }>;
 }) {
   const params = await props.params;
@@ -26,11 +28,14 @@ export default async function Page(props: {
   const cars = await getCars({ locale: params.locale });
 
   const filteredCars = cars.filter((car) => {
+    const currentBudgetIndex = getBudgets().findIndex(
+      (budget) => budget.value === parseInt(searchParams.budget),
+    );
+
+    const minPrice = getBudgets()[currentBudgetIndex - 1]?.value ?? 0;
+    const maxPrice = getBudgets()[currentBudgetIndex]?.value ?? Infinity;
+
     return (
-      (!searchParams.minPrice ||
-        car.price >= parseInt(searchParams.minPrice)) &&
-      (!searchParams.maxPrice ||
-        car.price <= parseInt(searchParams.maxPrice)) &&
       (!searchParams.minMileage ||
         car.mileage >= parseInt(searchParams.minMileage)) &&
       (!searchParams.maxMileage ||
@@ -48,21 +53,24 @@ export default async function Page(props: {
       (!searchParams.fuelType || car.fuelType === searchParams.fuelType) &&
       (!searchParams.transmission ||
         car.transmission === searchParams.transmission) &&
-      (!searchParams.critAir || car.critAir === searchParams.critAir)
+      (!searchParams.critAir || car.critAir === searchParams.critAir) &&
+      car.price >= minPrice &&
+      car.price <= maxPrice &&
+      (!searchParams.query ||
+        car.brand.toLowerCase().includes(searchParams.query.toLowerCase()) ||
+        car.model.toLowerCase().includes(searchParams.query.toLowerCase()))
     );
   });
 
   return (
-    <>
-      <div className="relative flex flex-col sm:flex-row">
-        <div className="w-full py-12 px-8 sm:w-80 sm:border-r sm:border-border flex flex-col gap-5">
+    <div className="bg-[#f7f7fa]">
+      <Container className="relative flex flex-col py-10">
+        <div className="w-full flex flex-col gap-5 mb-10">
           <CarFilters />
         </div>
-        <div className="flex-1 py-12 px-12 sm:px-16 flex flex-col gap-10">
-          <CarsGrid cars={filteredCars} />
-        </div>
-      </div>
+        <CarsGrid cars={filteredCars} />
+      </Container>
       <Cta />
-    </>
+    </div>
   );
 }
