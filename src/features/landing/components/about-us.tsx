@@ -62,9 +62,9 @@ export default function AboutUs() {
               <Typography variant="h2">Les fondateurs</Typography>
 
               <p className="text-muted-foreground">
-                Découvrez l'origine de Drivite à travers les portraits de ses
+                {`Découvrez l'origine de Drivite à travers les portraits de ses
                 fondateurs : Sarah Hanine et Léo Saunier. Ensemble, ils
-                incarnent une passion commune pour l'automobile.
+                incarnent une passion commune pour l'automobile.`}
               </p>
             </div>
             <div className="flex flex-col md:flex-row gap-12 justify-around w-full">
@@ -96,17 +96,19 @@ export default function AboutUs() {
                   </Typography>
 
                   <Typography variant="paragraph" className="mb-9">
-                    Fondée à Lyon, Drivite a débuté son parcours en répondant à
+                    {`Fondée à Lyon, Drivite a débuté son parcours en répondant à
                     un besoin critique sur le marché automobile : sécuriser et
                     simplifier l'achat et la vente de véhicules. En digitalisant
                     nos services d'accompagnement, nous avons introduit une
-                    nouvelle norme de transparence et de sécurité dans chaque
-                    transaction. Ce pivot numérique nous a permis de non
+                    nouvelle norme de transparence et de sécurité dans chaque`}
+                    <br />
+                    <br />
+                    {`transaction. Ce pivot numérique nous a permis de non
                     seulement consolider notre présence dans toute la France,
                     mais aussi de répondre efficacement aux besoins des clients.
                     Aujourd'hui, Drivite s'engage à offrir une expérience client
                     fiable et accessible, transformant ainsi le secteur
-                    automobile.
+                    automobile.`}
                   </Typography>
                 </div>
                 <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
@@ -154,20 +156,20 @@ export default function AboutUs() {
                     Nos valeurs et engagements
                   </Typography>
                   <Typography variant="paragraph" className="mb-9">
-                    Drivite se place comme votre intermédiaire de confiance à
+                    {`Drivite se place comme votre intermédiaire de confiance à
                     chaque étape de l'achat ou la vente d'un véhicule. Nous
                     sommes composé d'une équipes d'experts, entièrement dévouée
-                    à répondre à vos besoins
+                    à répondre à vos besoins`}
                     <br />
                     <br />
-                    Nous nous engageons à mettre à disposition toutes nos
+                    {`Nous nous engageons à mettre à disposition toutes nos
                     ressources pour vous permettre de trouver l'option idéale :
-                    cela dans les meilleures conditions et à un prix juste.
+                    cela dans les meilleures conditions et à un prix juste.`}
                     <br />
                     <br />
-                    Disponibilité, Passion, Transparence, Confiance,
+                    {`Disponibilité, Passion, Transparence, Confiance,
                     Responsabilité, Qualité, Expertise, Engagement, Respect,
-                    Honnêteté, Accessibilité, Innovation, Durabilité
+                    Honnêteté, Accessibilité, Innovation, Durabilité`}
                   </Typography>
                 </div>
               </div>
