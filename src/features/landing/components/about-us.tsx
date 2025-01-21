@@ -56,7 +56,7 @@ export default function AboutUs() {
       />
 
       <div className="bg-[#f8f9fe]">
-        <Container className="flex flex-col gap-12 py-28">
+        <Container className="flex flex-col gap-12 py-20">
           <section className="flex flex-col gap-8 sm:flex-row sm:gap-20">
             <div className="flex flex-col gap-4  w-full max-w-md">
               <Typography variant="h2">Les fondateurs</Typography>
@@ -87,7 +87,7 @@ export default function AboutUs() {
           </section>
         </Container>
         <div className="bg-[#f8f9fe]">
-          <Container>
+          <Container className="pb-28">
             <div className="flex flex-col items-center justify-start gap-6 lg:flex-row">
               <div className="flex w-full flex-col items-start justify-start gap-24 lg:w-1/2">
                 <div className="pr-6">
