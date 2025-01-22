@@ -26,8 +26,9 @@ const TeamMember = ({
         src={image}
         alt={name}
         className="w-full aspect-square object-cover rounded-lg"
-        width={100}
-        height={100}
+        objectFit="cover"
+        width={1000}
+        height={1000}
       />
       <div className="flex justify-between items-center mt-8">
         <Typography variant="h4" className="">
@@ -57,21 +58,23 @@ export default function AboutUs() {
 
       <div className="bg-[#f8f9fe]">
         <Container className="flex flex-col gap-12 py-20">
-          <section className="flex flex-col gap-8 sm:flex-row sm:gap-20">
-            <div className="flex flex-col gap-4  w-full max-w-md">
-              <Typography variant="h2">Les fondateurs</Typography>
+          <section className="flex flex-col gap-8 sm:gap-20">
+            <div className="flex flex-col gap-4 text-center w-full">
+              <Typography className="text-center" variant="h2">
+                Les fondateurs
+              </Typography>
 
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground w-full max-w-3xl mx-auto">
                 {`Découvrez l'origine de Drivite à travers les portraits de ses
                 fondateurs : Sarah Hanine et Léo Saunier. Ensemble, ils
                 incarnent une passion commune pour l'automobile.`}
               </p>
             </div>
-            <div className="flex flex-col md:flex-row gap-12 justify-around w-full">
+            <div className="flex flex-col md:flex-row gap-12 justify-around w-full max-w-3xl mx-auto">
               <TeamMember
                 name="Sarah Hanine"
                 subtitle="Fondatrice et Directrice Marketing"
-                image="/images/landing/sarah.jpeg"
+                image="/images/landing/sarah.png"
                 description="Sarah Hanine apporte à Drivite une expertise en développement commercial et en gestion de projet, soutenue par une passion pour l'automobile. Avec une solide formation académique et une expérience précédente en tant qu'assistante de direction et chargée de développement, elle est déterminée à offrir une expérience client exceptionnelle. Chez Drivite, Sarah assure que chaque interaction client reflète notre engagement envers la transparence et la satisfaction."
                 linkedin="https://www.linkedin.com/in/sarah-hanine"
               />
@@ -79,7 +82,7 @@ export default function AboutUs() {
               <TeamMember
                 name="Léo Saunier"
                 subtitle="Fondateur et Directeur Commercial"
-                image="/images/landing/leo.jpeg"
+                image="/images/landing/leo.png"
                 description="Léo Saunier incarne à Drivite une passion pour l'automobile et une expertise en commerce. Fort d'une expérience variée dans le développement commercial et la gestion d'équipes, il guide notre mission d'assurer des transactions automobiles sûres et transparentes. Léo combine une vision stratégique avec une connaissance approfondie du marché automobile, positionnant Drivite comme un partenaire de confiance pour tous vos besoins d'achat et de vente de véhicules."
                 linkedin="https://www.linkedin.com/in/leo-saunier"
               />
@@ -165,11 +168,6 @@ export default function AboutUs() {
                     {`Nous nous engageons à mettre à disposition toutes nos
                     ressources pour vous permettre de trouver l'option idéale :
                     cela dans les meilleures conditions et à un prix juste.`}
-                    <br />
-                    <br />
-                    {`Disponibilité, Passion, Transparence, Confiance,
-                    Responsabilité, Qualité, Expertise, Engagement, Respect,
-                    Honnêteté, Accessibilité, Innovation, Durabilité`}
                   </Typography>
                 </div>
               </div>
