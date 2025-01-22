@@ -42,7 +42,11 @@ const TeamMember = ({
       <Typography variant="lead" className="text-primary my-2">
         {subtitle}
       </Typography>
-      <Typography variant="small">{description}</Typography>
+      <Typography
+        variant="small"
+        dangerouslySetInnerHTML={{ __html: description }}
+        className="text-muted-foreground"
+      />
     </div>
   );
 };
@@ -70,12 +74,12 @@ export default function AboutUs() {
                 incarnent une passion commune pour l'automobile.`}
               </p>
             </div>
-            <div className="flex flex-col md:flex-row gap-12 justify-around w-full max-w-3xl mx-auto">
+            <div className="flex flex-col md:flex-row gap-12 sm:gap-28 justify-around w-full max-w-3xl mx-auto">
               <TeamMember
                 name="Sarah Hanine"
                 subtitle="Fondatrice et Directrice Marketing"
                 image="/images/landing/sarah.png"
-                description="Sarah Hanine apporte à Drivite une expertise en développement commercial et en gestion de projet, soutenue par une passion pour l'automobile. Avec une solide formation académique et une expérience précédente en tant qu'assistante de direction et chargée de développement, elle est déterminée à offrir une expérience client exceptionnelle. Chez Drivite, Sarah assure que chaque interaction client reflète notre engagement envers la transparence et la satisfaction."
+                description="Sarah Hanine apporte à Drivite une expertise en développement commercial et en gestion de projet, soutenue par une passion pour l'automobile. Avec une solide formation académique et une expérience précédente en tant qu'assistante de direction et chargée de développement, elle est déterminée à offrir une expérience client exceptionnelle. <br /> <br /> Chez Drivite, Sarah assure que chaque interaction client reflète notre engagement envers la transparence et la satisfaction."
                 linkedin="https://www.linkedin.com/in/sarah-hanine"
               />
 
@@ -83,8 +87,8 @@ export default function AboutUs() {
                 name="Léo Saunier"
                 subtitle="Fondateur et Directeur Commercial"
                 image="/images/landing/leo.png"
-                description="Léo Saunier incarne à Drivite une passion pour l'automobile et une expertise en commerce. Fort d'une expérience variée dans le développement commercial et la gestion d'équipes, il guide notre mission d'assurer des transactions automobiles sûres et transparentes. Léo combine une vision stratégique avec une connaissance approfondie du marché automobile, positionnant Drivite comme un partenaire de confiance pour tous vos besoins d'achat et de vente de véhicules."
-                linkedin="https://www.linkedin.com/in/leo-saunier"
+                description="Léo Saunier incarne à Drivite une passion pour l'automobile et une expertise en commerce. Fort d'une expérience variée dans le développement commercial et la gestion d'équipes, il guide notre mission d'assurer des transactions automobiles sûres et transparentes. <br /> <br /> Léo combine une vision stratégique avec une connaissance approfondie du marché automobile, positionnant Drivite comme un partenaire de confiance pour tous vos besoins d'achat et de vente de véhicules."
+                linkedin="https://www.linkedin.com/in/leosaunier/"
               />
             </div>
           </section>
@@ -116,18 +120,18 @@ export default function AboutUs() {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
                   <img
-                    src="https://shadcnblocks.com/images/block/photos/annie-spratt-MChSQHxGZrQ-unsplash.jpg"
+                    src="/images/landing/about-1.png"
                     alt="about 1"
                     className="aspect-[0.7] w-full rounded-lg object-cover md:w-1/2"
                   />
                   <div className="flex w-full flex-col items-center justify-center gap-6 md:w-1/2">
                     <img
-                      src="https://shadcnblocks.com/images/block/photos/annie-spratt-AkftcHujUmk-unsplash.jpg"
+                      src="/images/landing/about-2.png"
                       alt="about 2"
                       className="aspect-[1.1] rounded-lg object-cover"
                     />
                     <img
-                      src="https://shadcnblocks.com/images/block/photos/annie-spratt-vGgn0xLdy8s-unsplash.jpg"
+                      src="/images/landing/about-3.avif"
                       alt="about 3"
                       className="aspect-[0.7] rounded-lg object-cover"
                     />
@@ -137,18 +141,18 @@ export default function AboutUs() {
               <div className="flex w-full flex-col items-center justify-center gap-12 pt-12 lg:w-1/2 lg:pt-48">
                 <div className="flex flex-col items-center justify-center gap-6 md:flex-row">
                   <img
-                    src="https://shadcnblocks.com/images/block/photos/johnson-wang-iI4sR_nkkbc-unsplash.jpg"
+                    src="/images/landing/about-4.avif"
                     alt="about 4"
                     className="aspect-[0.9] w-full rounded-lg object-cover md:w-1/2"
                   />
                   <div className="flex w-full flex-col items-center justify-center gap-6 md:w-1/2">
                     <img
-                      src="https://shadcnblocks.com/images/block/photos/nastuh-abootalebi-eHD8Y1Znfpk-unsplash.jpg"
+                      src="/images/landing/about-5.avif"
                       alt="about 5"
                       className="aspect-[0.8] rounded-lg object-cover"
                     />
                     <img
-                      src="https://shadcnblocks.com/images/block/photos/alvin-engler-bIhpiQA009k-unsplash.jpg"
+                      src="/images/landing/about-6.avif"
                       alt="about 6"
                       className="aspect-[0.9] rounded-lg object-cover"
                     />

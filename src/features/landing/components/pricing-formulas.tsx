@@ -52,7 +52,7 @@ const PricingFormulas = ({
         </Typography>
         <Typography
           variant="paragraph"
-          className="text-center text-gray-500 mt-8 mx-auto max-w-3xl"
+          className="text-center text-gray-500 mt-8 mx-auto max-w-4xl"
         >
           Parmi ces trois formules, vous êtes sûr de trouver celle qui répond à
           vos besoins. Que vous soyez novice ou expert, notre équipe est prête à
