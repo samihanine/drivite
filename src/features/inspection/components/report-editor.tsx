@@ -292,8 +292,16 @@ export const ReportEditor: React.FC<{
         <ReportForm
           answers={answers as Answer[]}
           inspectionId=""
-          questions={questions.filter((q) => !q.deletedAt) as Question[]}
-          sections={sections.filter((s) => !s.deletedAt) as Section[]}
+          questions={
+            questions
+              .filter((q) => !q.deletedAt)
+              .sort((a, b) => a.order - b.order) as Question[]
+          }
+          sections={
+            sections
+              .filter((s) => !s.deletedAt)
+              .sort((a, b) => a.order - b.order) as Section[]
+          }
           conditions={conditions.filter((c) => !c.deletedAt) as Condition[]}
           isPreview
         />

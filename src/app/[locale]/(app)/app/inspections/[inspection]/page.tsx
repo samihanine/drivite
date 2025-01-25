@@ -34,9 +34,9 @@ export default async function Page({
 
   return inspection.status === "IN_PROGRESS" ? (
     <ReportForm
-      questions={questions}
+      questions={questions.sort((a, b) => a.order - b.order)}
       conditions={conditions}
-      sections={sections}
+      sections={sections.sort((a, b) => a.order - b.order)}
       answers={answers}
       inspectionId={inspectionId}
     />
