@@ -165,24 +165,25 @@ export default function Page() {
           {
             title: "Expertise avancée",
             description:
-              "Bénéficiez de notre savoir-faire et nos connaissances dans le secteur...",
+              "Bénéficiez de notre savoir-faire et nos connaissances dans le secteur automobile, garantissant des transactions réussies.",
             Icon: ClipboardDocumentIcon,
           },
           {
             title: "Accompagnement personnalisé",
-            description: "Nous nous adaptons à vos besoins uniques...",
+            description:
+              "Nous nous adaptons à vos besoins uniques pour vous offrir un service sur-mesure.",
             Icon: AdjustmentsVerticalIcon,
           },
           {
             title: "Sélection exigeante",
             description:
-              "Profitez d'une gamme de véhicules d'occasion soigneusement...",
+              "Profitez d'une gamme de véhicules d'occasion soigneusement sélectionnés pour leur qualité.",
             Icon: ShieldExclamationIcon,
           },
           {
             title: "Gain de temps",
             description:
-              "Évitez les pertes de temps grâce à notre gestion complète, pour...",
+              "Évitez les pertes de temps grâce à notre gestion complète, pour une expérience sans stress.",
             Icon: ClockIcon,
           },
         ]}
