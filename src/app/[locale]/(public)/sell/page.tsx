@@ -1,12 +1,18 @@
 "use client";
 import { Container } from "@/components/container";
-import { ChatIcon, ClockIcon, SpeedIcon, WheelIcon } from "@/components/icons";
+import { ChatIcon, SpeedIcon, WheelIcon } from "@/components/icons";
 import CommerceHero from "@/features/landing/components/commerce-hero";
 import { Cta } from "@/features/landing/components/cta";
 import Discover from "@/features/landing/components/discover";
 import DynamicPricing from "@/features/landing/components/dynamic-pricing";
 import InformationCards from "@/features/landing/components/information-cards";
 import PricingFormulas from "@/features/landing/components/pricing-formulas";
+import {
+  AdjustmentsVerticalIcon,
+  ClipboardDocumentIcon,
+  ShieldExclamationIcon,
+  ClockIcon,
+} from "@heroicons/react/24/outline";
 import {
   CalendarIcon,
   ChartBarIcon,
@@ -16,7 +22,7 @@ import {
   SparklesIcon,
   UserIcon,
 } from "@heroicons/react/24/solid";
-import { SearchIcon, SparkleIcon } from "lucide-react";
+import { SearchIcon } from "lucide-react";
 
 export default function Page() {
   return (
@@ -160,18 +166,18 @@ export default function Page() {
             title: "Expertise avancée",
             description:
               "Bénéficiez de notre savoir-faire et nos connaissances dans le secteur...",
-            Icon: ClockIcon,
+            Icon: ClipboardDocumentIcon,
           },
           {
             title: "Accompagnement personnalisé",
             description: "Nous nous adaptons à vos besoins uniques...",
-            Icon: ClockIcon,
+            Icon: AdjustmentsVerticalIcon,
           },
           {
             title: "Sélection exigeante",
             description:
               "Profitez d'une gamme de véhicules d'occasion soigneusement...",
-            Icon: ClockIcon,
+            Icon: ShieldExclamationIcon,
           },
           {
             title: "Gain de temps",

@@ -27,6 +27,8 @@ export default async function Page(props: {
   const searchParams = await props.searchParams;
   const cars = await getCars({ locale: params.locale });
 
+  console.log(searchParams);
+  console.log(cars);
   const filteredCars = cars.filter((car) => {
     const currentBudgetIndex = getBudgets().findIndex(
       (budget) => budget.value === parseInt(searchParams.budget),
@@ -47,12 +49,15 @@ export default async function Page(props: {
       (!searchParams.type || car.type === searchParams.type) &&
       (!searchParams.brand || car.brand === searchParams.brand) &&
       (!searchParams.exteriorColor ||
-        car.exteriorColor === searchParams.exteriorColor) &&
+        car.exteriorColor?.toLowerCase() ===
+          searchParams.exteriorColor?.toLowerCase()) &&
       (!searchParams.interiorColor ||
-        car.interiorColor === searchParams.interiorColor) &&
+        car.interiorColor?.toLowerCase() ===
+          searchParams.interiorColor?.toLowerCase()) &&
       (!searchParams.fuelType || car.fuelType === searchParams.fuelType) &&
       (!searchParams.transmission ||
-        car.transmission === searchParams.transmission) &&
+        car.transmission?.toLowerCase() ===
+          searchParams.transmission?.toLowerCase()) &&
       (!searchParams.critAir || car.critAir === searchParams.critAir) &&
       car.price >= minPrice &&
       car.price <= maxPrice &&

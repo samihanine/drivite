@@ -1,9 +1,6 @@
 "use client";
 
-import * as React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/input";
-import { Label } from "@/components/label";
 import {
   Select,
   SelectContent,
@@ -11,11 +8,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/select";
-import { Typography } from "@/components/typography";
-import { Button } from "@/components/button";
-import { getBrands } from "../utils/get-brands";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import * as React from "react";
+import { getBrands } from "../utils/get-brands";
 import { getBudgets } from "../utils/get-budgets";
+import { getColors } from "../utils/get-colors";
 
 export const CarFilters: React.FC = () => {
   const router = useRouter();
@@ -75,19 +73,18 @@ export const CarFilters: React.FC = () => {
           </SelectContent>
         </Select>
         <Select
-          defaultValue={searchParams.get("model") || ""}
-          value={searchParams.get("model") || ""}
-          onValueChange={(value) => updateQuery("model", value)}
-          disabled
+          defaultValue={searchParams.get("exteriorColor") || ""}
+          value={searchParams.get("exteriorColor") || ""}
+          onValueChange={(value) => updateQuery("exteriorColor", value)}
         >
           <SelectTrigger className="w-fit bg-[#0154B5] text-white">
-            <SelectValue placeholder="Modèle" />
+            <SelectValue placeholder="Couleur extérieure" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">Modèle</SelectItem>
-            {getBrands().map((brand) => (
-              <SelectItem key={brand} value={brand}>
-                {brand}
+            <SelectItem value="">Couleur extérieure</SelectItem>
+            {getColors().map((color) => (
+              <SelectItem key={color.value} value={color.value}>
+                {color.label}
               </SelectItem>
             ))}
           </SelectContent>

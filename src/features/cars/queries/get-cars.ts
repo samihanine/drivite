@@ -2,7 +2,7 @@ import { client } from "@/sanity/lib/client";
 import { Car } from "../schemas/car";
 import { SanityCar, serializeCar } from "../utils/serialize-car";
 
-export async function _getCars({ locale }: { locale: string }): Promise<Car[]> {
+export async function getCars({ locale }: { locale: string }): Promise<Car[]> {
   const query = '*[_type == "car"]';
   const cars = await client.fetch<SanityCar[]>(
     query,
@@ -13,7 +13,7 @@ export async function _getCars({ locale }: { locale: string }): Promise<Car[]> {
   return cars.map((car) => serializeCar({ car, locale }));
 }
 
-export async function getCars({ locale }: { locale: string }): Promise<Car[]> {
+export async function _getCars({ locale }: { locale: string }): Promise<Car[]> {
   return [
     {
       id: "1",

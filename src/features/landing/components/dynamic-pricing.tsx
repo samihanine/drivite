@@ -113,7 +113,7 @@ function PricingCard({
                 : "bg-white text-primary",
             )}
           >
-            Demander une inspection <ArrowRight className="w-4 h-4 ml-2" />
+            {pricing.buttonText} <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
         </Link>
       </div>

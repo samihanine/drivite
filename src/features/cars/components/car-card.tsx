@@ -34,7 +34,7 @@ export default function CarCard({
           alt={title}
           width={100}
           height={100}
-          className="w-full h-auto object-contain rounded-t-lg"
+          className="w-full aspect-video object-cover rounded-t-lg"
         />
 
         {isSold && (

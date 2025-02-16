@@ -6,26 +6,39 @@ import { Container } from "@/components/container";
 import { Typography } from "@/components/typography";
 
 const MarketStatisticCard = ({
-  percentage,
+  value,
+  unit,
   title,
 }: {
   title: string;
-  percentage: number;
+  value: number;
+  unit: string;
 }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     const startCount = () => {
-      let start = 0;
-      const end = percentage;
+      let current = 0;
       const duration = 1500;
-      const stepTime = Math.abs(Math.floor(duration / end));
+      let increment: number;
+      let stepTime: number;
+
+      if (Number.isInteger(value)) {
+        increment = 1;
+        stepTime = Math.floor(duration / value);
+      } else {
+        stepTime = 50;
+        const steps = Math.floor(duration / stepTime);
+        increment = value / steps;
+      }
 
       const timer = setInterval(() => {
-        start += 1;
-        setCount(start);
-        if (start === end) {
+        current += increment;
+        if (current >= value) {
+          setCount(value);
           clearInterval(timer);
+        } else {
+          setCount(current);
         }
       }, stepTime);
     };
@@ -45,11 +58,9 @@ const MarketStatisticCard = ({
     }
 
     return () => {
-      if (element) {
-        observer.unobserve(element);
-      }
+      if (element) observer.unobserve(element);
     };
-  }, [percentage, title]);
+  }, [value, title]);
 
   return (
     <motion.div
@@ -66,9 +77,9 @@ const MarketStatisticCard = ({
     >
       <div className="flex flex-col items-center justify-between h-full gap-6">
         <Typography variant="h3" className="text-center text-4xl font-medium">
-          {count} %
+          {Number.isInteger(value) ? Math.floor(count) : count.toFixed(1)}{" "}
+          {unit}
         </Typography>
-
         <Typography variant="small" className="text-center">
           {title}
         </Typography>
@@ -97,15 +108,25 @@ export const MarketStatistics = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full">
-          <MarketStatisticCard title="de compteurs trafiqués" percentage={10} />
-          <MarketStatisticCard title="d’accidents dissimulés" percentage={20} />
           <MarketStatisticCard
-            title="de frais de réparations cachés"
-            percentage={30}
+            title="de véhicules vendus en France en 2024 (neufs et occasions)"
+            value={7.1}
+            unit="millions"
           />
           <MarketStatisticCard
-            title="d’annonces frauduleuses"
-            percentage={15}
+            title="d’annonces frauduleuses (vices cachés, accidents dissimulés, compteurs trafiqués…)"
+            value={30}
+            unit="%"
+          />
+          <MarketStatisticCard
+            title="des acheteurs et vendeurs de voitures expriment des craintes"
+            value={88}
+            unit="%"
+          />
+          <MarketStatisticCard
+            title="des Français ont déjà été confrontés à une arnaque lors de l’achat / vente"
+            value={58}
+            unit="%"
           />
         </div>
       </Container>

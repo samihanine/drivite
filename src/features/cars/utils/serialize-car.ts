@@ -14,24 +14,8 @@ export type SanityCar = {
   model: string;
   finish: string;
   equipments: string[];
-  interiorColor: {
-    rgb: {
-      r: number;
-      g: number;
-      b: number;
-      a: number;
-    };
-    hex: string;
-  };
-  exteriorColor: {
-    rgb: {
-      r: number;
-      g: number;
-      b: number;
-      a: number;
-    };
-    hex: string;
-  };
+  interiorColor: string;
+  exteriorColor: string;
   manufacturingYear: number;
   mileage: number;
   fuelType: string;
@@ -58,8 +42,8 @@ export const serializeCar = ({
   model: car.model,
   finish: car.finish,
   equipments: car.equipments,
-  interiorColor: car.interiorColor.hex,
-  exteriorColor: car.exteriorColor.hex,
+  interiorColor: car.interiorColor,
+  exteriorColor: car.exteriorColor,
   manufacturingYear: car.manufacturingYear,
   mileage: car.mileage,
   fuelType: car.fuelType,
