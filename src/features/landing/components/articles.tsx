@@ -1,7 +1,6 @@
 import React from "react";
 import { load } from "cheerio";
 import { Container } from "@/components/container";
-import Link from "next/link";
 import { Typography } from "@/components/typography";
 
 interface MetaData {
@@ -13,6 +12,7 @@ interface MetaData {
 interface ArticlePreviewsProps {
   urls: string[];
 }
+
 async function fetchMetaData(url: string): Promise<MetaData> {
   const res = await fetch(url);
   const html = await res.text();
@@ -35,7 +35,7 @@ export default async function Articles({ urls }: ArticlePreviewsProps) {
       <div className="flex flex-col gap-4 items-center mb-5">
         <Typography variant="h2">Ils parlent de nous</Typography>
         <Typography variant="small">
-          Découvrez les articles et les interviews qui parle de Drivite.
+          Découvrez les articles et les interviews qui parlent de Drivite.
         </Typography>
       </div>
 
@@ -43,11 +43,16 @@ export default async function Articles({ urls }: ArticlePreviewsProps) {
         <a
           key={urls[idx]}
           href={urls[idx]}
-          className="flex gap-4 border border-border rounded-xl hover:border-primary transition-colors duration-300"
+          className="flex gap-4 border border-border rounded-xl hover:border-primary transition-colors duration-300 w-full"
           target="_blank"
           rel="noopener noreferrer"
         >
           <div className="flex flex-col gap-4 flex-1 p-6">
+            <img
+              src={`https://t3.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${urls[idx]}&size=128`}
+              alt="Logo"
+              className="w-6 h-6"
+            />
             <Typography variant="h5">{meta.title}</Typography>
             <Typography variant="small">{meta.description}</Typography>
           </div>

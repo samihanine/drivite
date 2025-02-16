@@ -34,11 +34,9 @@ export function Car({ car }: { car: Car }) {
             <CarouselContent>
               {car.images.map((image) => (
                 <CarouselItem key={image}>
-                  <Image
+                  <img
                     src={image}
                     alt={car.brand + " " + car.model}
-                    width={1200}
-                    height={600}
                     className="w-full h-96 object-contain bg-gray-100"
                   />
                 </CarouselItem>
