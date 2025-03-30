@@ -4,6 +4,7 @@ import { getI18n } from "@/locale/server";
 import { getPageLinks } from "@/features/landing/queries/get-page-links";
 import Script from "next/script";
 import { cookies } from "next/headers";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export async function generateMetadata(_: {
   params: Promise<{ lang: string }>;
@@ -33,18 +34,21 @@ export default async function RootLayout({
 
   return (
     <>
+      <GoogleAnalytics gaId="G-7FSEV99573" />
       <Script id="json" type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Product",
-          name: "Nom du produit",
-          image: ["https://exemple.com/photo_du_produit.jpg"],
+          name: "Drivite",
+          image: [
+            "https://www.drivite.fr/_next/image?url=%2Fimages%2Flanding%2Fdouble-phone.png&w=1080&q=75",
+          ],
           description: "Description du produit",
           sku: "SKU12345",
           mpn: "925872",
           brand: {
             "@type": "Brand",
-            name: "Nom de la marque",
+            name: "Drivite",
           },
           review: {
             "@type": "Review",
@@ -55,7 +59,7 @@ export default async function RootLayout({
             },
             author: {
               "@type": "Person",
-              name: "Nom du critique",
+              name: "Lucie",
             },
           },
           aggregateRating: {

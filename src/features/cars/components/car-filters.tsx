@@ -13,7 +13,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as React from "react";
 import { getBrands } from "../utils/get-brands";
 import { getBudgets } from "../utils/get-budgets";
-import { getColors } from "../utils/get-colors";
 
 export const CarFilters: React.FC = () => {
   const router = useRouter();
@@ -68,23 +67,6 @@ export const CarFilters: React.FC = () => {
             {getBrands().map((brand) => (
               <SelectItem key={brand} value={brand}>
                 {brand}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-        <Select
-          defaultValue={searchParams.get("exteriorColor") || ""}
-          value={searchParams.get("exteriorColor") || ""}
-          onValueChange={(value) => updateQuery("exteriorColor", value)}
-        >
-          <SelectTrigger className="w-fit bg-[#0154B5] text-white">
-            <SelectValue placeholder="Couleur extérieure" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="">Couleur extérieure</SelectItem>
-            {getColors().map((color) => (
-              <SelectItem key={color.value} value={color.value}>
-                {color.label}
               </SelectItem>
             ))}
           </SelectContent>
