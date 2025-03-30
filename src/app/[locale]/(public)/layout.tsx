@@ -4,7 +4,6 @@ import { getI18n } from "@/locale/server";
 import { getPageLinks } from "@/features/landing/queries/get-page-links";
 import Script from "next/script";
 import { cookies } from "next/headers";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 export async function generateMetadata(_: {
   params: Promise<{ lang: string }>;
@@ -34,7 +33,6 @@ export default async function RootLayout({
 
   return (
     <>
-      <GoogleAnalytics gaId="G-7FSEV99573" />
       <Script id="json" type="application/ld+json">
         {JSON.stringify({
           "@context": "https://schema.org",
