@@ -5,12 +5,12 @@ import { Answer, Question, Section } from "@/db/schemas";
 import { Image } from "@/components/image";
 import LogoImage from "/public/images/logos/logo-text.png";
 import { Card } from "@/components/card";
-import { Container } from "@/components/container";
 import { Button } from "@/components/button";
 import S3Image from "@/features/upload/components/s3-image";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import { AppContainer } from "@/components/app-container";
+import { useAction } from "next-safe-action/hooks";
+import { generateReportPdf } from "../actions/generate-report-pdf";
+import { toast } from "sonner";
 
 interface ReportProps {
   questions: Question[];
@@ -94,45 +94,39 @@ const ReportPage: React.FC<ReportProps> = ({
   onCancel,
 }) => {
   const sortedSections = [...sections].sort((a, b) => a.order - b.order);
+  const {
+    executeAsync: generateReportPdfAction,
+    status: statusGenerateReportPdf,
+  } = useAction(generateReportPdf);
 
   const handleDownload = async () => {
-    const input = document.getElementById("report");
-    if (!input) return;
+    const idToast = toast.loading("Génération du rapport...");
+    const result = await generateReportPdfAction({
+      answers,
+    });
 
-    input.setAttribute("style", "width: 793px");
-    const images = document.querySelectorAll(
-      "#report img",
-    ) as NodeListOf<HTMLImageElement>;
+    const base64 = result?.data;
 
-    for (const img of images) {
-      img.crossOrigin = "anonymous";
+    if (typeof base64 !== "string") {
+      toast.error("Erreur lors de la génération du rapport", {
+        id: idToast,
+      });
+      return;
     }
 
-    const textInRectangle = document.querySelectorAll(".pdf-in-rectangle");
-    textInRectangle.forEach((element) => {
-      element.setAttribute(
-        "style",
-        `position: relative; top: -6px; ${element.getAttribute("style")}`,
-      );
+    // Convert base64 to blob
+    const blob = new Blob([base64], { type: "application/pdf" });
+
+    // download the blob
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "rapport.pdf";
+    a.click();
+
+    toast.success("Rapport téléchargé avec succès", {
+      id: idToast,
     });
-
-    const canvas = await html2canvas(input, {
-      scale: 1,
-      useCORS: true,
-      allowTaint: true,
-    });
-
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "pt", [canvas.width, canvas.height]);
-
-    pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height, "", "FAST");
-
-    textInRectangle.forEach((element) => {
-      element.removeAttribute("style");
-    });
-    input.removeAttribute("style");
-
-    pdf.save("rapport.pdf");
   };
 
   return (
