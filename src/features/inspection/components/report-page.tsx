@@ -68,24 +68,21 @@ const SectionComponent: React.FC<{
       <div className="bg-[#E7F1FB] py-2 px-4 font-medium mb-4">
         <span className="pdf-in-rectangle">{section.title}</span>
       </div>
-      {questions
-        .filter((q) => q.sectionId === section.id)
-        .sort((a, b) => a.order - b.order)
-        .map((q) =>
-          q.type === "IMAGE" ? (
-            <ImageResponse
-              key={q.id}
-              question={q}
-              answer={answers.find((a) => a.questionId === q.id)}
-            />
-          ) : (
-            <TextResponse
-              key={q.id}
-              question={q}
-              answer={answers.find((a) => a.questionId === q.id)}
-            />
-          ),
-        )}
+      {sectionQuestions.map((q) =>
+        q.type === "IMAGE" ? (
+          <ImageResponse
+            key={q.id}
+            question={q}
+            answer={answers.find((a) => a.questionId === q.id)}
+          />
+        ) : (
+          <TextResponse
+            key={q.id}
+            question={q}
+            answer={answers.find((a) => a.questionId === q.id)}
+          />
+        ),
+      )}
     </div>
   );
 };
