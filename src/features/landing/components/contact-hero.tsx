@@ -1,11 +1,18 @@
+"use client";
 import { Container } from "@/components/container";
 import { Typography } from "@/components/typography";
-import { getI18n } from "@/locale/server";
 import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import { CalendlyEmbed } from "./calendly";
+import { useI18n } from "@/locale/client";
+import { useState } from "react";
+import { ContactForm } from "./contact-form";
+import { Button } from "@/components/button";
 
 export const ContactHero = async () => {
-  const t = await getI18n();
+  const t = useI18n();
+  const [currentTab, setCurrentTab] = useState<"contact" | "appointment">(
+    "contact",
+  );
 
   return (
     <div className="py-20 bg-[#E7F1FB] min-h-[calc(100vh-80px)]">
@@ -48,17 +55,41 @@ export const ContactHero = async () => {
           </div>
         </div>
 
-        <div className="bg-background p-8 w-full md:w-2/5 rounded-2xl shadow-md flex flex-col gap-8">
-          <div>
-            <Typography variant="h2" className="mb-2">
-              Entrons en contact
-            </Typography>
-            <Typography variant="paragraph">
-              Prenez rendez-vous pour une consultation gratuite
-            </Typography>
+        <div className="bg-background p-8 w-full md:w-2/5 rounded-2xl shadow-md flex flex-col gap-3">
+          <div className="flex gap-4 bg-slate-100 rounded-lg p-2">
+            <Button
+              variant={currentTab === "contact" ? "outline" : "ghost"}
+              className="flex-1"
+              onClick={() => setCurrentTab("contact")}
+            >
+              Message
+            </Button>
+            <Button
+              variant={currentTab === "appointment" ? "outline" : "ghost"}
+              className="flex-1"
+              onClick={() => setCurrentTab("appointment")}
+            >
+              Rendez-vous
+            </Button>
           </div>
 
-          <CalendlyEmbed url="https://calendly.com/drivite/30min" />
+          {currentTab === "appointment" && (
+            <>
+              <Typography variant="h3" className="mb-2">
+                Prenez rendez-vous
+              </Typography>
+
+              <CalendlyEmbed url="https://calendly.com/drivite/30min" />
+            </>
+          )}
+          {currentTab === "contact" && (
+            <>
+              <Typography variant="h3" className="mb-2">
+                Envoyez nous un message
+              </Typography>
+              <ContactForm />
+            </>
+          )}
         </div>
       </Container>
     </div>

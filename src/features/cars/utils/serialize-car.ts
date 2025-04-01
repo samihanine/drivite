@@ -24,6 +24,7 @@ export type SanityCar = {
   enginePower: string;
   images: { asset: { _ref: string } }[];
   publishedAt: string;
+  isSold: boolean;
 };
 
 export const serializeCar = ({
@@ -53,4 +54,5 @@ export const serializeCar = ({
   doors: car.doors,
   seats: car.seats,
   publishedAt: car.publishedAt,
+  isSold: car.isSold,
 });

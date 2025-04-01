@@ -27,8 +27,6 @@ export default async function Page(props: {
   const searchParams = await props.searchParams;
   const cars = await getCars({ locale: params.locale });
 
-  console.log(searchParams);
-  console.log(cars);
   const filteredCars = cars.filter((car) => {
     const currentBudgetIndex = getBudgets().findIndex(
       (budget) => budget.value === parseInt(searchParams.budget),
@@ -66,6 +64,8 @@ export default async function Page(props: {
         car.model.toLowerCase().includes(searchParams.query.toLowerCase()))
     );
   });
+
+  console.log(filteredCars);
 
   return (
     <div className="bg-[#f7f7fa]">

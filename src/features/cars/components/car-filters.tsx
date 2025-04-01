@@ -14,6 +14,18 @@ import * as React from "react";
 import { getBrands } from "../utils/get-brands";
 import { getBudgets } from "../utils/get-budgets";
 
+const getFuelTypes = () => [
+  { title: "Essence", value: "petrol" },
+  { title: "Diesel", value: "diesel" },
+  { title: "Hybride", value: "hybrid" },
+  { title: "Electrique", value: "electric" },
+];
+
+const getTransmissions = () => [
+  { title: "Automatique", value: "Automatique" },
+  { title: "Manuelle", value: "Manuelle" },
+];
+
 export const CarFilters: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -84,6 +96,45 @@ export const CarFilters: React.FC = () => {
             {getBudgets().map((budget) => (
               <SelectItem key={budget.value} value={budget.value.toString()}>
                 {budget.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select
+          defaultValue={searchParams.get("fuelType") || ""}
+          value={searchParams.get("fuelType") || ""}
+          onValueChange={(value) => updateQuery("fuelType", value)}
+        >
+          <SelectTrigger className="w-fit bg-[#0154B5] text-white">
+            <SelectValue placeholder="Carburant" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">Carburant</SelectItem>
+            {getFuelTypes().map((fuel) => (
+              <SelectItem key={fuel.value} value={fuel.value.toString()}>
+                {fuel.title}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        <Select
+          defaultValue={searchParams.get("transmission") || ""}
+          value={searchParams.get("transmission") || ""}
+          onValueChange={(value) => updateQuery("transmission", value)}
+        >
+          <SelectTrigger className="w-fit bg-[#0154B5] text-white">
+            <SelectValue placeholder="Boite de vitesse" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="">Boite de vitesse</SelectItem>
+            {getTransmissions().map((transmission) => (
+              <SelectItem
+                key={transmission.value}
+                value={transmission.value.toString()}
+              >
+                {transmission.title}
               </SelectItem>
             ))}
           </SelectContent>
