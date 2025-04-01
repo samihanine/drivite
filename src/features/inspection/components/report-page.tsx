@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Answer, Question, Section } from "@/db/schemas";
 import { Image } from "@/components/image";
 import LogoImage from "/public/images/logos/logo-text.png";
@@ -94,13 +94,48 @@ const ReportPage: React.FC<ReportProps> = ({
   onCancel,
 }) => {
   const sortedSections = [...sections].sort((a, b) => a.order - b.order);
-  const {
-    executeAsync: generateReportPdfAction,
-    status: statusGenerateReportPdf,
-  } = useAction(generateReportPdf);
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const { executeAsync: generateReportPdfAction } =
+    useAction(generateReportPdf);
+
+  useEffect(() => {
+    const generatePdf = async () => {
+      try {
+        setIsGenerating(true);
+        const result = await generateReportPdfAction({
+          answers,
+        });
+
+        const base64 = result?.data;
+
+        if (typeof base64 !== "string") {
+          toast.error("Error generating PDF preview");
+          return;
+        }
+
+        setPdfUrl(base64);
+      } catch (error) {
+        toast.error("Error generating PDF preview");
+        console.error(error);
+      } finally {
+        setIsGenerating(false);
+      }
+    };
+
+    generatePdf();
+
+    // Cleanup function to revoke the object URL
+    return () => {
+      if (pdfUrl) {
+        URL.revokeObjectURL(pdfUrl);
+      }
+    };
+  }, [answers, generateReportPdfAction]);
 
   const handleDownload = async () => {
-    const idToast = toast.loading("Génération du rapport...");
+    const idToast = toast.loading("Generating report...");
     const result = await generateReportPdfAction({
       answers,
     });
@@ -108,7 +143,7 @@ const ReportPage: React.FC<ReportProps> = ({
     const base64 = result?.data;
 
     if (typeof base64 !== "string") {
-      toast.error("Erreur lors de la génération du rapport", {
+      toast.error("Error generating report", {
         id: idToast,
       });
       return;
@@ -121,10 +156,12 @@ const ReportPage: React.FC<ReportProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "rapport.pdf";
+    a.download = "report.pdf";
     a.click();
 
-    toast.success("Rapport téléchargé avec succès", {
+    console.log(base64);
+
+    toast.success("Report downloaded successfully", {
       id: idToast,
     });
   };
@@ -143,30 +180,45 @@ const ReportPage: React.FC<ReportProps> = ({
             <Button onClick={handleDownload}>Télécharger le rapport</Button>
           </div>
         </div>
-        <Card className="rounded-none w-full max-w-3xl mx-auto">
-          <div className="p-8 aspect-[1.4157/2] w-full" id="report">
-            <div className="flex justify-center mb-8">
-              <Image
-                src={LogoImage}
-                alt="Drivite Logo"
-                className=""
-                height={96}
-                width={200}
-              />
-            </div>
-            <h1 className="text-2xl font-medium mb-8">
-              Drivite - Inspection du véhicule
-            </h1>
-            {sortedSections.map((section) => (
-              <SectionComponent
-                key={section.id}
-                section={section}
-                questions={questions}
-                answers={answers}
-              />
-            ))}
+
+        {isGenerating ? (
+          <div className="w-full flex justify-center py-10">
+            <p>Génération du rapport...</p>
           </div>
-        </Card>
+        ) : pdfUrl ? (
+          <div className="w-full h-[800px] mb-10">
+            <iframe
+              src={pdfUrl}
+              className="w-full h-full border-0"
+              title="PDF Report Preview"
+            />
+          </div>
+        ) : (
+          <Card className="rounded-none w-full max-w-3xl mx-auto">
+            <div className="p-8 aspect-[1.4157/2] w-full" id="report">
+              <div className="flex justify-center mb-8">
+                <Image
+                  src={LogoImage}
+                  alt="Drivite Logo"
+                  className=""
+                  height={96}
+                  width={200}
+                />
+              </div>
+              <h1 className="text-2xl font-medium mb-8">
+                Drivite - Rapport d&apos;inspection
+              </h1>
+              {sortedSections.map((section) => (
+                <SectionComponent
+                  key={section.id}
+                  section={section}
+                  questions={questions}
+                  answers={answers}
+                />
+              ))}
+            </div>
+          </Card>
+        )}
       </AppContainer>
     </>
   );
