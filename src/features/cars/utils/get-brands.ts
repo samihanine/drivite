@@ -35,6 +35,7 @@ export const getBrands = () => {
     "Man",
     "Mazda",
     "McLaren",
+    "Mini",
     "AMG",
     "Mercedes",
     "MG",
