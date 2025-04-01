@@ -65,8 +65,6 @@ export default async function Page(props: {
     );
   });
 
-  console.log(filteredCars);
-
   return (
     <div className="bg-[#f7f7fa]">
       <Container className="relative flex flex-col py-10">

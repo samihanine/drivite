@@ -108,14 +108,7 @@ const ReportPage: React.FC<ReportProps> = ({
     ) as NodeListOf<HTMLImageElement>;
 
     for (const img of images) {
-      const response = await fetch(img.src);
-      const blob = await response.blob();
-      const reader = new FileReader();
-      await new Promise((resolve) => {
-        reader.onload = resolve;
-        reader.readAsDataURL(blob);
-      });
-      img.src = reader.result as string;
+      img.crossOrigin = "anonymous";
     }
 
     const textInRectangle = document.querySelectorAll(".pdf-in-rectangle");
@@ -129,6 +122,7 @@ const ReportPage: React.FC<ReportProps> = ({
     const canvas = await html2canvas(input, {
       scale: 1,
       useCORS: true,
+      allowTaint: true,
     });
 
     const imgData = canvas.toDataURL("image/png");
