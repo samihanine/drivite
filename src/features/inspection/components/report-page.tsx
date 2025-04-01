@@ -126,44 +126,43 @@ const ReportPage: React.FC<ReportProps> = ({
 
     generatePdf();
 
-    // Cleanup function to revoke the object URL
     return () => {
       if (pdfUrl) {
         URL.revokeObjectURL(pdfUrl);
       }
     };
-  }, [answers, generateReportPdfAction]);
+  }, [answers]);
 
   const handleDownload = async () => {
-    const idToast = toast.loading("Generating report...");
-    const result = await generateReportPdfAction({
-      answers,
-    });
+    if (!pdfUrl) return;
 
-    const base64 = result?.data;
+    try {
+      const base64Data = pdfUrl.includes("base64,")
+        ? pdfUrl.split("base64,")[1]
+        : pdfUrl;
 
-    if (typeof base64 !== "string") {
-      toast.error("Error generating report", {
-        id: idToast,
+      const byteCharacters = atob(base64Data);
+      const byteArrays = [];
+
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteArrays.push(byteCharacters.charCodeAt(i));
+      }
+
+      const blob = new Blob([new Uint8Array(byteArrays)], {
+        type: "application/pdf",
       });
-      return;
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "rapport.pdf";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Erreur lors du téléchargement du PDF:", error);
+      toast.error("Erreur lors du téléchargement du rapport");
     }
-
-    // Convert base64 to blob
-    const blob = new Blob([base64], { type: "application/pdf" });
-
-    // download the blob
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "report.pdf";
-    a.click();
-
-    console.log(base64);
-
-    toast.success("Report downloaded successfully", {
-      id: idToast,
-    });
   };
 
   return (
@@ -177,7 +176,9 @@ const ReportPage: React.FC<ReportProps> = ({
                 Retour
               </Button>
             )}
-            <Button onClick={handleDownload}>Télécharger le rapport</Button>
+            <Button disabled={!pdfUrl} onClick={handleDownload}>
+              Télécharger le rapport
+            </Button>
           </div>
         </div>
 
