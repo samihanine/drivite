@@ -1,4 +1,5 @@
 "use client";
+
 import { Container } from "@/components/container";
 import { Typography } from "@/components/typography";
 import { EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/solid";
@@ -8,7 +9,7 @@ import { useState } from "react";
 import { ContactForm } from "./contact-form";
 import { Button } from "@/components/button";
 
-export const ContactHero = async () => {
+export const ContactHero = () => {
   const t = useI18n();
   const [currentTab, setCurrentTab] = useState<"contact" | "appointment">(
     "contact",
